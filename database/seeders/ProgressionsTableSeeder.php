@@ -24,20 +24,27 @@ class ProgressionsTableSeeder extends Seeder
         }
 
         $cryptocurrencies = \App\Models\Cryptocurrency::all();
-        
-        
+
+        $date_now = now();
+        $date_initial = date('Y-m-d', strtotime($date_now. ' - 30 days'));
 
         foreach ($cryptocurrencies as $crypto)
         {
             $current_value=$crypto->current_value;
             $cryptoname = $crypto->name;
+            
 
         for($i=0;$i<30;$i++){
-            $date = date('Y-m-d', time() + ($i*86400));
-            $rate=getCotationFor($cryptoname)*100;
+            
+            $date=date('Y-m-d', strtotime($date_initial. ' + '.($i+1).' days'));
+
+            //$date = date('Y-m-d', time() + (($i*86400)));
+            $rate=getCotationFor($cryptoname)*1000;
             if($i==0){
-                $progress_value=$current_value;
-            }else{
+                $progress_value=$current_value;-
+                $rate="0";
+            }
+            else{
                 $progress_value=$progress_value+$rate;
             }
             
