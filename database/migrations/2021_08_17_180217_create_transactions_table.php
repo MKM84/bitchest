@@ -23,7 +23,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedDecimal("purchase_price");
             $table->unsignedDecimal("selling_price")->nullable();
 
-            $table->foreignId("users_id")->constrained("users")->onDelete("cascade");
+            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->foreignId("cryptocurrency_id")->constrained("cryptocurrencies");
             $table->foreignId("progression_id")->constrained("progressions");
 
