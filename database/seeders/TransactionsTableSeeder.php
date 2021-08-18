@@ -17,16 +17,27 @@ class TransactionsTableSeeder extends Seeder
     public function run()
     {
         \App\Models\Transaction::factory(100)->create();
+
         // Find users that have admin status
 
         $admins = DB::table('users')->where('status', 'admin')->get('id')->toArray();
 
         // The Arr::pluck method retrieves all of the values for a given key from an array:
-        $admin_ids = Arr::pluck($admins, 'id');
+        $admins_ids = Arr::pluck($admins, 'id');
 
         // The whereIn method verifies that a given column's value is contained within the given array:
         DB::table('transactions')
-            ->whereIn('user_id', $admin_ids)
+            ->whereIn('user_id', $admins_ids)
             ->delete();
+
+
+         DB::table('transactions')
+            ->where('state', false)
+            ->update([
+                'selling_price'    => null,
+                'selling_date'     => null
+            ]);
+
+
     }
 }
