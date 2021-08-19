@@ -10,7 +10,7 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'total_solde',
+        'sum',
         'quantity',
         'state',
         'purchase_date',
