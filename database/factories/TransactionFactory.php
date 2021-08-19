@@ -29,8 +29,8 @@ class TransactionFactory extends Factory
         $currencyId = $this->faker->randomElement($cryptocurrencies); // get random cryptocurrencies id
 
         // get random date between now and 30 days before
-        $date_purchasing = date('Y-m-d', strtotime("-" . $this->faker->numberBetween(0, 29) . " days"));
-        $date_selling = date('Y-m-d', strtotime("-" . $this->faker->numberBetween(0, 29) . " days"));
+        $date_purchasing = date('Y-m-d', strtotime("-" . $this->faker->numberBetween(16, 29) . " days"));
+        $date_selling = date('Y-m-d', strtotime("-" . $this->faker->numberBetween(0, 15) . " days"));
 
         // get Progression crypto value of purchasing
         $progression = Progression::where('cryptocurrency_id', '=', $currencyId)->where('progress_date', '=', $date_purchasing)->first();
