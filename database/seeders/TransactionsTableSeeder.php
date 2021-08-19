@@ -16,8 +16,12 @@ class TransactionsTableSeeder extends Seeder
      */
     public function run()
     {
+
+        // Generate 100 transactions
         \App\Models\Transaction::factory(100)->create();
 
+    // Modify the faker data :
+    // ---------------------------
 
         // Delete users that have admin status
         $admins = DB::table('users')->where('status', 'admin')->get('id')->toArray();
