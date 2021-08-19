@@ -18,10 +18,12 @@ class CryptocurrenciesTableSeeder extends Seeder
 
     public function run()
     {
+        // get random first cotation of crypto
         function getFirstCotation($cryptoname){
             return ord(substr($cryptoname,0,1)) + rand(0, 10);
           }
-
+        // insert in table cryptocurrencies the crypto with name, logo (picture) and current value
+        
         DB::table('cryptocurrencies')->insert([
             [
                 'name' => 'Bitcoin',
