@@ -33,14 +33,14 @@ class ProgressionsTableSeeder extends Seeder
             $current_value = $crypto->current_value; // get current value of crypto
             $cryptoname = $crypto->name; // get name of crypto
 
-            $progress_value = $current_value; 
+            $progress_value = $current_value;
 
-            for ($i = 0; $i < 30; $i++) { 
+            for ($i = 0; $i < 30; $i++) {
 
                 //Add 1 days to date
-                $date = date('Y-m-d', strtotime($date_initial . ' + ' . ($i + 1) . ' days')); 
+                $date = date('Y-m-d', strtotime($date_initial . ' + ' . ($i + 1) . ' days'));
 
-                
+
                 $rate = getCotationFor($cryptoname) * 1000; // get value of cotation
                 if ($i == 0) {
                     $progress_value = $current_value;

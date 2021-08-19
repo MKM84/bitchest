@@ -42,13 +42,13 @@ class TransactionsTableSeeder extends Seeder
                 'selling_date'     => null
             ]);
 
-        // Calculate the sum in case of selling
-        DB::update("UPDATE `transactions` SET `sum` = `quantity` * `selling_price` WHERE `state` = 1");
+        // // Calculate the sum in case of selling
+        // DB::update("UPDATE `transactions` SET `sum` = `quantity` * `selling_price` WHERE `state` = 1");
 
-        // Calculate the sum in case of purchase
-        DB::update("UPDATE `transactions` SET `sum` = `quantity` * `purchase_price` WHERE `state` = 0");
+        // // Calculate the sum in case of purchase
+        // DB::update("UPDATE `transactions` SET `sum` = `quantity` * `purchase_price` WHERE `state` = 0");
     }
 
-    
-    
+
+
 }

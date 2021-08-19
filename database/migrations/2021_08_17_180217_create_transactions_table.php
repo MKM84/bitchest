@@ -15,17 +15,18 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedDecimal("sum")->default(0);
+            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
+            $table->foreignId("cryptocurrency_id")->constrained("cryptocurrencies");
+            $table->foreignId("progression_id")->constrained("progressions");
             $table->unsignedDecimal("quantity");
             $table->boolean("state")->default(0);
             $table->datetime("purchase_date");
             $table->datetime("selling_date")->nullable();
             $table->unsignedDecimal("purchase_price");
             $table->unsignedDecimal("selling_price")->nullable();
-            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
-            $table->foreignId("cryptocurrency_id")->constrained("cryptocurrencies");
-            $table->foreignId("progression_id")->constrained("progressions");
-
+            $table->unsignedDecimal("sum_selling", 12, 2)->default(0);
+            $table->unsignedDecimal("sum_purchase", 12, 2)->default(0);
+            $table->float("balance")->nullable();
             $table->timestamps();
         });
     }
