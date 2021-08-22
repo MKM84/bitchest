@@ -1,5 +1,8 @@
 <template>
   <div class="home col-4 mx-auto py-5 mt-5 bg-light p-5 rounded">
+      <div class="mx-auto col-1 mb-4">
+<i class="fas fa-cubes fa-3x"></i>
+      </div>
     <h2 class="text-center mb-4">Login</h2>
 
     <form>
