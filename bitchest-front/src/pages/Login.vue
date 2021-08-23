@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     login() {
+        if(this.form.email.length != 0 && this.form.password != 0)
       User.login(this.form)
 
         .then((r) => {

@@ -14,7 +14,7 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::middleware('auth')->get('/user', function (Request $request) {
+Route::middleware(['cors', 'auth'])->get('/user', function (Request $request) {
     return $request->user();
 });
 

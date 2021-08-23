@@ -17,9 +17,9 @@ return [
 
     'paths' => [
         'api/*',
-        '/login',
-        '/logout',
-        '/user',
+        // '/login',
+        // '/logout',
+        // '/user',
         '/csrf-cookie'
 ],
 
