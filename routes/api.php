@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -20,3 +21,15 @@ Route::middleware(['cors', 'auth'])->get('/user', function (Request $request) {
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
+
+
+// Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+//     Route::get('/', [AdminController::class, 'index']);
+
+// });
+
+    // Route::get('/', [AdminController::class, 'index']);
+
+    Route::group(['middleware' => 'auth'],  function () {
+        Route::get('/admin', [AdminController::class, 'index']);
+    });

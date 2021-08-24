@@ -2,10 +2,9 @@
   <div
     class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-4 mx-auto py-5 mt-5 bg-light p-5 rounded"
   >
-    <div class="col-12 text-center d-flex justify-content-center align-items-end mb-5">
-      <i class="fab fa-bitcoin fa-3x text-warning "></i>
-      <h3 class="logo">itChest</h3>
-    </div>
+      <div class="col-12 text-center mt-3 d-flex justify-content-center align-items-end">
+        <img src="../assets/img/bitchest_logo.png" alt="" width="200" />
+      </div>
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">*Email :</label>
@@ -64,12 +63,12 @@ export default {
               if (r.data.status == "admin") {
                 localStorage.setItem("admin", "true");
                 this.$router.push({
-                  name: "Dashboardadmin",
+                  name: "AdminAllCryptos",
                 });
               } else {
                 localStorage.setItem("admin", "false");
                 this.$router.push({
-                  name: "Dashboardclient",
+                  name: "UserAllCryptos",
                 });
               }
 

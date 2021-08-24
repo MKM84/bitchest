@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class CryptocurrenciesTableSeeder extends Seeder
@@ -27,61 +28,61 @@ class CryptocurrenciesTableSeeder extends Seeder
         DB::table('cryptocurrencies')->insert([
             [
                 'name' => 'Bitcoin',
-                'logo' => 'a',
+                'logo' => 'bitcoin_logo.png',
                 'current_value'=>getFirstCotation("Bitcoin")*1000,
 
             ],
             [
                 'name' => 'Ethereum',
-                'logo' => 'a',
+                'logo' => 'ethereum.png',
                 'current_value'=>getFirstCotation("Ethereum")*1000,
 
             ],
             [
                 'name' => 'Ripple',
-                'logo' => 'v',
+                'logo' => 'ripple.png',
                 'current_value'=>getFirstCotation("Ripple")*1000,
 
             ],
             [
                 'name' => 'Bitcoin Cash',
-                'logo' => 'b',
+                'logo' => 'bitcoin-cash.png',
                 'current_value'=>getFirstCotation("Bitcoin Cash")*1000,
 
             ],
             [
                 'name' => 'Cardano',
-                'logo' => 'z',
+                'logo' => 'cardano.png',
                 'current_value'=>getFirstCotation("Cardano")*1000,
 
             ],
             [
                 'name' => 'Litecoin',
-                'logo' => 'e',
+                'logo' => 'litecoin.png',
                 'current_value'=>getFirstCotation("Litecoin")*1000,
 
             ],
             [
                 'name' => 'NEM',
-                'logo' => 'r',
+                'logo' => 'nem.png',
                 'current_value'=>getFirstCotation("NEM")*1000,
 
             ],
             [
                 'name' => 'Stellar',
-                'logo' => 't',
+                'logo' => 'stellar.png',
                 'current_value'=>getFirstCotation("Stellar")*1000,
 
             ],
             [
                 'name' => 'IOTA',
-                'logo' => 'r',
+                'logo' => 'iota.png',
                 'current_value'=>getFirstCotation("IOTA")*1000,
 
             ],
             [
                 'name' => 'Das',
-                'logo' => 't',
+                'logo' => 'das.png',
                 'current_value'=>getFirstCotation("Das")*1000,
 
             ],

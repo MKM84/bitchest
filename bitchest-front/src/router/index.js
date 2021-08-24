@@ -4,13 +4,14 @@ import {
 } from 'vue-router';
 
 import Login from "../pages/Login.vue";
-import Dashboardadmin from "../pages/admin/Dashboardadmin.vue";
-import Dashboardclient from "../pages/client/Dashboardclient.vue";
+import AdminAllCryptos from "../pages/admin/AdminAllCryptos.vue";
+import UserAllCryptos from "../pages/client/UserAllCryptos.vue";
+import NotFound from "../pages/NotFound.vue";
 
 
 
-const routes = [
-    {
+
+const routes = [{
         path: '/',
         redirect: '/login'
     },
@@ -24,20 +25,26 @@ const routes = [
     },
     {
         path: '/admin',
-        name: 'Dashboardadmin',
-        component: Dashboardadmin,
+        name: 'AdminAllCryptos',
+        component: AdminAllCryptos,
         meta: {
             authOnly: true
         }
     },
     {
         path: '/client',
-        name: 'Dashboardclient',
-        component: Dashboardclient,
+        name: 'UserAllCryptos',
+        component: UserAllCryptos,
         meta: {
             authOnly: true
         }
     },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: NotFound
+    },
+
 
 
 ];
@@ -52,9 +59,9 @@ function isLoggedIn() {
     return localStorage.getItem("auth");
 }
 
-function isAdmin() {
-    return localStorage.getItem("admin");
-}
+// function isAdmin() {
+//     return localStorage.getItem("admin");
+// }
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.authOnly)) {
@@ -74,21 +81,21 @@ router.beforeEach((to, from, next) => {
         // this route requires auth, check if logged in
         // if not, redirect to login page.
         if (isLoggedIn()) {
-            if (isAdmin() == 'true') {
-                next({
-                    path: "/admin",
-                    query: {
-                        redirect: to.fullPath
-                    }
-                })
-            } else if (isAdmin() == 'false') {
-                next({
-                    path: "/client",
-                    query: {
-                        redirect: to.fullPath
-                    }
-                })
-            }
+            // if (isAdmin() == 'true') {
+            //     next({
+            //         path: "/admin",
+            //         query: {
+            //             redirect: to.fullPath
+            //         }
+            //     })
+            // } else if (isAdmin() == 'false') {
+            //     next({
+            //         path: "/client",
+            //         query: {
+            //             redirect: to.fullPath
+            //         }
+            //     })
+            // }
         } else {
             next();
         }

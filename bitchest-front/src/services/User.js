@@ -19,7 +19,10 @@ export default {
     auth() {
 
         return Api.get("/user");
+    },
 
+    getAllCurrencies() {
+        return Api.get("/admin");
     }
 };
 
