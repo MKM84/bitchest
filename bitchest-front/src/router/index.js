@@ -11,7 +11,8 @@ import NotFound from "../pages/NotFound.vue";
 
 
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         redirect: '/login'
     },

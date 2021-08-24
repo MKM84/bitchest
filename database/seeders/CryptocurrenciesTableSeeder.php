@@ -28,7 +28,7 @@ class CryptocurrenciesTableSeeder extends Seeder
         DB::table('cryptocurrencies')->insert([
             [
                 'name' => 'Bitcoin',
-                'logo' => 'bitcoin_logo.png',
+                'logo' => 'bitcoin.png',
                 'current_value'=>getFirstCotation("Bitcoin")*1000,
 
             ],
@@ -46,7 +46,7 @@ class CryptocurrenciesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Bitcoin Cash',
-                'logo' => 'bitcoin-cash.png',
+                'logo' => 'bitcoin_cash.png',
                 'current_value'=>getFirstCotation("Bitcoin Cash")*1000,
 
             ],
@@ -81,9 +81,9 @@ class CryptocurrenciesTableSeeder extends Seeder
 
             ],
             [
-                'name' => 'Das',
-                'logo' => 'das.png',
-                'current_value'=>getFirstCotation("Das")*1000,
+                'name' => 'Dash',
+                'logo' => 'dash.png',
+                'current_value'=>getFirstCotation("Dash")*1000,
 
             ],
         ]);

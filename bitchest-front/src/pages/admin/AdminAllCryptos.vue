@@ -2,7 +2,7 @@
   <div class="row col-12">
     <aside class="col-2 bg-light">
       <div class="col-12 text-center mt-4 d-flex justify-content-center align-items-end">
-        <img src="../../assets/img/bitchest_logo.png" alt="" width="200" />
+        <img src="img/bitchest_logo.png" alt="" width="200" />
       </div>
       <div class="col-12 mt-5">
         <a
@@ -36,7 +36,7 @@
           <tr v-for="crypto in cryptos" :key="crypto.id">
             <td>
 
-                <img :src="`../../assets/img/${crypto.logo}`" alt="" width="25" /> {{crypto.name}}</td>
+                <img :src="`img/${crypto.logo}`" alt="" width="25" /> {{crypto.name}}</td>
              <td>
                 {{crypto.current_value}} €
             </td>
