@@ -38,7 +38,9 @@ class LoginController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.']
+            'email' => ['*email incorrecte.'],
+            'password' => ['*Mot de passe incorrecte']
+
         ]);
     }
 

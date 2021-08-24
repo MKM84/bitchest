@@ -1,14 +1,14 @@
 <template>
-  <div class="col-4 mx-auto py-5 mt-5 bg-light p-5 rounded">
-    <div
-      class="mx-auto col-2 mb-4 border border-2 border-warning text-center p-1 bg-white rounded"
-    >
-      <i class="fab fa-bitcoin fa-3x text-warning"></i>
+  <div
+    class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-4 mx-auto py-5 mt-5 bg-light p-5 rounded"
+  >
+    <div class="col-12 text-center d-flex justify-content-center align-items-end mb-5">
+      <i class="fab fa-bitcoin fa-3x text-warning "></i>
+      <h3 class="logo">itChest</h3>
     </div>
-    <h3 class="text-center mb-4">LOGIN</h3>
 
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email :</label>
+      <label for="exampleInputEmail1" class="form-label">*Email :</label>
       <input
         type="email"
         class="form-control"
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password : </label>
+      <label for="exampleInputPassword1" class="form-label">*Password : </label>
       <input
         type="password"
         class="form-control"
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <button @click.prevent="login" class="btn btn-primary">Login</button>
+  <button @click.prevent="login" class="btn btn-primary ">Login</button>
   </div>
 </template>
 
@@ -53,39 +53,39 @@ export default {
   },
   methods: {
     login() {
-        if(this.form.email.length != 0 && this.form.password != 0)
-      User.login(this.form)
+      if (this.form.email.length != 0 && this.form.password != 0)
+        User.login(this.form)
 
-        .then((r) => {
-          if (r.statusText == "OK") {
-              console.log(r)
-            localStorage.setItem("auth", "true");
+          .then((r) => {
+            if (r.statusText == "OK") {
+              console.log(r);
+              localStorage.setItem("auth", "true");
 
-            if (r.data.status == "admin") {
-              localStorage.setItem("admin", "true");
-              this.$router.push({
-                name: "Dashboardadmin",
-              });
+              if (r.data.status == "admin") {
+                localStorage.setItem("admin", "true");
+                this.$router.push({
+                  name: "Dashboardadmin",
+                });
+              } else {
+                localStorage.setItem("admin", "false");
+                this.$router.push({
+                  name: "Dashboardclient",
+                });
+              }
+
+              return r.data;
             } else {
-              localStorage.setItem("admin", "false");
-              this.$router.push({
-                name: "Dashboardclient",
-              });
+              return {
+                done: false,
+              };
             }
-
-            return r.data;
-          } else {
-            return {
-              done: false,
-            };
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          if (error.response.status === 422) {
-            this.errors = error.response.data.errors;
-          }
-        });
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error.response.status === 422) {
+              this.errors = error.response.data.errors;
+            }
+          });
     },
   },
 };
