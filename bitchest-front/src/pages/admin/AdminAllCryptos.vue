@@ -3,8 +3,8 @@
 
     <Navigation :admin="admin" />
 
-    <section class="col cryptos">
-      <h3 class="text-left mt-5 mb-3 text-info">Les cryptomonnaies</h3>
+    <section class="col">
+      <h3 class="text-left mt-5 mb-3 text-info ">Les cryptomonnaies</h3>
       <table class="table">
         <thead>
           <tr>

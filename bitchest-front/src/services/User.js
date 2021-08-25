@@ -26,6 +26,9 @@ export default {
     getAllUsers() {
         return Api.get("/admin/user-list");
     },
+    addUser(user) {
+        return Api.post("/admin/add-user", user);
+    },
     getAllUserCurrencies() {
         return Api.get("/client");
     }

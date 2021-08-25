@@ -20,7 +20,7 @@
         </router-link>
                 <router-link to="/admin/add-user">
           <a
-            class="d-block p-2 m-3 fs-6 rounded border btn bg-light"
+            class="d-block p-2 m-3 fs-6 rounded border btn bg-light border-dark"
             href="#"
             >Ajouter un utilisateur</a
           >

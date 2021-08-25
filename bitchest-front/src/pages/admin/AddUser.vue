@@ -5,7 +5,7 @@
     <section class=" offset-md-2 col-4">
       <h3 class="text-left mt-5 mb-3 text-info">Ajouter un utilisateur</h3>
 
-      <form @submit.prevent="addUser">
+      <form @submit.prevent="addNewUser">
         <div class="mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-3">Nom </label>
@@ -73,13 +73,13 @@
           <label for="password" class="form-label fs-6  mt-3">Mot de passe</label>
           <input
             name="password"
-            type="password"
+            type="text"
             class="form-control"
             id="password"
             aria-describedby="password"
             v-model="user.password"
           />
-          <div id="lastnameHelp" class="form-text text-danger" v-if="user.password">
+          <div id="lastnameHelp" class="form-text text-danger" v-if="errors.password">
             {{ errors.password[0] }}
           </div>
           <div
@@ -88,6 +88,26 @@
             v-if="v$.user.password.$error"
           >
             {{ v$.user.password.$errors[0].$message }}
+          </div>
+
+          <label for="password" class="form-label fs-6  mt-3">Status</label>
+          <input
+            name="password"
+            type="text"
+            class="form-control"
+            id="password"
+            aria-describedby="password"
+            v-model="user.status"
+          />
+          <div id="lastnameHelp" class="form-text text-danger" v-if="errors.status">
+            {{ errors.status[0] }}
+          </div>
+          <div
+            id="lastnameError"
+            class="form-text text-danger"
+            v-if="v$.user.status.$error"
+          >
+            {{ v$.user.status.$errors[0].$message }}
           </div>
         </div>
 
@@ -122,7 +142,7 @@ export default {
     return {
       user: {
         lastname: "",
-        firstame: "",
+        firstname: "",
         email: "",
         password: "",
         status: "",
@@ -137,19 +157,25 @@ export default {
         lastname: {required, minLength: minLength(3)},
         firstname: {required, minLength: minLength(3)},
         email: { required, email },
-        password: { required, minLength: minLength(8) },
+        password: {required},
         status: { required },
       },
     };
   },
   methods: {
-    addUser() {
+    addNewUser() {
       this.v$.$validate();
       if (this.v$.$error) {
         return false;
       }
-      User.addUser(this.form)
+      User.addUser(this.user)
       .then(this.$router.push("/admin/user-list"))
+              .catch((error) => {
+          console.log(error);
+          if (error.response.status === 422) {
+            this.errors = error.response.data.errors;
+          }
+        });
 
     },
   },
