@@ -18,6 +18,13 @@
             >Cryptomonnaies</a
           >
         </router-link>
+                <router-link to="/admin/add-user">
+          <a
+            class="d-block p-2 m-3 fs-6 rounded border btn bg-light"
+            href="#"
+            >Ajouter un utilisateur</a
+          >
+        </router-link>
         <a
           class="d-block p-2 m-3 mt-5 fs-6 rounded border border-dark btn btn-dark"
           href="#"
@@ -57,6 +64,7 @@ export default {
     name: 'Navigation',
     props: {
         admin: {type: Boolean}
+
     },
     methods: {
     logout() {
