@@ -30,6 +30,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
     // Route::get('/', [AdminController::class, 'index']);
 
-    Route::group(['middleware' => 'auth'],  function () {
+    Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index']);
+        Route::get('/admin/user-list', [AdminController::class, 'users']);
     });

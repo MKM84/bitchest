@@ -38,8 +38,8 @@ class LoginController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'email' => ['*Email incorrecte.'],
-            'password' => ['*Mot de passe incorrecte']
+            'email' => ['Email incorrecte.'],
+            'password' => ['Mot de passe incorrecte.']
 
         ]);
     }

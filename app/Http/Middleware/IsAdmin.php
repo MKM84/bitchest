@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 use Closure;
 use Illuminate\Http\Request;
 
-class Cors
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,9 +17,9 @@ class Cors
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request)
-        ->header('Access-Control-Allow-Origin', '*')
-        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
-        ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        if (Auth::user() &&  Auth::user()->status == 'admin') {
+            return $next($request);
+     }
+        return ['Accès réservé aux administrateurs du site'];
     }
 }

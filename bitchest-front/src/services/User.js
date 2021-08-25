@@ -17,12 +17,17 @@ export default {
     },
 
     auth() {
-
         return Api.get("/user");
     },
 
-    getAllCurrencies() {
+    getAllAdminCurrencies() {
         return Api.get("/admin");
+    },
+    getAllUsers() {
+        return Api.get("/admin/user-list");
+    },
+    getAllUserCurrencies() {
+        return Api.get("/client");
     }
 };
 

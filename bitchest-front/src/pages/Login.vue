@@ -1,8 +1,8 @@
 <template>
   <div
-    class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-4 mx-auto py-5 mt-5 bg-light p-5 rounded"
+    class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-4 mx-auto py-5 mt-5 bg-info p-5 rounded"
   >
-      <div class="col-12 text-center mt-3 d-flex justify-content-center align-items-end">
+      <div class="col-12 text-center mb-3 d-flex justify-content-center align-items-end">
         <img src="img/bitchest_logo.png" alt="" width="200" />
       </div>
 
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-  <button @click.prevent="login" class="btn btn-primary ">Login</button>
+  <button @click.prevent="login" class="btn btn-dark ">Login</button>
   </div>
 </template>
 
@@ -73,10 +73,6 @@ export default {
               }
 
               return r.data;
-            } else {
-              return {
-                done: false,
-              };
             }
           })
           .catch((error) => {
