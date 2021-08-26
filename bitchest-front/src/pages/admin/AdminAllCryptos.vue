@@ -33,18 +33,20 @@ export default {
   components: {
     Navigation,
   },
+  props: {
+      admin:{ type: Boolean}
+  },
   mounted() {
-    this.getAllAdminCurrencies();
+    this.getAllAdminCryptos();
   },
   data() {
     return {
       cryptos: {},
-      admin: true,
     };
   },
   methods: {
-    getAllAdminCurrencies() {
-      User.getAllAdminCurrencies().then((r) => {
+    getAllAdminCryptos() {
+      User.getAllAdminCryptos().then((r) => {
         this.cryptos = r.data.currencies;
         console.log(this.cryptos);
       });

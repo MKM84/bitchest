@@ -1,23 +1,43 @@
 <template>
-<Pictos />
-
-<router-view />
+  <Pictos />
+  <router-view @get-all-users="getAllUsers" :userList="userList" :admin="admin" />
 </template>
 
 <script>
-import Pictos from './components/Pictos.vue'
+import Pictos from "./components/Pictos.vue";
+import User from "./services/User";
 
 export default {
-  name: 'App',
+  name: "App",
+  mounted() {
+    this.isAdmin();
+  },
+  props: {},
   components: {
-    Pictos
+    Pictos,
+  },
+  data() {
+    return {
+      userList: {},
+      admin: "",
+    };
   },
   methods: {
-      isLoggedIn() {
-
+    isAdmin() {
+      let userIsAdmin = localStorage.getItem("admin");
+      if (userIsAdmin) {
+        this.admin = true;
+        this.getAllUsers();
       }
-  }
-}
+    },
+    getAllUsers() {
+      User.getAllUsers().then((r) => {
+        this.userList = r.data.userList;
+        console.log(this.userList);
+      });
+    },
+  },
+};
 </script>
 
 <style>

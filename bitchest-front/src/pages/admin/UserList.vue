@@ -27,16 +27,23 @@
               {{ user.email }}
             </td>
             <td class="fs-6">
-                <span :class="`badge ${ user.status === 0 ? 'bg-info text-dark' : 'bg-light text-dark'}`">{{ user.status === 0 ? 'Admin' : 'Client' }}</span>
-
+              <span
+                :class="`badge ${
+                  user.status === 0 ? 'bg-info text-dark' : 'bg-light text-dark'
+                }`"
+                >{{ user.status === 0 ? "Admin" : "Client" }}</span
+              >
             </td>
             <td class="fs-6">
-             <button type="button" class="btn text-secondary"><i class="fas fa-edit"></i></button>
+              <button type="button" class="btn text-secondary">
+                <i class="fas fa-edit"></i>
+              </button>
             </td>
             <td class="fs-6">
-           <button type="button" class="btn text-danger"><i class="fas fa-trash-alt"></i></button>
+              <button type="button" class="btn text-danger">
+                <i class="fas fa-trash-alt"></i>
+              </button>
             </td>
-
           </tr>
         </tbody>
       </table>
@@ -45,32 +52,26 @@
 </template>
 
 <script>
-import User from "../../services/User";
+// import User from "../../services/User";
 import Navigation from "../../components/Navigation.vue";
 export default {
   name: "UserList",
   components: {
     Navigation,
   },
-  mounted() {
-    this.getAllUsers();
-  },
-  data() {
-    return {
-      userList: {},
-      admin: true,
-    };
-  },
-  methods: {
-    getAllUsers() {
-      User.getAllUsers().then((r) => {
-        this.userList = r.data.userList;
-        console.log(this.userList);
-      });
+  props: {
+    userList: {},
+    admin: {
+      type: Boolean,
     },
   },
+  mounted() {
+    this.$emit["get-all-users"];
+  },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
-<style>
-
-</style>
+<style></style>

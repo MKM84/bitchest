@@ -3,7 +3,7 @@
       <div class="col-12 text-center mt-4 d-flex justify-content-center align-items-end">
         <img src="../../public/img/bitchest_logo.png" alt="" width="150" />
       </div>
-      <div v-if="admin" class="col mt-5">
+      <div v-if="admin === true" class="col mt-5">
         <router-link to="/admin/user-list">
           <a
             class="d-block p-2 m-3 fs-6 rounded border border-dark btn btn-outline-dark"
@@ -64,7 +64,6 @@ export default {
     name: 'Navigation',
     props: {
         admin: {type: Boolean}
-
     },
     methods: {
     logout() {

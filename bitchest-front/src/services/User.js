@@ -20,7 +20,7 @@ export default {
         return Api.get("/user");
     },
 
-    getAllAdminCurrencies() {
+    getAllAdminCryptos() {
         return Api.get("/admin");
     },
     getAllUsers() {
