@@ -88,7 +88,7 @@ export default {
             console.log(r);
             localStorage.setItem("auth", "true");
 
-            if (r.data.status == "admin") {
+            if (r.data.status == 0) {
               localStorage.setItem("admin", "true");
               this.$router.push({
                 name: "AdminAllCryptos",

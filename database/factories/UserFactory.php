@@ -25,7 +25,7 @@ class UserFactory extends Factory
         return [
             'firstname' => $this->faker->firstName,
             'lastname' => $this->faker->lastName,
-            'status'=>$this->faker->randomDigit <= 2 ? "admin" : "client",
+            'status'=>$this->faker->randomDigit <= 2 ? 0 : 1,
             'email' => $this->faker->unique()->safeEmail(),
             'user_solde' => $this->faker->numberBetween(20000, 200000),
             'email_verified_at' => now(),

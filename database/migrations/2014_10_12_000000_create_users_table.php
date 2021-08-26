@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname', 100);
             $table->string('lastname', 100);
             $table->string('email')->unique();
-            $table->enum("status", ["client", "admin"])->default("client");
+            $table->boolean("status");
             $table->unsignedDecimal('user_solde');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

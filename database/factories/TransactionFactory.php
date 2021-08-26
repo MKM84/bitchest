@@ -42,7 +42,7 @@ class TransactionFactory extends Factory
         $date_selling = $date_selling . " " . $this->faker->time();
 
         // get all user where status = client
-        $users = User::where('status', '=', 'client')->get();
+        $users = User::where('status', '=', 1)->get();
         // get id of client users
         $users = $users->pluck('id')->all();
 

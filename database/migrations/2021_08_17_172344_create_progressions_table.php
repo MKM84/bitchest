@@ -19,7 +19,6 @@ class CreateProgressionsTable extends Migration
             $table->float("rate");
             $table->date("progress_date");
             $table->timestamps();
-
             $table->foreignId("cryptocurrency_id")->constrained("cryptocurrencies");
 
 

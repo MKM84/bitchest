@@ -27,7 +27,7 @@
               {{ user.email }}
             </td>
             <td class="fs-6">
-                <span :class="`badge ${ user.status === 'admin' ? 'bg-info text-dark' : 'bg-light text-dark'}`">{{ user.status }}</span>
+                <span :class="`badge ${ user.status === 0 ? 'bg-info text-dark' : 'bg-light text-dark'}`">{{ user.status === 0 ? 'Admin' : 'Client' }}</span>
 
             </td>
             <td class="fs-6">

@@ -33,4 +33,6 @@ Route::post('/logout', [LoginController::class, 'logout']);
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index']);
         Route::get('/admin/user-list', [AdminController::class, 'users']);
+        Route::post('/admin/add-user', [AdminController::class, 'addUser']);
+
     });

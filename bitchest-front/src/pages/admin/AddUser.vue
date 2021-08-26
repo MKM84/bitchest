@@ -2,7 +2,7 @@
   <div class="row col-12">
     <Navigation :admin="admin" />
 
-    <section class=" offset-md-2 col-4">
+    <section class="offset-md-2 col-4">
       <h3 class="text-left mt-5 mb-3 text-info">Ajouter un utilisateur</h3>
 
       <form @submit.prevent="addNewUser">
@@ -28,7 +28,7 @@
             {{ v$.user.lastname.$errors[0].$message }}
           </div>
           <!-- Firstname -->
-          <label for="firstname" class="form-label fs-6  mt-3">Prénom</label>
+          <label for="firstname" class="form-label fs-6 mt-3">Prénom</label>
           <input
             name="firstname"
             type="text"
@@ -49,7 +49,7 @@
           </div>
 
           <!-- email  -->
-          <label for="email" class="form-label fs-6  mt-3">Email</label>
+          <label for="email" class="form-label fs-6 mt-3">Email</label>
           <input
             name="email"
             type="email"
@@ -70,7 +70,7 @@
           </div>
 
           <!-- Password  -->
-          <label for="password" class="form-label fs-6  mt-3">Mot de passe</label>
+          <label for="password" class="form-label fs-6 mt-3">Mot de passe</label>
           <input
             name="password"
             type="text"
@@ -89,17 +89,32 @@
           >
             {{ v$.user.password.$errors[0].$message }}
           </div>
+          <!-- Status  -->
 
-          <label for="password" class="form-label fs-6  mt-3">Status</label>
-          <input
-            name="password"
-            type="text"
-            class="form-control"
-            id="password"
-            aria-describedby="password"
-            v-model="user.status"
-          />
-          <div id="lastnameHelp" class="form-text text-danger" v-if="errors.status">
+
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="client"
+              id="client-radio"
+              value="1"
+              v-model="user.status"
+            />
+            <label class="form-check-label" for="client-radio"> Client </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="admin"
+              id="admin-radio"
+              value="0"
+              v-model="user.status"
+            />
+            <label class="form-check-label" for="admin-radio"> Admin </label>
+          </div>
+               <div id="lastnameHelp" class="form-text text-danger" v-if="errors.status">
             {{ errors.status[0] }}
           </div>
           <div
@@ -113,8 +128,7 @@
 
         <button type="submit" class="btn btn-info mr-3">Ajouter</button>
         <router-link to="/admin/user-list">
-
-        <button type="button" class="btn btn-outline-dark m-3">Annuler</button>
+          <button type="button" class="btn btn-outline-dark m-3">Annuler</button>
         </router-link>
       </form>
     </section>
@@ -126,7 +140,7 @@ import User from "../../services/User";
 import Navigation from "../../components/Navigation.vue";
 
 import useVuelidate from "@vuelidate/core";
-import { required, email, minLength } from "@vuelidate/validators";
+import { required, email, minLength, numeric } from "@vuelidate/validators";
 
 export default {
   name: "AddUser",
@@ -145,7 +159,7 @@ export default {
         firstname: "",
         email: "",
         password: "",
-        status: "",
+        status: null,
       },
       admin: true,
       errors: [],
@@ -154,11 +168,11 @@ export default {
   validations() {
     return {
       user: {
-        lastname: {required, minLength: minLength(3)},
-        firstname: {required, minLength: minLength(3)},
+        lastname: { required, minLength: minLength(3) },
+        firstname: { required, minLength: minLength(3) },
         email: { required, email },
-        password: {required},
-        status: { required },
+        password: { required },
+        status: { required, numeric },
       },
     };
   },
@@ -169,17 +183,15 @@ export default {
         return false;
       }
       User.addUser(this.user)
-      .then(this.$router.push("/admin/user-list"))
-              .catch((error) => {
+        .then(this.$router.push("/admin/user-list"))
+        .catch((error) => {
           console.log(error);
           if (error.response.status === 422) {
             this.errors = error.response.data.errors;
           }
         });
-
     },
   },
 };
 </script>
-<style>
-</style>
+<style></style>
