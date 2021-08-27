@@ -10,6 +10,10 @@ import AddUser from "../pages/admin/AddUser.vue";
 import EditUser from "../pages/admin/EditUser.vue";
 
 import UserAllCryptos from "../pages/client/UserAllCryptos.vue";
+import UserWallet from "../pages/client/UserWallet.vue";
+import UserPurchases from "../pages/client/UserPurchases.vue";
+import UserSellCrypto from "../pages/client/UserSellCrypto.vue";
+
 import NotFound from "../pages/NotFound.vue";
 
 
@@ -82,7 +86,7 @@ const routes = [{
     {
         path: '/client/user-wallet',
         name: 'UserWallet',
-        component: UserAllCryptos,
+        component: UserWallet,
         meta: {
             authOnly: true,
             clientOnly: true
@@ -91,7 +95,7 @@ const routes = [{
     {
         path: '/client/user-purchases',
         name: 'UserPurchases',
-        component: UserAllCryptos,
+        component: UserPurchases,
         meta: {
             authOnly: true,
             clientOnly: true
@@ -100,7 +104,7 @@ const routes = [{
     {
         path: '/client/User-Sell-crypto',
         name: 'UserSellCrypto',
-        component: UserAllCryptos,
+        component: UserSellCrypto,
         meta: {
             authOnly: true,
             clientOnly: true
@@ -109,7 +113,7 @@ const routes = [{
     {
         path: '/client/user-form',
         name: 'UserSellCrypto',
-        component: UserAllCryptos,
+        component: UserSellCrypto,
         meta: {
             authOnly: true,
             clientOnly: true

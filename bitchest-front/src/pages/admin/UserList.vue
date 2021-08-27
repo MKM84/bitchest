@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="admin" />
+    <Navigation :admin="true" />
 
     <section class="col">
       <h3 class="text-left mt-5 mb-3 text-info">Les clients</h3>
@@ -52,7 +52,6 @@
 </template>
 
 <script>
-// import User from "../../services/User";
 import Navigation from "../../components/Navigation.vue";
 export default {
   name: "UserList",
@@ -61,17 +60,7 @@ export default {
   },
   props: {
     userList: {},
-    admin: {
-      type: Boolean,
-    },
   },
-  mounted() {
-    this.$emit["get-all-users"];
-  },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>
 <style></style>

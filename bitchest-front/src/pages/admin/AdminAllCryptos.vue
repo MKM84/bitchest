@@ -1,10 +1,9 @@
 <template>
   <div class="row col-12">
-
-    <Navigation :admin="admin" />
+    <Navigation :admin="true" />
 
     <section class="col">
-      <h3 class="text-left mt-5 mb-3 text-info ">Les cryptomonnaies</h3>
+      <h3 class="text-left mt-5 mb-3 text-info">Les cryptomonnaies</h3>
       <table class="table">
         <thead>
           <tr>
@@ -26,7 +25,6 @@
 </template>
 
 <script>
-import User from "../../services/User";
 import Navigation from "../../components/Navigation.vue";
 export default {
   name: "AdminAllCryptos",
@@ -34,27 +32,9 @@ export default {
     Navigation,
   },
   props: {
-      admin:{ type: Boolean}
+    cryptos: { type: Array},
   },
-  mounted() {
-    this.getAllAdminCryptos();
-  },
-  data() {
-    return {
-      cryptos: {},
-    };
-  },
-  methods: {
-    getAllAdminCryptos() {
-      User.getAllAdminCryptos().then((r) => {
-        this.cryptos = r.data.currencies;
-        console.log(this.cryptos);
-      });
-    },
-  },
+
 };
 </script>
-<style>
-
-
-</style>
+<style></style>

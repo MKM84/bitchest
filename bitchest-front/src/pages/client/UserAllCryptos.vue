@@ -1,58 +1,28 @@
 <template>
   <div class="row col-12">
-
-    <Navigation :admin="admin"/>
+    <Navigation :admin="false" />
 
     <section class="col">
-      <h4 class="text-left mt-5 mb-3">Liste des cryptomonnaies</h4>
-      <table class="table table-borderless table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Cours actuel</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="crypto in cryptos" :key="crypto.id">
-            <td class="fs-5">
-              <img :src="`img/${crypto.logo}`" alt="" width="25" /> {{ crypto.name }}
-            </td>
-            <td class="fs-5">{{ crypto.current_value }} €</td>
-          </tr>
-        </tbody>
-      </table>
+      <h3 class="text-left mt-5 mb-3 text-info">user cryptos</h3>
     </section>
   </div>
 </template>
 
 <script>
-import User from "../../services/User";
-import Navigation from "../../components/Navigation.vue"
+import Navigation from "../../components/Navigation.vue";
 export default {
-  name: "AdminAllCryptos",
+  name: "UserAllCryptos",
   components: {
-      Navigation
-      },
+    Navigation,
+  },
+  props: {},
   mounted() {
-    this.getAllUserCurrencies();
+    this.$emit("get-all-admincryptos");
   },
   data() {
-    return {
-        cryptos: {},
-        admin: false
-        };
+    return {};
   },
-  methods: {
-
-    getAllUserCurrencies() {
-      User.getAllUserCurrencies().then((r) => {
-        this.cryptos = r.data.currencies;
-        console.log(this.cryptos);
-      });
-    },
-  },
+  methods: {},
 };
 </script>
-<style>
-
-</style>
+<style></style>

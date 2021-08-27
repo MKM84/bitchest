@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="admin" />
+    <Navigation :admin="true" />
 
     <section class="offset-md-2 col-4">
       <h3 class="text-left mt-5 mb-3 text-info">Ajouter un utilisateur</h3>
@@ -147,6 +147,9 @@ export default {
   components: {
     Navigation,
   },
+  props: {
+      userList: {}
+  },
   setup() {
     return {
       v$: useVuelidate(),
@@ -161,7 +164,7 @@ export default {
         password: "",
         status: null,
       },
-      admin: true,
+
       errors: [],
     };
   },

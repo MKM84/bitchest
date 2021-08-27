@@ -6,11 +6,11 @@
       <img src="img/bitchest_logo.png" alt="" width="200" />
     </div>
 
-    <form @submit.prevent="login">
+    <form @submit.prevent="onLogin">
       <div class="mb-4">
         <label for="email" class="form-label fs-5">Email* </label>
         <input
-        name="email"
+          name="email"
           type="email"
           class="form-control"
           id="email"
@@ -27,7 +27,7 @@
       <div class="mb-4">
         <label for="password" class="form-label fs-5">Password* </label>
         <input
-        name="password"
+          name="password"
           type="password"
           class="form-control"
           id="exampleInputPassword1"
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import User from "../services/User";
+// import User from "../services/User";
 import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 
@@ -58,6 +58,7 @@ export default {
       v$: useVuelidate(),
     };
   },
+  emits:['login'],
   data() {
     return {
       form: {
@@ -76,38 +77,19 @@ export default {
     };
   },
   methods: {
-    login() {
+    setAdmin() {
+      return new Promise((resolve)=> {resolve(localStorage.setItem("admin", "true"))});
+    },
+    setClient() {
+      return new Promise((resolve)=> {resolve(localStorage.setItem("admin", "false"))});
+    },
+    onLogin() {
       this.v$.$validate();
       if (this.v$.$error) {
         return false;
       }
-      User.login(this.form)
+      this.$emit('login', this.form)
 
-        .then((r) => {
-          if (r.statusText == "OK") {
-            console.log(r);
-            localStorage.setItem("auth", "true");
-
-            if (r.data.status == 0) {
-              localStorage.setItem("admin", "true");
-              this.$router.push({
-                name: "AdminAllCryptos",
-              });
-            } else {
-              localStorage.setItem("admin", "false");
-              this.$router.push({
-                name: "UserAllCryptos",
-              });
-            }
-            return r.data;
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          if (error.response.status === 422) {
-            this.errors = error.response.data.errors;
-          }
-        });
     },
   },
 };
