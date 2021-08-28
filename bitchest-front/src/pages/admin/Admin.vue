@@ -45,7 +45,7 @@ export default {
           }
         })
         .then(this.$router.push("/admin/user-list"))
-
+        .then(this.getAllUsers())
         .catch((error) => {
           console.error(error);
         });
@@ -62,6 +62,7 @@ export default {
           }
         })
         .then(this.$router.push("/admin/user-list"))
+        .then(this.getAllUsers())
         .catch((error) => {
           console.error(error);
         });
