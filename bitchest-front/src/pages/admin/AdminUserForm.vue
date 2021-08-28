@@ -2,7 +2,7 @@
   <div class="row col-12">
     <Navigation :admin="true" />
 
-    <section class="offset-md-2 col-4">
+    <section class="offset-md-2 col-4" v-if="user">
       <h3 class="text-left mt-5 mb-3 text-info">Ajouter un utilisateur</h3>
 
       <form @submit.prevent="onSubmit">
@@ -150,13 +150,22 @@ export default {
       errors: [],
     };
   },
-  mounted() {
+  beforeUpdate() {
       const id = this.$route.params.id;
       if(id > 0) {
           const user = this.userList.find(u => u.id == id);
           this.user = user;
       }
   },
+    mounted() {
+      const id = this.$route.params.id;
+      if(id > 0) {
+          const user = this.userList.find(u => u.id == id);
+          this.user = user;
+      }
+  },
+
+
   validations() {
     return {
       user: {
