@@ -4,7 +4,7 @@
 
     <section class="col">
       <h3 class="text-left mt-5 mb-3 text-info">Les cryptomonnaies</h3>
-      <table class="table">
+      <table class="table" :v-if="cryptos">
         <thead>
           <tr>
             <th scope="col">Nom</th>
@@ -14,7 +14,7 @@
         <tbody>
           <tr v-for="crypto in cryptos" :key="crypto.id">
             <td class="fs-6 pt-3 pb-3">
-              <img :src="`img/${crypto.logo}`" alt="" width="30" /> {{ crypto.name }}
+              <img :src="`/img/${crypto.logo}`" alt="" width="30" /> {{ crypto.name }}
             </td>
             <td class="fs-6 pt-3 pb-3">{{ crypto.current_value }} €</td>
           </tr>

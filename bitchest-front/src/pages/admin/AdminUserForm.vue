@@ -1,11 +1,11 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="admin" />
+    <Navigation :admin="true" />
 
     <section class="offset-md-2 col-4">
       <h3 class="text-left mt-5 mb-3 text-info">Ajouter un utilisateur</h3>
 
-      <form @submit.prevent="addNewUser">
+      <form @submit.prevent="onSubmit">
         <div class="mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-3">Nom </label>
@@ -69,26 +69,7 @@
             {{ v$.user.email.$errors[0].$message }}
           </div>
 
-          <!-- Password  -->
-          <label for="password" class="form-label fs-6 mt-3">Mot de passe</label>
-          <input
-            name="password"
-            type="text"
-            class="form-control"
-            id="password"
-            aria-describedby="password"
-            v-model="user.password"
-          />
-          <div id="lastnameHelp" class="form-text text-danger" v-if="errors.password">
-            {{ errors.password[0] }}
-          </div>
-          <div
-            id="lastnameError"
-            class="form-text text-danger"
-            v-if="v$.user.password.$error"
-          >
-            {{ v$.user.password.$errors[0].$message }}
-          </div>
+
           <!-- Status  -->
 
 
@@ -126,7 +107,7 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-info mr-3">Ajouter</button>
+        <button type="submit" class="btn btn-info mr-3">Valider</button>
         <router-link to="/admin/user-list">
           <button type="button" class="btn btn-outline-dark m-3">Annuler</button>
         </router-link>
@@ -136,21 +117,26 @@
 </template>
 
 <script>
-import User from "../../services/User";
 import Navigation from "../../components/Navigation.vue";
 
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, numeric } from "@vuelidate/validators";
 
 export default {
-  name: "AddUser",
+  name: "AdminUserForm",
   components: {
     Navigation,
   },
+  emits:['new-user', 'edit-user'],
   setup() {
     return {
       v$: useVuelidate(),
     };
+  },
+  props: {
+      userList: {
+          type: Array
+      }
   },
   data() {
     return {
@@ -158,12 +144,18 @@ export default {
         lastname: "",
         firstname: "",
         email: "",
-        password: "",
         status: null,
       },
-      admin: true,
+
       errors: [],
     };
+  },
+  mounted() {
+      const id = this.$route.params.id;
+      if(id > 0) {
+          const user = this.userList.find(u => u.id == id);
+          this.user = user;
+      }
   },
   validations() {
     return {
@@ -171,25 +163,28 @@ export default {
         lastname: { required, minLength: minLength(3) },
         firstname: { required, minLength: minLength(3) },
         email: { required, email },
-        password: { required },
         status: { required, numeric },
       },
     };
   },
   methods: {
-    addNewUser() {
+    onSubmit() {
       this.v$.$validate();
       if (this.v$.$error) {
         return false;
       }
-      User.addUser(this.user)
-        .then(this.$router.push("/admin/user-list"))
-        .catch((error) => {
-          console.log(error);
-          if (error.response.status === 422) {
-            this.errors = error.response.data.errors;
-          }
-        });
+       const id = this.$route.params.id;
+
+      if(id == 0){
+        this.$emit('new-user', this.user);
+      }else{
+        this.$emit('edit-user', this.user);
+      }
+
+      this.user = {};
+      this.$router.push('/admin/user-list');
+
+
     },
   },
 };

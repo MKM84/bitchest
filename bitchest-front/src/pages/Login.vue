@@ -16,6 +16,7 @@
           id="email"
           aria-describedby="emailHelp"
           v-model="form.email"
+          autofocus
         />
         <div id="emailHelp" class="form-text text-danger" v-if="errors.email">
           {{ errors.email[0] }}
@@ -58,7 +59,7 @@ export default {
       v$: useVuelidate(),
     };
   },
-  emits:['login'],
+  emits:['log-in'],
   data() {
     return {
       form: {
@@ -77,18 +78,13 @@ export default {
     };
   },
   methods: {
-    setAdmin() {
-      return new Promise((resolve)=> {resolve(localStorage.setItem("admin", "true"))});
-    },
-    setClient() {
-      return new Promise((resolve)=> {resolve(localStorage.setItem("admin", "false"))});
-    },
+
     onLogin() {
       this.v$.$validate();
       if (this.v$.$error) {
         return false;
       }
-      this.$emit('login', this.form)
+      this.$emit('log-in', this.form)
 
     },
   },

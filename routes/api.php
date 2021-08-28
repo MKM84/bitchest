@@ -34,5 +34,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
         Route::get('/admin', [AdminController::class, 'index']);
         Route::get('/admin/user-list', [AdminController::class, 'users']);
         Route::post('/admin/add-user', [AdminController::class, 'addUser']);
+        Route::put('/admin/edit-user/{id}', [AdminController::class, 'editUser']);
+        Route::delete('/admin/delete-user/{id}', [AdminController::class, 'deleteUser']);
 
     });

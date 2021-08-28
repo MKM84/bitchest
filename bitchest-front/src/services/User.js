@@ -27,11 +27,24 @@ export default {
         return Api.get("/admin/user-list");
     },
     addUser(user) {
-        return Api.post("/admin/add-user", user);
+        return Api.post("/admin/add-user", user).then((r) => sendActionResult(r));
+    },
+    editUser(user) {
+        return Api.put(`admin/edit-user/${user.id}`, user).then((r) => sendActionResult(r));
+    },
+    deleteUser(id) {
+        return Api.delete(`admin/delete-user/${id}`).then((r) => sendActionResult(r));
     },
     getAllUserCurrencies() {
         return Api.get("/client");
     }
 };
 
+const sendActionResult = (r) => {
+	if (r.statusText == 'OK' && r.data.done == true) {
+		return r.data;
+	} else {
+		return { done: false };
+	}
+};
 

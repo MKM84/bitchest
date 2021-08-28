@@ -4,7 +4,7 @@
 
     <section class="col">
       <h3 class="text-left mt-5 mb-3 text-info">Les clients</h3>
-      <table class="table">
+      <table class="table" :v-if="userList">
         <thead>
           <tr>
             <th scope="col">Nom</th>
@@ -35,12 +35,17 @@
               >
             </td>
             <td class="fs-6">
+      <router-link :to="'/admin/user-form/'+ user.id">
+
               <button type="button" class="btn text-secondary">
                 <i class="fas fa-edit"></i>
               </button>
+      </router-link>
+
             </td>
             <td class="fs-6">
-              <button type="button" class="btn text-danger">
+
+              <button @click="$emit('delete-user', user.id)" type="button" class="btn text-danger" >
                 <i class="fas fa-trash-alt"></i>
               </button>
             </td>
@@ -54,13 +59,14 @@
 <script>
 import Navigation from "../../components/Navigation.vue";
 export default {
-  name: "UserList",
+  name: "Users",
   components: {
     Navigation,
   },
   props: {
     userList: {},
   },
+  emits: ['delete-user']
 };
 </script>
 <style></style>

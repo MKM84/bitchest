@@ -17,7 +17,6 @@ export default {
   },
   props: {},
   mounted() {
-    this.$emit("get-all-admincryptos");
   },
   data() {
     return {};

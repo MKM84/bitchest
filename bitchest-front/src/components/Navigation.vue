@@ -11,18 +11,19 @@
           >Utilisateurs</a
         >
       </router-link>
-      <router-link to="/admin">
+      <router-link to="/admin/cryptos">
         <a
           class="d-block p-2 m-3 fs-6 rounded border border-dark btn btn-outline-dark"
           href="#"
           >Cryptomonnaies</a
         >
       </router-link>
-      <router-link to="/admin/add-user">
+      <router-link to="/admin/user-form/0">
         <a class="d-block p-2 m-3 fs-6 rounded border btn bg-light border-dark" href="#"
           >Ajouter un utilisateur</a
         >
       </router-link>
+
       <a
         class="d-block p-2 m-3 mt-5 fs-6 rounded border border-dark btn btn-dark"
         href="#"
@@ -38,11 +39,18 @@
           >Mon portefeuille</a
         >
       </router-link>
-      <router-link to="/client">
+      <router-link to="/client/cryptos">
         <a
           class="d-block p-2 m-3 fs-6 rounded border border-dark btn btn-outline-dark"
           href="#"
           >Cryptomonnaies</a
+        >
+      </router-link>
+            <router-link to="/client/user-form">
+        <a
+          class="d-block p-2 m-3 fs-6 rounded border border-dark btn btn-outline-dark"
+          href="#"
+          >Mon compte</a
         >
       </router-link>
       <a

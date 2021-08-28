@@ -4,12 +4,14 @@ import {
 } from 'vue-router';
 
 import Login from "../pages/Login.vue";
+import Admin from "../pages/admin/Admin.vue"
 import AdminAllCryptos from "../pages/admin/AdminAllCryptos.vue";
-import UserList from "../pages/admin/UserList.vue";
-import AddUser from "../pages/admin/AddUser.vue";
-import EditUser from "../pages/admin/EditUser.vue";
+import Users from "../pages/admin/Users.vue";
+import AdminUserForm from "../pages/admin/AdminUserForm.vue";
 
+import Client from "../pages/client/Client.vue"
 import UserAllCryptos from "../pages/client/UserAllCryptos.vue";
+import UserForm from "../pages/client/UserForm.vue";
 import UserWallet from "../pages/client/UserWallet.vue";
 import UserPurchases from "../pages/client/UserPurchases.vue";
 import UserSellCrypto from "../pages/client/UserSellCrypto.vue";
@@ -24,6 +26,14 @@ const routes = [{
         redirect: '/login'
     },
     {
+        path: '/admin',
+        redirect: '/admin/cryptos'
+    },
+    {
+        path: '/client',
+        redirect: '/client/cryptos'
+    },
+    {
         path: '/login',
         name: 'login',
         component: Login,
@@ -31,97 +41,107 @@ const routes = [{
             guestOnly: true
         }
     },
-
     // Admin route
     {
         path: '/admin',
-        name: 'AdminAllCryptos',
-        component: AdminAllCryptos,
+        name: 'Admin',
+        component: Admin,
         meta: {
             authOnly: true,
             adminOnly: true
-        }
-    },
-    {
-        path: '/admin/user-list',
-        name: 'UserList',
-        component: UserList,
-        meta: {
-            authOnly: true,
-            adminOnly: true
+        },
+        children: [{
+                path: 'cryptos',
+                name: 'AdminAllCryptos',
+                component: AdminAllCryptos,
+                meta: {
+                    authOnly: true,
+                    adminOnly: true
+                }
+            },
+            {
+                path: 'user-list',
+                name: 'Users',
+                component: Users,
+                meta: {
+                    authOnly: true,
+                    adminOnly: true
 
-        }
-    },
-    {
-        path: '/admin/add-user',
-        name: 'AddUser',
-        component: AddUser,
-        meta: {
-            authOnly: true,
-            adminOnly: true
+                }
+            },
 
-        }
-    },
-    {
-        path: '/admin/edit-user/:id',
-        name: 'EditUser',
-        component: EditUser,
-        meta: {
-            authOnly: true,
-            adminOnly: true
+            {
+                path: 'user-form/:id',
+                name: 'AdminUserForm',
+                component: AdminUserForm,
+                meta: {
+                    authOnly: true,
+                    adminOnly: true
 
-        }
+                }
+            }
+        ]
     },
 
-        // Client routes
+
+    // Client routes
     {
         path: '/client',
-        name: 'UserAllCryptos',
-        component: UserAllCryptos,
+        name: 'Client',
+        component: Client,
         meta: {
             authOnly: true,
             clientOnly: true
-        }
-    },
-    {
-        path: '/client/user-wallet',
-        name: 'UserWallet',
-        component: UserWallet,
-        meta: {
-            authOnly: true,
-            clientOnly: true
-        }
-    },
-    {
-        path: '/client/user-purchases',
-        name: 'UserPurchases',
-        component: UserPurchases,
-        meta: {
-            authOnly: true,
-            clientOnly: true
-        }
-    },
-    {
-        path: '/client/User-Sell-crypto',
-        name: 'UserSellCrypto',
-        component: UserSellCrypto,
-        meta: {
-            authOnly: true,
-            clientOnly: true
-        }
-    },
-    {
-        path: '/client/user-form',
-        name: 'UserSellCrypto',
-        component: UserSellCrypto,
-        meta: {
-            authOnly: true,
-            clientOnly: true
-        }
+        },
+        children: [{
+                path: 'cryptos',
+                name: 'UserAllCryptos',
+                component: UserAllCryptos,
+                meta: {
+                    authOnly: true,
+                    clientOnly: true
+                },
+            },
+            {
+                path: 'user-wallet',
+                name: 'UserWallet',
+                component: UserWallet,
+                meta: {
+                    authOnly: true,
+                    clientOnly: true
+                }
+            },
+            {
+                path: 'user-purchases',
+                name: 'UserPurchases',
+                component: UserPurchases,
+                meta: {
+                    authOnly: true,
+                    clientOnly: true
+                }
+            },
+            {
+                path: 'User-Sell-crypto',
+                name: 'UserSellCrypto',
+                component: UserSellCrypto,
+                meta: {
+                    authOnly: true,
+                    clientOnly: true
+                }
+            },
+            {
+                path: 'user-form',
+                name: 'UserForm',
+                component: UserForm,
+                meta: {
+                    authOnly: true,
+                    clientOnly: true
+                }
+            }
+        ]
     },
 
-
-        // 404 route
+    // 404 route
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
@@ -171,8 +191,7 @@ router.beforeEach((to, from, next) => {
                 }
             });
 
-        }
-        else if (isLoggedIn() && isAdmin() === 'false') {
+        } else if (isLoggedIn() && isAdmin() === 'false') {
             next({
                 path: "/client",
                 query: {
@@ -196,12 +215,10 @@ router.beforeEach((to, from, next) => {
                     redirect: to.fullPath
                 }
             });
-        }
-        else {
+        } else {
             next();
         }
-    }
-    else if (to.matched.some(record => record.meta.clientOnly)) {
+    } else if (to.matched.some(record => record.meta.clientOnly)) {
         // this route requires auth, check if logged in
         // if not, redirect to login page.
         if (isLoggedIn() && isAdmin() === 'true') {

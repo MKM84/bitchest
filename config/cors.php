@@ -19,9 +19,6 @@ return [
         'api/*',
         'api/admin/*',
         'api/client/*',
-        // '/login',
-        // '/logout',
-        // '/user',
         '/csrf-cookie'
 ],
 

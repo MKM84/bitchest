@@ -1,11 +1,9 @@
 <template>
   <Pictos />
   <router-view
-    @get-all-users="getAllUsers"
-    :userList="userList"
-    @get-all-admincryptos="getAllAdminCryptos"
-    :cryptos="cryptos"
-    @login="login"
+
+    @log-in="logIn"
+
   />
 </template>
 
@@ -16,20 +14,18 @@ import User from "./services/User";
 export default {
   name: "App",
   mounted() {
-    this.getAllUsers();
-    this.getAllAdminCryptos();
+
   },
   components: {
     Pictos,
   },
   data() {
     return {
-      userList: [],
-      cryptos: [],
+
     };
   },
   methods: {
-    login(form) {
+    logIn(form) {
       User.login(form)
         .then((r) => {
           if (r.statusText == "OK") {
@@ -37,15 +33,14 @@ export default {
             localStorage.setItem("auth", "true");
             if (r.data.status == 0) {
               localStorage.setItem("admin", "true");
-              this.getAllUsers();
-              this.getAllAdminCryptos();
+
               this.$router.push({
                 name: "AdminAllCryptos",
               });
             } else {
               localStorage.setItem("admin", "false");
               this.$router.push({
-                name: "UserAllCryptos",
+                name: "Client",
               });
             }
             return r.data;
@@ -58,24 +53,7 @@ export default {
           }
         });
     },
-    getAllUsers() {
-      if (localStorage.getItem("admin") != null) {
-        if (localStorage.getItem("admin") == "true") {
-          User.getAllUsers().then((r) => {
-            this.userList = r.data.userList;
-          });
-        } else return;
-      }
-    },
-    getAllAdminCryptos() {
-      if (localStorage.getItem("admin") != null) {
-        if (localStorage.getItem("admin") == "true") {
-          User.getAllAdminCryptos().then((r) => {
-            this.cryptos = r.data.currencies;
-          });
-        }
-      } else return;
-    },
+
   },
 };
 </script>
