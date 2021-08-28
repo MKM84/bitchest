@@ -1,9 +1,7 @@
 <template>
   <Pictos />
   <router-view
-
     @log-in="logIn"
-
   />
 </template>
 
@@ -29,11 +27,9 @@ export default {
       User.login(form)
         .then((r) => {
           if (r.statusText == "OK") {
-            console.log(r);
             localStorage.setItem("auth", "true");
             if (r.data.status == 0) {
               localStorage.setItem("admin", "true");
-
               this.$router.push({
                 name: "AdminAllCryptos",
               });

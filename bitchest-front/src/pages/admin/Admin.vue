@@ -76,9 +76,10 @@ export default {
         User.deleteUser(id).then((r) => {
           if (r.done) {
             this.userList = this.userList.filter((u) => u.id != id)
-            .catch(error=>console.error(error));
           }
-        });
+        })
+            .catch(error=>console.error(error));
+
       }
     },
   },
