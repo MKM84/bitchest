@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
-use Illuminate\Support\Facades\Auth;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class IsClient
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() &&  Auth::user()->status == 0) {
+        if (Auth::user() &&  Auth::user()->status == 1) {
             return $next($request);
      }
-        return ['Accès réservé aux administrateurs.'];
+        return ['Accès réservé aux clients.'];
     }
 }

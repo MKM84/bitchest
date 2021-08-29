@@ -35,7 +35,7 @@ export default {
     deleteUser(id) {
         return Api.delete(`admin/delete-user/${id}`).then((r) => sendActionResult(r));
     },
-    getAllUserCurrencies() {
+    getAllUserCryptos() {
         return Api.get("/client");
     }
 };

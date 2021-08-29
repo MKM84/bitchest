@@ -64,7 +64,7 @@ export default {
     Navigation,
   },
   props: {
-    userList: {},
+    userList: { type: Array},
   },
   emits: ['delete-user']
 };

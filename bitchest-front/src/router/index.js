@@ -4,6 +4,7 @@ import {
 } from 'vue-router';
 
 import Login from "../pages/Login.vue";
+
 import Admin from "../pages/admin/Admin.vue"
 import AdminAllCryptos from "../pages/admin/AdminAllCryptos.vue";
 import Users from "../pages/admin/Users.vue";
@@ -22,17 +23,11 @@ import NotFound from "../pages/NotFound.vue";
 
 
 const routes = [{
+
         path: '/',
         redirect: '/login'
     },
-    {
-        path: '/admin',
-        redirect: '/admin/cryptos'
-    },
-    {
-        path: '/client',
-        redirect: '/client/cryptos'
-    },
+
     {
         path: '/login',
         name: 'login',
@@ -50,6 +45,8 @@ const routes = [{
             authOnly: true,
             adminOnly: true
         },
+        redirect: '/admin/cryptos',
+
         children: [{
                 path: 'cryptos',
                 name: 'AdminAllCryptos',
@@ -93,6 +90,8 @@ const routes = [{
             authOnly: true,
             clientOnly: true
         },
+        redirect: '/client/cryptos'
+        ,
         children: [{
                 path: 'cryptos',
                 name: 'UserAllCryptos',
@@ -191,7 +190,7 @@ router.beforeEach((to, from, next) => {
                 }
             });
 
-        } else if (isLoggedIn() && isAdmin() === 'false') {
+        } if (isLoggedIn() && isAdmin() === 'false') {
             next({
                 path: "/client",
                 query: {

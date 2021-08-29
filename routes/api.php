@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\API\AdminController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\API\AdminController;
+use App\Http\Controllers\API\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,4 +39,9 @@ Route::post('/logout', [LoginController::class, 'logout']);
         Route::put('/admin/edit-user/{id}', [AdminController::class, 'editUser']);
         Route::delete('/admin/delete-user/{id}', [AdminController::class, 'deleteUser']);
 
+    });
+
+
+    Route::middleware(['auth', 'client'])->group(function () {
+        Route::get('/client', [UserController::class, 'index']);
     });

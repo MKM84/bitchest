@@ -12,10 +12,17 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+
+    }
+
     // Get Cryptos
     public function index()
     {
-        $currencies = array_reverse(Cryptocurrency::all()->toArray());
+        $currencies = Cryptocurrency::all()->toArray();
 
         return ['currencies' => $currencies];
     }
@@ -23,7 +30,7 @@ class AdminController extends Controller
     // Get all users
     public function users()
     {
-        $users = User::all()->toArray();
+        $users = array_reverse(User::all()->toArray());
 
         return ['userList' => $users];
     }

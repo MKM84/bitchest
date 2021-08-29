@@ -5,7 +5,6 @@
     @edit-user="editUser"
     @new-user="newUser"
     @delete-user="deleteUser"
-    :key="componentKey"
   />
 </template>
 
@@ -22,7 +21,6 @@ export default {
     return {
       userList: [],
       cryptos: [],
-      componentKey: 0,
     };
   },
   methods: {
@@ -44,7 +42,6 @@ export default {
             this.userList = [...this.userList, user];
           }
         })
-        .then(this.$router.push("/admin/user-list"))
         .then(this.getAllUsers())
         .catch((error) => {
           console.error(error);
@@ -61,7 +58,6 @@ export default {
             EditedUser.status = user.status;
           }
         })
-        .then(this.$router.push("/admin/user-list"))
         .then(this.getAllUsers())
         .catch((error) => {
           console.error(error);
