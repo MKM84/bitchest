@@ -9,8 +9,8 @@
           <tr>
             <th scope="col">Nom</th>
             <th scope="col">Cours actuel</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Cours actuel</th>
+            <th scope="col">Évolution</th>
+            <th scope="col">Acheter</th>
           </tr>
         </thead>
         <tbody>
@@ -20,20 +20,19 @@
             </td>
             <td class="fs-6 pt-3 pb-3">{{ crypto.current_value }} €</td>
             <td class="fs-6 pt-3 pb-3">
-        <router-link :to="'/client/crypto-graph/'+ crypto.id">
-              <button type="button" class="btn btn-info">
-                Évolution
-              </button>
-      </router-link>
+              <router-link :to="'/client/crypto-graph/' + crypto.id">
+                <button type="button" class="btn btn-info">
+                  <i class="fas fa-chart-line"></i>
+                </button>
+              </router-link>
             </td>
-                        <td class="fs-6 pt-3 pb-3">
-        <router-link :to="'/client/purchase-form/'+ crypto.id">
-              <button type="button" class="btn btn-dark">
-                Acheter
-              </button>
-      </router-link>
+            <td class="fs-6 pt-3 pb-3">
+              <router-link :to="'/client/buy-crypto/' + crypto.id">
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-shopping-basket"></i>
+                </button>
+              </router-link>
             </td>
-
           </tr>
         </tbody>
       </table>
@@ -53,7 +52,6 @@ export default {
     userSolde: { type: Number },
   },
   mounted() {
-    console.log("test");
   },
   data() {
     return {};

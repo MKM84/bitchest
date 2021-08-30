@@ -20,4 +20,5 @@ class Progression extends Model
     }
 
 
+
 }

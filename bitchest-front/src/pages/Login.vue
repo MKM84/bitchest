@@ -54,6 +54,7 @@ import { required, email } from "@vuelidate/validators";
 
 export default {
   name: "Login",
+  props:{   errors: {}},
   setup() {
     return {
       v$: useVuelidate(),
@@ -66,7 +67,7 @@ export default {
         email: "",
         password: "",
       },
-      errors: [],
+
     };
   },
   validations() {
@@ -85,6 +86,7 @@ export default {
         return false;
       }
       this.$emit('log-in', this.form)
+
 
     },
   },

@@ -2,6 +2,7 @@
   <Pictos />
   <router-view
     @log-in="logIn"
+    :errors="errors"
   />
 </template>
 
@@ -19,7 +20,7 @@ export default {
   },
   data() {
     return {
-
+        errors:{},
     };
   },
   methods: {
@@ -33,11 +34,13 @@ export default {
               this.$router.push({
                 name: "AdminAllCryptos",
               });
+                    this.errors = {}
             } else {
               localStorage.setItem("admin", "false");
               this.$router.push({
                 name: "Client",
               });
+                    this.errors = {}
             }
             return r.data;
           }
@@ -48,6 +51,7 @@ export default {
             this.errors = error.response.data.errors;
           }
         });
+
     },
 
   },

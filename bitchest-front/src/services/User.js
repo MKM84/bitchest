@@ -37,6 +37,15 @@ export default {
     },
     getAllUserCryptos() {
         return Api.get("/client");
+    },
+    getUserWallet() {
+        return Api.get("client/user-wallet");
+    },
+    getUserInfos() {
+        return Api.get("client/user-infos");
+    },
+    editUserInfos(user) {
+        return Api.put(`/client/edit-user-infos/${user.id}`, user).then((r) => sendActionResult(r));
     }
 };
 

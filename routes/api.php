@@ -44,4 +44,8 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
     Route::middleware(['auth', 'client'])->group(function () {
         Route::get('/client', [UserController::class, 'index']);
+        Route::get('/client/user-wallet', [UserController::class, 'userWallet']);
+        Route::get('/client/user-infos', [UserController::class, 'getUserInfos']);
+        Route::put('/client/edit-user-infos/{id}', [UserController::class, 'EditUserInfos']);
+
     });

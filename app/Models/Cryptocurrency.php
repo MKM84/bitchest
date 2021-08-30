@@ -12,5 +12,8 @@ class Cryptocurrency extends Model
     protected $fillable = [
         'name', 'logo', 'current_value'
     ];
+    public function progressions() {
+        return $this->hasMany(Progression::class);
+    }
 
 }

@@ -54,7 +54,7 @@
         >
       </router-link>
 
-      <p v-if="userSolde" class="fs-5">Solde : {{userSolde}}</p>
+      <p v-if="userSolde" class="fs-5">Solde : {{userSolde}} €</p>
       <a
         class="d-block p-2 m-3 mt-5 fs-6 rounded border border-dark btn btn-dark"
         href="#"

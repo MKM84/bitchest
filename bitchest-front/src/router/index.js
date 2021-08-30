@@ -14,8 +14,11 @@ import Client from "../pages/client/Client.vue"
 import UserAllCryptos from "../pages/client/UserAllCryptos.vue";
 import UserForm from "../pages/client/UserForm.vue";
 import UserWallet from "../pages/client/UserWallet.vue";
-import UserPurchases from "../pages/client/UserPurchases.vue";
+import PurchaseHistory from "../pages/client/PurchaseHistory.vue";
 import UserSellCrypto from "../pages/client/UserSellCrypto.vue";
+import CryptoGraph from "../pages/client/CryptoGraph.vue"
+import BuyCrypto from "../pages/client/BuyCrypto.vue"
+
 
 import NotFound from "../pages/NotFound.vue";
 
@@ -111,16 +114,16 @@ const routes = [{
                 }
             },
             {
-                path: 'user-purchases',
-                name: 'UserPurchases',
-                component: UserPurchases,
+                path: 'purchase-history/:id',
+                name: 'PurchaseHistory',
+                component: PurchaseHistory,
                 meta: {
                     authOnly: true,
                     clientOnly: true
                 }
             },
             {
-                path: 'User-Sell-crypto',
+                path: 'user-sell-crypto/:id',
                 name: 'UserSellCrypto',
                 component: UserSellCrypto,
                 meta: {
@@ -132,6 +135,24 @@ const routes = [{
                 path: 'user-form',
                 name: 'UserForm',
                 component: UserForm,
+                meta: {
+                    authOnly: true,
+                    clientOnly: true
+                }
+            },
+            {
+                path: 'crypto-graph/:id',
+                name: 'CryptoGraph',
+                component: CryptoGraph,
+                meta: {
+                    authOnly: true,
+                    clientOnly: true
+                }
+            },
+            {
+                path: 'buy-crypto/:id',
+                name: 'BuyCrypto',
+                component: BuyCrypto,
                 meta: {
                     authOnly: true,
                     clientOnly: true
