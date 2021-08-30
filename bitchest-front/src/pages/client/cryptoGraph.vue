@@ -19,11 +19,14 @@ export default {
   props: {
     userSolde: { type: Number },
   },
+
   mounted() {
   },
+
   data() {
     return {};
   },
+
   methods: {},
 };
 </script>
