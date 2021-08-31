@@ -15,5 +15,8 @@ class Cryptocurrency extends Model
     public function progressions() {
         return $this->hasMany(Progression::class);
     }
+    public function transactions(){
+        return $this->hasMany(Transaction::class);
+    }
 
 }

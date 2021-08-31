@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Arr;
 
+use DB;
+
 class UserController extends Controller
 {
 
@@ -58,23 +60,41 @@ class UserController extends Controller
     // User wallet
     public function userWallet()
     {
+        //initial array
+        $wallet_array = [];
+        
+        //get id of user connect
         $id = Auth::user()->id;
+        //initial Progression Model
+        $progress=new Progression();
+        //initiale Transaction Model
+        $transaction=new Transaction();
 
-        $progession = Cryptocurrency::find(1)->progressions;
-        $trans = Transaction::find(1)->user;
-        $userTransactions = User::find($id)->transactions;
-        $userCryptos = Arr::pluck($userTransactions, 'cryptocurrency_id');
+        // get wallet of user
+        $walletByUser=$transaction->getWallets($id);
 
-        $cryptoCurrentValueArray = [];
         $i = 0;
-        foreach ($userCryptos as $id) {
-            $actualValue =  Progression::all()->sortByDesc("id")->where('cryptocurrency_id', $id)->unique('cryptocurrency_id');
-            $cryptoCurrentValueArray[$i] = $actualValue;
+        foreach ($walletByUser as $wall) {
+            // get current value of crypto
+            $currentvalue_of_crypto=$progress->getCurrentValueByCrypto($wall->id_crypto);
+
+            $wallet_array[$i]["id_crypto"] = $wall->id_crypto;
+            $wallet_array[$i]["name_crypto"] = $wall->name_crypto;
+            $wallet_array[$i]["quantity_sum"] = $wall->quantity_sum;
+            $wallet_array[$i]["prices_sum"] = $wall->prices_sum;
+            $wallet_array[$i]["current_value"]=$currentvalue_of_crypto->progress_value;
+         
             $i++;
-
-            return ['progession' => $progession, 'trans' => $trans, 'userTransactions' => $userTransactions, 'userCryptos' => array_unique($userCryptos), 'actualValue' => $cryptoCurrentValueArray];
-
         }
+
+        // get all transactions by user connect and crypto id -> 2
+        $allusertransactionsbycrypto = $transaction->getAllUserTransactionsByCrypto($id,2);
+        // get all transactions to sell by user connect and crypto id -> 2
+        $allusertransactionstosellbycrypto = $transaction->getAllUserTransactionsToSellByCrypto($id,2);
+
+        //return data for vue
+        return ['wallet' => $wallet_array,'allusertransactionsbycrypto' => $allusertransactionsbycrypto,
+        'allusertransactionstosellbycrypto' => $allusertransactionstosellbycrypto];
     }
 
 
