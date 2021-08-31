@@ -58,23 +58,23 @@ class UserController extends Controller
     // User wallet
     public function userWallet()
     {
-        // $id = Auth::user()->id;
+        $id = Auth::user()->id;
 
-        // $progession = Cryptocurrency::find(1)->progressions;
-        // $trans = Transaction::find(1)->user;
-        // $userTransactions = User::find($id)->transactions;
-        // $userCryptos = Arr::pluck($userTransactions, 'cryptocurrency_id');
+        $progession = Cryptocurrency::find(1)->progressions;
+        $trans = Transaction::find(1)->user;
+        $userTransactions = User::find($id)->transactions;
+        $userCryptos = Arr::pluck($userTransactions, 'cryptocurrency_id');
 
-        // $cryptoCurrentValueArray = [];
-        // $i = 0;
-        // foreach ($userCryptos as $id) {
-        //     $actualValue =  Progression::all()->sortByDesc("id")->where('cryptocurrency_id', $id)->unique('cryptocurrency_id');
-        //     $cryptoCurrentValueArray[$i] = $actualValue;
-        //     $i++;
+        $cryptoCurrentValueArray = [];
+        $i = 0;
+        foreach ($userCryptos as $id) {
+            $actualValue =  Progression::all()->sortByDesc("id")->where('cryptocurrency_id', $id)->unique('cryptocurrency_id');
+            $cryptoCurrentValueArray[$i] = $actualValue;
+            $i++;
 
-        //     return ['progession' => $progession, 'trans' => $trans, 'userTransactions' => $userTransactions, 'userCryptos' => array_unique($userCryptos), 'actualValue' => $cryptoCurrentValueArray];
+            return ['progession' => $progession, 'trans' => $trans, 'userTransactions' => $userTransactions, 'userCryptos' => array_unique($userCryptos), 'actualValue' => $cryptoCurrentValueArray];
 
-        // }
+        }
     }
 
 

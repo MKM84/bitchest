@@ -3,7 +3,6 @@
  <router-view
      :cryptos="cryptos"
      :userSolde="userSolde"
-     :wallet="wallet"
      @get-user-infos="getUserInfos"
      :userInfos="userInfos"
      @edit-my-profile="editMyProfile"
@@ -19,7 +18,6 @@ export default {
   name: "Client",
   mounted() {
       this.getAllUserCryptos();
-      this.getUserWallet();
       this.getUserInfos();
   },
   components: {
@@ -29,7 +27,6 @@ export default {
     return {
         cryptos: [],
         userSolde: 0,
-        wallet: [],
         userInfos: []
     };
   },
