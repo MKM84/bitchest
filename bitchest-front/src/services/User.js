@@ -46,7 +46,10 @@ export default {
     },
     editUserInfos(user) {
         return Api.put(`/client/edit-user-infos/${user.id}`, user).then((r) => sendActionResult(r));
-    }
+    },
+    getCryptoEvolution(id) {
+        return Api.get(`client/crypto-graph/${id}`);
+    },
 };
 
 const sendActionResult = (r) => {

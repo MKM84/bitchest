@@ -93,4 +93,13 @@ class UserController extends Controller
         return response()->json(['done' => true]);
     }
 
+
+    public function getCryptoEvolution($id) {
+        $dateCryptoEvolution = Progression::all()->sortByDesc("id")->where('cryptocurrency_id', $id)->pluck('progress_date')->toArray();
+
+        $valueCryptoEvolution = Progression::all()->sortByDesc("id")->where('cryptocurrency_id', $id)->pluck('progress_value')->toArray();
+
+        return ['dateCryptoEvolution' => $dateCryptoEvolution, 'valueCryptoEvolution' => $valueCryptoEvolution];
+    }
+
 }

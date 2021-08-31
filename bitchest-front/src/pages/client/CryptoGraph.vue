@@ -6,9 +6,10 @@
       <h3 class="text-left mt-5 mb-3 text-info">Progression de Bitcoin depuis un mois</h3>
       <div class="m-5">
         <Vue3ChartJs
+          v-if="loaded"
           :id="doughnutChart.id"
           :type="doughnutChart.type"
-          :data="framework"
+          :data="CryptoEvolution"
         />
       </div>
     </section>
@@ -18,7 +19,7 @@
 <script>
 import Navigation from "../../components/Navigation.vue";
 import Vue3ChartJs from "@j-t-mcc/vue3-chartjs";
-
+import User from "../../services/User";
 export default {
   name: "CryptoGraph",
   components: {
@@ -39,26 +40,29 @@ export default {
   },
   data() {
     return {
-      framework: {
-        labels: [
-          "2021-08-2",
-          "2021-08-01",
-          "2021-07-30",
-          "2021-07-29",
-          "2021-07-28",
-          "2021-07-27",
-          "2021-07-26",
-        ],
+      CryptoEvolution: {
+        labels: [],
         datasets: [
           {
             backgroundColor: ["#000"],
-            data: [74660.0, 78000.0, 72000.0, 60660.0, 90660.0, 100660.0, 74660.0],
+            data: [],
             borderColor: "#00fe17",
             label: "Bitcoin",
           },
         ],
       },
+      loaded: false,
     };
+  },
+  mounted() {
+    const id = this.$route.params.id;
+    User.getCryptoEvolution(id)
+      .then((r) => {
+        this.CryptoEvolution.labels = r.data.dateCryptoEvolution;
+        this.CryptoEvolution.datasets[0].data = r.data.valueCryptoEvolution;
+        this.loaded = true;
+      })
+      .catch((error) => console.error(error));
   },
 };
 </script>
