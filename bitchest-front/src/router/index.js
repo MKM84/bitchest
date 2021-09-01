@@ -114,7 +114,7 @@ const routes = [{
                 }
             },
             {
-                path: 'purchase-history/:id',
+                path: 'purchase-history',
                 name: 'PurchaseHistory',
                 component: PurchaseHistory,
                 meta: {

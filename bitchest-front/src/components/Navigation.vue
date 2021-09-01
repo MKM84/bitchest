@@ -46,6 +46,18 @@
           >Cryptomonnaies</a
         >
       </router-link>
+
+      <router-link to="/client/purchase-history">
+        <a
+          class="d-block p-2 m-3 fs-6 rounded border border-dark btn btn-outline-dark"
+          href="#"
+          >Historique</a
+        >
+      </router-link>
+
+
+
+
             <router-link to="/client/user-form">
         <a
           class="d-block p-2 m-3 fs-6 rounded border border-dark btn btn-outline-dark"

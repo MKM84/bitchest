@@ -39,7 +39,10 @@ export default {
         return Api.get("/client");
     },
     getUserWallet() {
-        return Api.get("client/user-wallet");
+        return Api.get("/client/user-wallet");
+    },
+    getUserHistory() {
+        return Api.get('/client/purchase-history');
     },
     getUserInfos() {
         return Api.get("client/user-infos");

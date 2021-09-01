@@ -6,6 +6,7 @@
      @get-user-infos="getUserInfos"
      :userInfos="userInfos"
      @edit-my-profile="editMyProfile"
+     :wallet="wallet"
  />
 
 </template>
@@ -19,6 +20,7 @@ export default {
   mounted() {
       this.getAllUserCryptos();
       this.getUserInfos();
+      this.getUserWallet();
   },
   components: {
 
@@ -27,7 +29,8 @@ export default {
     return {
         cryptos: [],
         userSolde: 0,
-        userInfos: []
+        userInfos: [],
+        wallet: []
     };
   },
   methods: {
@@ -39,7 +42,7 @@ export default {
     },
       getUserWallet() {
             User.getUserWallet().then((r) => {
-        this.wallet = r.data.wallet;
+        this.wallet = r.data.userWallet;
         console.log(r);
       }).catch(error=>console.error(error));
   },

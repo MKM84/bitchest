@@ -3,7 +3,9 @@
     <Navigation :admin="false" :userSolde="userSolde" />
 
     <section class="col-10">
-      <h3 class="text-left mt-5 mb-3 text-info">Progression de Bitcoin depuis un mois</h3>
+      <h3 class="text-left mt-5 mb-3 text-info mx-5" v-if="loaded">Progression de
+            <img :src="`/img/${crypto.logo}`" alt="" width="30" />
+         {{crypto.name}} depuis un mois</h3>
       <div class="m-5">
         <Vue3ChartJs
           v-if="loaded"
@@ -51,6 +53,7 @@ export default {
           },
         ],
       },
+      crypto: {},
       loaded: false,
     };
   },
@@ -60,7 +63,10 @@ export default {
       .then((r) => {
         this.CryptoEvolution.labels = r.data.dateCryptoEvolution;
         this.CryptoEvolution.datasets[0].data = r.data.valueCryptoEvolution;
+        this.CryptoEvolution.datasets[0].label = r.data.crypto.name;
+        this.crypto = r.data.crypto;
         this.loaded = true;
+        console.log(r.data);
       })
       .catch((error) => console.error(error));
   },

@@ -4,36 +4,30 @@
 
     <section class="col">
       <h3 class="text-left mt-5 mb-3 text-info">Mon portefeuille</h3>
-      <table class="table">
+      <table class="table" v-if="wallet">
         <thead>
           <tr>
             <th scope="col">Cryptomonnaies</th>
-            <th scope="col">Cours actuel</th>
             <th scope="col">Quantité </th>
             <th scope="col">Dépeses</th>
-            <th scope="col">Historique</th>
+            <th scope="col">Cours actuel</th>
             <th scope="col">Vendre</th>
 
           </tr>
         </thead>
         <tbody>
-          <tr >
+          <tr v-for="wall in wallet" :key="wall.id">
             <td class="fs-6 pt-3 pb-3">
-              Crypto
+                <img :src="`/img/${wall.logo_crypto}`" alt="" width="30" />
+              {{wall.name_crypto}}
             </td>
-            <td class="fs-6 pt-3 pb-3">10000€</td>
-            <td class="fs-6 pt-3 pb-3">5</td>
-            <td class="fs-6 pt-3 pb-3">220000€</td>
+            <td class="fs-6 pt-3 pb-3">{{wall.quantity_sum}}</td>
+            <td class="fs-6 pt-3 pb-3">{{wall.prices_sum}} €</td>
+            <td class="fs-6 pt-3 pb-3">{{wall.current_value}} €</td>
+
 
             <td class="fs-6 pt-3 pb-3">
-              <router-link :to="'/client/purchase-history/:id'">
-                <button type="button" class="btn btn-info">
-                 <i class="fas fa-history"></i>
-                </button>
-              </router-link>
-            </td>
-            <td class="fs-6 pt-3 pb-3">
-              <router-link :to="'/client/user-sell-crypto/:id'">
+              <router-link :to="'/client/user-sell-crypto/' + wall.id_crypto">
                 <button type="button" class="btn btn-light">
                  <i class="fas fa-euro-sign"></i>
                 </button>
@@ -58,7 +52,7 @@ export default {
       userSolde: { type: Number },
   },
   mounted() {
-
+// this.$emit('get-user-wallet');
   },
   data() {
     return {

@@ -48,5 +48,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
         Route::get('/client/user-infos', [UserController::class, 'getUserInfos']);
         Route::put('/client/edit-user-infos/{id}', [UserController::class, 'EditUserInfos']);
         Route::get('/client/crypto-graph/{id}', [UserController::class, 'getCryptoEvolution']);
+        Route::get('/client/purchase-history', [UserController::class, 'getHistory']);
+
 
     });
