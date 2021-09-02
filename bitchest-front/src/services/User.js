@@ -44,6 +44,9 @@ export default {
     getUserHistory() {
         return Api.get('/client/purchase-history');
     },
+    getCryptoToSell(id) {
+        return Api.get(`client/user-sell-crypto/${id}`);
+    },
     getUserInfos() {
         return Api.get("client/user-infos");
     },

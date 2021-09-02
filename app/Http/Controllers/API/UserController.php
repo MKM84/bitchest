@@ -19,6 +19,7 @@ class UserController extends Controller
 
     private $userSold;
 
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,9 +28,20 @@ class UserController extends Controller
             $this->userSold = Auth::user()->user_solde;
             return $next($request);
         });
+
     }
 
-    // Get Cryptos && actual vaur & user sold
+    public function getCurrentValueByCrypto($id)
+    {
+        $currentValueByCrypto =  DB::table('progressions')
+            ->select('progress_value')
+            ->where('cryptocurrency_id', $id)
+            ->orderByDesc('progress_date')
+            ->first();
+        return $currentValueByCrypto;
+    }
+
+    // Get Cryptos && actual vaule & user sold
     public function index()
     {
         $cryptosArray = array();
@@ -59,6 +71,7 @@ class UserController extends Controller
     }
 
 
+
     public function userWallet()
     {
 
@@ -81,20 +94,14 @@ class UserController extends Controller
             ->get();
 
 
-            function getCurrentValueByCrypto($id)
-            {
-                $currentValueByCrypto =  DB::table('progressions')
-                    ->select('progress_value')
-                    ->where('cryptocurrency_id', $id)
-                    ->orderByDesc('progress_date')
-                    ->first();
-                return $currentValueByCrypto;
-            }
+
+
+
 
         $i = 0;
         foreach ($walletsUser as $wall) {
             // get current value of crypto
-            $currentvalue_of_crypto = getCurrentValueByCrypto($wall->id_crypto);
+            $currentvalue_of_crypto = $this->getCurrentValueByCrypto($wall->id_crypto);
 
             $wallet_array[$i]["id_crypto"] = $wall->id_crypto;
             $wallet_array[$i]["name_crypto"] = $wall->name_crypto;
@@ -109,25 +116,42 @@ class UserController extends Controller
         return ['userWallet' => $wallet_array];
     }
 
-    public function getHistory() {
+
+
+    public function getHistory()
+    {
         $id = Auth::user()->id;
 
         $historyByCrypto = DB::table('transactions')
-        ->join('cryptocurrencies', 'transactions.cryptocurrency_id', '=', 'cryptocurrencies.id')
-        ->join('users', 'transactions.user_id', '=', 'users.id')
-        ->select("cryptocurrencies.name as name_crypto","state","quantity","purchase_date", "logo"
-        ,"purchase_price","sum_purchase","selling_date","selling_price","balance")
-        ->where('user_id', $id)
-        ->orderByDesc('transactions.purchase_date')
-        ->get();
+            ->join('cryptocurrencies', 'transactions.cryptocurrency_id', '=', 'cryptocurrencies.id')
+            ->join('users', 'transactions.user_id', '=', 'users.id')
+            ->select(
+                "cryptocurrencies.name as name_crypto",
+                "state",
+                "quantity",
+                "purchase_date",
+                "logo",
+                "purchase_price",
+                "sum_purchase",
+                "selling_date",
+                "selling_price",
+                "balance"
+            )
+            ->where('user_id', $id)
+            ->orderByDesc('transactions.purchase_date')
+            ->get();
 
         return ['historyByCrypto' => $historyByCrypto];
     }
+
+
 
     public function getUserInfos()
     {
         return ['userInfos' => Auth::user()];
     }
+
+
 
     public function EditUserInfos($id, Request $request)
     {
@@ -136,6 +160,7 @@ class UserController extends Controller
 
         return response()->json(['done' => true]);
     }
+
 
     public function getCryptoEvolution($id)
     {
@@ -146,5 +171,27 @@ class UserController extends Controller
         $crypto = Cryptocurrency::find($id);
 
         return ['dateCryptoEvolution' => array_reverse($dateCryptoEvolution), 'valueCryptoEvolution' => array_reverse($valueCryptoEvolution), 'crypto' => $crypto];
+    }
+
+
+    public function getCryptosToSell($crypto_id)
+    {
+        $user_id = Auth::user()->id;
+
+        $cryptosToSell = DB::table('transactions')
+        ->join('cryptocurrencies', 'transactions.cryptocurrency_id', '=', 'cryptocurrencies.id')
+        ->join('users', 'transactions.user_id', '=', 'users.id')
+        ->select("cryptocurrencies.name as crypto_name","state","quantity","purchase_date"
+        ,"purchase_price", "logo", "sum_purchase")
+        ->where('transactions.state',0)
+        ->where('user_id', $user_id)
+        ->where('transactions.cryptocurrency_id', $crypto_id)
+        ->get();
+
+        $cryptoName = Cryptocurrency::all()->where('id', $crypto_id)->pluck('name')->toArray();
+        $cryptoLogo = Cryptocurrency::all()->where('id', $crypto_id)->pluck('logo')->toArray();
+        $actualValue = $this->getCurrentValueByCrypto($crypto_id);
+
+        return ['cryptosToSellData' => ['name' => $cryptoName, 'logo' => $cryptoLogo, 'actualValue' => $actualValue, 'cryptosToSell' => $cryptosToSell]];
     }
 }

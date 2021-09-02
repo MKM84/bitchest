@@ -51,7 +51,6 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import User from "../../services/User";
 export default {
   name: "PurchaseHistory",
   components: {
@@ -59,18 +58,14 @@ export default {
   },
   props: {
     userSolde: { type: Number },
+    userHistory : { type: Array}
   },
+
   mounted() {
-    User.getUserHistory()
-      .then((r) => {
-        this.userHistory = r.data.historyByCrypto;
-        console.log(r.data);
-      })
-      .catch((error) => console.error(error));
+
   },
   data() {
     return {
-      userHistory: {},
     };
   },
   methods: {},

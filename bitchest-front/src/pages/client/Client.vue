@@ -1,56 +1,79 @@
 <template>
-
- <router-view
-     :cryptos="cryptos"
-     :userSolde="userSolde"
-     @get-user-infos="getUserInfos"
-     :userInfos="userInfos"
-     @edit-my-profile="editMyProfile"
-     :wallet="wallet"
- />
-
+  <router-view
+    :cryptos="cryptos"
+    :userSolde="userSolde"
+    @get-user-infos="getUserInfos"
+    :userInfos="userInfos"
+    @edit-my-profile="editMyProfile"
+    :wallet="wallet"
+    :userHistory="userHistory"
+    @get-cryptos-to-sell="getCryptoToSell"
+    :cryptosToSell="cryptosToSell"
+  />
 </template>
 
 <script>
 import User from "../../services/User";
 
-
 export default {
   name: "Client",
   mounted() {
-      this.getAllUserCryptos();
-      this.getUserInfos();
-      this.getUserWallet();
+    this.getAllUserCryptos();
+    this.getUserInfos();
+    this.getUserWallet();
+    this.getUserHistory();
   },
-  components: {
-
-  },
+  components: {},
   data() {
     return {
-        cryptos: [],
-        userSolde: 0,
-        userInfos: [],
-        wallet: []
+      cryptos: [],
+      userSolde: 0,
+      userInfos: [],
+      wallet: [],
+      userHistory: [],
+      cryptosToSell: []
     };
   },
   methods: {
     getAllUserCryptos() {
-      User.getAllUserCryptos().then((r) => {
-        this.cryptos = r.data.currencies;
-        this.userSolde = Number(r.data.userSolde);
-      }).catch(error=>console.error(error));
+      User.getAllUserCryptos()
+        .then((r) => {
+          this.cryptos = r.data.currencies;
+          this.userSolde = Number(r.data.userSolde);
+        })
+        .catch((error) => console.error(error));
     },
-      getUserWallet() {
-            User.getUserWallet().then((r) => {
-        this.wallet = r.data.userWallet;
-        console.log(r);
-      }).catch(error=>console.error(error));
-  },
+    getUserWallet() {
+      User.getUserWallet()
+        .then((r) => {
+          this.wallet = r.data.userWallet;
+          console.log(r);
+        })
+        .catch((error) => console.error(error));
+    },
+    getUserHistory() {
+      User.getUserHistory()
+        .then((r) => {
+          this.userHistory = r.data.historyByCrypto;
+          console.log(r.data);
+        })
+        .catch((error) => console.error(error));
+    },
+    getCryptoToSell(id) {
+              User.getCryptoToSell(id)
+        .then((r) => {
+          this.cryptosToSell = r.data.cryptosToSellData;
+          console.log(r.data);
+        })
+        .catch((error) => console.error(error));
+    },
     getUserInfos() {
-      User.getUserInfos().then((r) => {
-        console.log(r);
-        this.userInfos = r.data.userInfos;
-      }).catch(error=>console.error(error));
+      User.getUserInfos()
+        .then((r) => {
+          console.log(r);
+          this.userInfos = r.data.userInfos;
+        })
+        .catch((error) => console.error(error));
     },
     editMyProfile(user) {
       User.editUserInfos(user)
@@ -65,9 +88,8 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-    }
+    },
   },
-
 };
 </script>
 
