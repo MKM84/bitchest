@@ -25,65 +25,66 @@ class CryptocurrenciesTableSeeder extends Seeder
           }
         // insert in table cryptocurrencies the crypto with name, logo (picture) and current value
 
+        $ratio = 500;
         DB::table('cryptocurrencies')->insert([
             [
                 'name' => 'Bitcoin',
                 'logo' => 'bitcoin.png',
-                'current_value'=>getFirstCotation("Bitcoin")*1000,
+                'current_value'=>getFirstCotation("Bitcoin")*$ratio,
 
             ],
             [
                 'name' => 'Ethereum',
                 'logo' => 'ethereum.png',
-                'current_value'=>getFirstCotation("Ethereum")*1000,
+                'current_value'=>getFirstCotation("Ethereum")*$ratio,
 
             ],
             [
                 'name' => 'Ripple',
                 'logo' => 'ripple.png',
-                'current_value'=>getFirstCotation("Ripple")*1000,
+                'current_value'=>getFirstCotation("Ripple")*$ratio,
 
             ],
             [
                 'name' => 'Bitcoin Cash',
                 'logo' => 'bitcoin_cash.png',
-                'current_value'=>getFirstCotation("Bitcoin Cash")*1000,
+                'current_value'=>getFirstCotation("Bitcoin Cash")*$ratio,
 
             ],
             [
                 'name' => 'Cardano',
                 'logo' => 'cardano.png',
-                'current_value'=>getFirstCotation("Cardano")*1000,
+                'current_value'=>getFirstCotation("Cardano")*$ratio,
 
             ],
             [
                 'name' => 'Litecoin',
                 'logo' => 'litecoin.png',
-                'current_value'=>getFirstCotation("Litecoin")*1000,
+                'current_value'=>getFirstCotation("Litecoin")*$ratio,
 
             ],
             [
                 'name' => 'NEM',
                 'logo' => 'nem.png',
-                'current_value'=>getFirstCotation("NEM")*1000,
+                'current_value'=>getFirstCotation("NEM")*$ratio,
 
             ],
             [
                 'name' => 'Stellar',
                 'logo' => 'stellar.png',
-                'current_value'=>getFirstCotation("Stellar")*1000,
+                'current_value'=>getFirstCotation("Stellar")*$ratio,
 
             ],
             [
                 'name' => 'IOTA',
                 'logo' => 'iota.png',
-                'current_value'=>getFirstCotation("IOTA")*1000,
+                'current_value'=>getFirstCotation("IOTA")*$ratio,
 
             ],
             [
                 'name' => 'Dash',
                 'logo' => 'dash.png',
-                'current_value'=>getFirstCotation("Dash")*1000,
+                'current_value'=>getFirstCotation("Dash")*$ratio,
 
             ],
         ]);

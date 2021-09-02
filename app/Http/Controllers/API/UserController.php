@@ -28,13 +28,12 @@ class UserController extends Controller
             $this->userSold = Auth::user()->user_solde;
             return $next($request);
         });
-
     }
 
     public function getCurrentValueByCrypto($id)
     {
         $currentValueByCrypto =  DB::table('progressions')
-            ->select('progress_value')
+            ->select('progress_value', 'id')
             ->where('cryptocurrency_id', $id)
             ->orderByDesc('progress_date')
             ->first();
@@ -179,14 +178,21 @@ class UserController extends Controller
         $user_id = Auth::user()->id;
 
         $cryptosToSell = DB::table('transactions')
-        ->join('cryptocurrencies', 'transactions.cryptocurrency_id', '=', 'cryptocurrencies.id')
-        ->join('users', 'transactions.user_id', '=', 'users.id')
-        ->select("cryptocurrencies.name as crypto_name","state","quantity","purchase_date"
-        ,"purchase_price", "logo", "sum_purchase")
-        ->where('transactions.state',0)
-        ->where('user_id', $user_id)
-        ->where('transactions.cryptocurrency_id', $crypto_id)
-        ->get();
+            ->join('cryptocurrencies', 'transactions.cryptocurrency_id', '=', 'cryptocurrencies.id')
+            ->join('users', 'transactions.user_id', '=', 'users.id')
+            ->select(
+                "cryptocurrencies.name as crypto_name",
+                "state",
+                "quantity",
+                "purchase_date",
+                "purchase_price",
+                "logo",
+                "sum_purchase"
+            )
+            ->where('transactions.state', 0)
+            ->where('user_id', $user_id)
+            ->where('transactions.cryptocurrency_id', $crypto_id)
+            ->get();
 
         $cryptoName = Cryptocurrency::all()->where('id', $crypto_id)->pluck('name')->toArray();
         $cryptoLogo = Cryptocurrency::all()->where('id', $crypto_id)->pluck('logo')->toArray();
@@ -194,4 +200,71 @@ class UserController extends Controller
 
         return ['cryptosToSellData' => ['name' => $cryptoName, 'logo' => $cryptoLogo, 'actualValue' => $actualValue, 'cryptosToSell' => $cryptosToSell]];
     }
+
+    public function addTransaction(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        // $progress = $this->getCurrentValueByCrypto($request->input('cryptocurrency_id'));
+        // $transaction = new Transaction([
+            // 'user_id' => $user_id,
+            // 'cryptocurrency_id' => $request->input('cryptocurrency_id'),
+            // 'progression_id' =>  $this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->id,
+            // 'quantity' => $request->input('quantity'),
+            // 'state' => 0,
+            // 'purchase_date' => now(),
+            // 'selling_date' => null,
+            // 'purchase_price' => $this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->progress_value,
+            // 'selling_price' => null,
+            // 'sum_selling' => 0,
+            // 'sum_purchase' => $this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->progress_value * $request->input('quantity'),
+            // 'balance' => null
+
+            // 'user_id' => $user_id,
+            // 'cryptocurrency_id' => 1,
+            // 'progression_id' =>  30,
+            // 'quantity' => 2,
+            // 'state' => 0,
+            // 'purchase_date' => now(),
+            // 'purchase_price' => 40000,
+            // 'sum_selling' => 0,
+            // 'sum_purchase' => 80000,
+
+
+
+
+        //     'sum_purchase' => 5000,
+        //     'sum_selling' => 60000,
+        //     'balance' => null,
+        //     'quantity' => 3,
+        //     'state' => 0,
+        //     'purchase_date' => now(),
+        //     'selling_date' =>  null,
+        //     'purchase_price' => 40000,
+        //     'selling_price' => null
+        // ]);
+
+       $transaction =  Transaction::create(
+[           'sum_purchase' => 489997.00,
+            'sum_selling' => 60000,
+            'balance' => null,
+            'quantity' => 3,
+            'state' => 0,
+            'purchase_date' => "2021-08-16 14:57:13",
+            'selling_date' =>  null,
+            'purchase_price' => 62420.00,
+            'selling_price' => null]
+       );
+       $transaction->user()->attach($user_id);
+       $transaction->cryptocurrency()->attach($request->cryptocurrency_id);
+       $transaction->progression()->attach($this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->id);
+
+
+        $transaction->save();
+
+        return response()->json([
+            'done' => true
+        ]);
+    }
+
+
 }

@@ -15,9 +15,9 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
-            $table->foreignId("cryptocurrency_id")->constrained("cryptocurrencies");
-            $table->foreignId("progression_id")->constrained("progressions");
+            $table->foreignId("user_id")->constrained("users")->onDelete("cascade")->default(0);
+            $table->foreignId("cryptocurrency_id")->constrained("cryptocurrencies")->default(0);
+            $table->foreignId("progression_id")->constrained("progressions")->default(0);
             $table->unsignedDecimal("quantity");
             $table->boolean("state")->default(0);
             $table->datetime("purchase_date");

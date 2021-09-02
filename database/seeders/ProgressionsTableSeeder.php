@@ -41,7 +41,7 @@ class ProgressionsTableSeeder extends Seeder
                 $date = date('Y-m-d', strtotime($date_initial . ' + ' . ($i + 1) . ' days'));
 
 
-                $rate = getCotationFor($cryptoname) * 1000; // get value of cotation
+                $rate = getCotationFor($cryptoname) * 500; // get value of cotation
                 if ($i == 0) {
                     $progress_value = $current_value;
                     $rate = "0";

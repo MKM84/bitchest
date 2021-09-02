@@ -56,6 +56,9 @@ export default {
     getCryptoEvolution(id) {
         return Api.get(`client/crypto-graph/${id}`);
     },
+    ByNewCryptos(crypto){
+        return Api.post("/client/add-transaction", crypto).then((r) => sendActionResult(r));
+    }
 };
 
 const sendActionResult = (r) => {

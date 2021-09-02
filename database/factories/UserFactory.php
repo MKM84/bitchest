@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'lastname' => $this->faker->lastName,
             'status'=>$this->faker->randomDigit <= 2 ? 0 : 1,
             'email' => $this->faker->unique()->safeEmail(),
-            'user_solde' => $this->faker->numberBetween(20000, 200000),
+            'user_solde' => 0,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

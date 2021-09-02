@@ -24,7 +24,7 @@ class TransactionsTableSeeder extends Seeder
     // ---------------------------
 
         // Delete users that have admin status
-        $admins = DB::table('users')->where('status', 'admin')->get('id')->toArray();
+        $admins = DB::table('users')->where('status', 0)->get('id')->toArray();
 
         // The Arr::pluck method retrieves all of the values for a given key from an array
         $admins_ids = Arr::pluck($admins, 'id');
@@ -41,6 +41,25 @@ class TransactionsTableSeeder extends Seeder
                 'selling_price'    => null,
                 'selling_date'     => null
             ]);
+
+
+            $soldeUsersTotal = DB::table('transactions')
+            ->join('users', 'transactions.user_id', '=', 'users.id')
+            ->selectRaw("
+            transactions.user_id as id_user,
+            ROUND(SUM(transactions.sum_purchase), 2) as totalsolde")
+            ->where('transactions.state', 0)
+            ->groupBy('transactions.user_id')
+            ->get();
+
+            foreach($soldeUsersTotal as $soldeUserTotal){
+
+                DB::table('users')
+            ->where('id', $soldeUserTotal->id_user)
+            ->update([
+                'user_solde'    => $soldeUserTotal->totalsolde
+            ]);
+        }
 
         // // Calculate the sum in case of selling
         // DB::update("UPDATE `transactions` SET `sum` = `quantity` * `selling_price` WHERE `state` = 1");

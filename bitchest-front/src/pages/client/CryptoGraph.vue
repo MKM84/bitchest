@@ -5,7 +5,7 @@
     <section class="col-10">
       <h3 class="text-left mt-5 mb-3 text-info mx-5" v-if="loaded">Progression de
             <img :src="`/img/${crypto.logo}`" alt="" width="30" />
-         {{crypto.name}} depuis un mois</h3>
+         {{crypto.name}} durant les 30 derniers jours</h3>
       <div class="m-5">
         <Vue3ChartJs
           v-if="loaded"

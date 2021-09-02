@@ -9,6 +9,7 @@
     :userHistory="userHistory"
     @get-cryptos-to-sell="getCryptoToSell"
     :cryptosToSell="cryptosToSell"
+    @buy-new-crypto="ByNewCryptos"
   />
 </template>
 
@@ -89,6 +90,23 @@ export default {
           console.error(error);
         });
     },
+    ByNewCryptos(crypto) {
+          User.ByNewCryptos(crypto)
+        .then((r) => {
+          if (r.done) {
+        this.getUserInfos();
+        this.getUserWallet();
+        this.getUserHistory();
+        this.getCryptoToSell();
+        this.getAllUserCryptos();
+
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
   },
 };
 </script>

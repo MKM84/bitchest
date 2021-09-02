@@ -19,7 +19,10 @@ class Transaction extends Model
         'purchase_date',
         'selling_date',
         'purchase_price',
-        'selling_price'
+        'selling_price',
+        'user_id',
+        'cryptocurrency_id',
+        'progression_id'
     ];
 
     public function user() {
