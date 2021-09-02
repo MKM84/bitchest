@@ -17,7 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade")->default(0);
             $table->foreignId("cryptocurrency_id")->constrained("cryptocurrencies")->default(0);
-            $table->foreignId("progression_id")->constrained("progressions")->default(0);
+            $table->foreignId("progression_id")->constrained("progressions")->nullable();
             $table->unsignedDecimal("quantity");
             $table->boolean("state")->default(0);
             $table->datetime("purchase_date");

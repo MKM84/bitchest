@@ -28,9 +28,8 @@
             <td class="fs-6 pt-3 pb-3">{{ crypto.sum_purchase }}</td>
 
             <td class="fs-6 pt-3 pb-3"> {{Math.round(cryptosToSell.actualValue.progress_value * crypto.quantity - crypto.sum_purchase)}}</td>
-
             <td class="fs-6 pt-3 pb-3">
-              <button type="button" class="btn btn-info">
+              <button @click="$emit('sell-cryptos', crypto.id_transaction)" type="button" class="btn btn-info">
                 <i class="fas fa-euro-sign"></i>
               </button>
             </td>
@@ -53,8 +52,13 @@ export default {
     userSolde: { type: Number },
 
   },
-  $emits: ["get-cryptos-to-sell"],
+  $emits: ["get-cryptos-to-sell", 'sell-cryptos'],
   mounted() {
+    const crypto_id = this.$route.params.id;
+
+    this.$emit("get-cryptos-to-sell", crypto_id);
+  },
+  beforeUpdate() {
     const crypto_id = this.$route.params.id;
 
     this.$emit("get-cryptos-to-sell", crypto_id);
@@ -64,7 +68,9 @@ export default {
       crypto: {},
     };
   },
-  methods: {},
+  methods: {
+
+  },
 };
 </script>
 <style></style>

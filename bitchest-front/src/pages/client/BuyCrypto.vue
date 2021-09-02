@@ -106,7 +106,7 @@ export default {
       this.$emit("buy-new-crypto", this.cryptoToBuy);
 
     console.log(this.cryptoToBuy)
-      this.$router.push("/client/cryptos");
+      this.$router.push("/client/user-wallet");
     },
     calculateTotal() {
       const id_crypto = this.$route.params.id;

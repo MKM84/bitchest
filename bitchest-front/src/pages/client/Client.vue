@@ -10,6 +10,7 @@
     @get-cryptos-to-sell="getCryptoToSell"
     :cryptosToSell="cryptosToSell"
     @buy-new-crypto="ByNewCryptos"
+    @sell-cryptos="sellCryptos"
   />
 </template>
 
@@ -105,7 +106,24 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    },
+    sellCryptos(id){
+              User.sellCryptos(id)
+        .then((r) => {
+          if (r.done) {
+        this.getUserInfos();
+        this.getUserWallet();
+        this.getUserHistory();
+        this.getCryptoToSell();
+        this.getAllUserCryptos();
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+        console.log(id);
     }
+
 
   },
 };

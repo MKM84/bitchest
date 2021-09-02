@@ -51,5 +51,6 @@ Route::post('/logout', [LoginController::class, 'logout']);
         Route::get('/client/purchase-history', [UserController::class, 'getHistory']);
         Route::get('/client/user-sell-crypto/{id}', [UserController::class, 'getCryptosToSell']);
         Route::post('/client/add-transaction/', [UserController::class, 'addTransaction']);
+        Route::patch('/client/sell-transaction/{id}', [UserController::class, 'sellTransaction']);
 
     });

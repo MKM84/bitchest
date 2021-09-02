@@ -58,6 +58,10 @@ export default {
     },
     ByNewCryptos(crypto){
         return Api.post("/client/add-transaction", crypto).then((r) => sendActionResult(r));
+    },
+    sellCryptos(id) {
+        return Api.patch(`/client/sell-transaction/${id}`).then((r) => sendActionResult(r));
+
     }
 };
 

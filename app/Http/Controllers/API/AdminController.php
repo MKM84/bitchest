@@ -66,7 +66,7 @@ class AdminController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make('password'),
             'status' => $request->input('status'),
-            'user_solde' => 89588.00,
+            'user_solde' => 0,
         ]);
         $user->save();
 
