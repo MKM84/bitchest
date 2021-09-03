@@ -130,14 +130,14 @@ class UserController extends Controller
                 "quantity",
                 "purchase_date",
                 "logo",
-                "purchase_price",
+                DB::raw("DATE_FORMAT(purchase_date, '%d/%m/%Y %H:%i:%s') as purchase_date"),
                 "sum_purchase",
-                "selling_date",
+                DB::raw("DATE_FORMAT(selling_date, '%d/%m/%Y %H:%i:%s') as selling_date"),
                 "selling_price",
                 "balance"
             )
             ->where('user_id', $id)
-            ->orderByDesc('transactions.purchase_date')
+            ->orderByDesc('transactions.updated_at')
             ->get();
 
         return ['historyByCrypto' => $historyByCrypto];
@@ -184,7 +184,7 @@ class UserController extends Controller
                 "cryptocurrencies.name as crypto_name",
                 "state",
                 "quantity",
-                "purchase_date",
+                DB::raw("DATE_FORMAT(purchase_date, '%d/%m/%Y %H:%i:%s') as purchase_date"),
                 "purchase_price",
                 "logo",
                 'transactions.id as id_transaction',
@@ -193,6 +193,7 @@ class UserController extends Controller
             ->where('transactions.state', 0)
             ->where('user_id', $user_id)
             ->where('transactions.cryptocurrency_id', $crypto_id)
+            ->orderByDesc('transactions.updated_at')
             ->get();
 
         $cryptoName = Cryptocurrency::all()->where('id', $crypto_id)->pluck('name')->toArray();
@@ -223,7 +224,7 @@ class UserController extends Controller
 
         $user = User::find($user_id);
 
-        $userSolde = ($user->user_solde) + ($this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->progress_value * $request->input('quantity'));
+        $userSolde = ($user->user_solde) - ($this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->progress_value * $request->input('quantity'));
 
         User::where('id', $user_id)
             ->update(['user_solde' => $userSolde]);
@@ -251,7 +252,7 @@ class UserController extends Controller
 
         $user = User::find($user_id);
 
-        $userSolde = ($user->user_solde) - $transaction->sum_purchase;
+        $userSolde = ($user->user_solde) + $transaction->sum_purchase;
 
         User::where('id', $user_id)
             ->update(['user_solde' => $userSolde]);

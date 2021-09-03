@@ -11,6 +11,8 @@
     :cryptosToSell="cryptosToSell"
     @buy-new-crypto="ByNewCryptos"
     @sell-cryptos="sellCryptos"
+    :alerteContent="alerteContent"
+    :showAlerte="showAlerte"
   />
 </template>
 
@@ -33,7 +35,9 @@ export default {
       userInfos: [],
       wallet: [],
       userHistory: [],
-      cryptosToSell: []
+      cryptosToSell: [],
+      alerteContent: "",
+      showAlerte: false,
     };
   },
   methods: {
@@ -62,7 +66,7 @@ export default {
         .catch((error) => console.error(error));
     },
     getCryptoToSell(id) {
-              User.getCryptoToSell(id)
+      User.getCryptoToSell(id)
         .then((r) => {
           this.cryptosToSell = r.data.cryptosToSellData;
           console.log(r.data);
@@ -92,39 +96,50 @@ export default {
         });
     },
     ByNewCryptos(crypto) {
-          User.ByNewCryptos(crypto)
+      User.ByNewCryptos(crypto)
         .then((r) => {
           if (r.done) {
-        this.getUserInfos();
-        this.getUserWallet();
-        this.getUserHistory();
-        this.getCryptoToSell();
-        this.getAllUserCryptos();
 
+            this.getUserInfos();
+            this.getUserWallet();
+            this.getUserHistory();
+            this.getCryptoToSell();
+            this.getAllUserCryptos();
+            this.showAlerte = true;
+            this.alerteContent = "Votre achat a bien été effectué !";
+            this.hideAlerte();
           }
         })
         .catch((error) => {
           console.error(error);
         });
     },
-    sellCryptos(id){
-              User.sellCryptos(id)
+    sellCryptos(id) {
+      User.sellCryptos(id)
         .then((r) => {
           if (r.done) {
-        this.getUserInfos();
-        this.getUserWallet();
-        this.getUserHistory();
-        this.getCryptoToSell();
-        this.getAllUserCryptos();
+            this.$router.push("/client/user-wallet");
+            this.getUserInfos();
+            this.getUserWallet();
+            this.getUserHistory();
+            this.getCryptoToSell();
+            this.getAllUserCryptos();
+            this.showAlerte = true;
+            this.alerteContent = "Votre vente a bien été effectuée !";
+            this.hideAlerte();
           }
         })
         .catch((error) => {
           console.error(error);
         });
-        console.log(id);
-    }
-
-
+      console.log(id);
+    },
+    hideAlerte() {
+      setTimeout(() => {
+        this.showAlerte = false;
+        this.alerteContent = "";
+      }, 4000);
+    },
   },
 };
 </script>

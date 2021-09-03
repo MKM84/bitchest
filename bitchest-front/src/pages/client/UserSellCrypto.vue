@@ -50,19 +50,18 @@ export default {
   props: {
     cryptosToSell: { },
     userSolde: { type: Number },
-
   },
   $emits: ["get-cryptos-to-sell", 'sell-cryptos'],
   mounted() {
     const crypto_id = this.$route.params.id;
-
     this.$emit("get-cryptos-to-sell", crypto_id);
-  },
-  beforeUpdate() {
-    const crypto_id = this.$route.params.id;
 
-    this.$emit("get-cryptos-to-sell", crypto_id);
   },
+//   beforeUpdate() {
+//     const crypto_id = this.$route.params.id;
+//     this.$emit("get-cryptos-to-sell", crypto_id);
+
+//   },
   data() {
     return {
       crypto: {},
