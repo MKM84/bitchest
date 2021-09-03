@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CryptocurrenciesTableSeeder::class);
         $this->call(ProgressionsTableSeeder::class);
         $this->call(TransactionsTableSeeder::class);
-        //  \App\Models\Transaction::factory(10)->create();
+   
 
 
 

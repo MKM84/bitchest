@@ -25,25 +25,27 @@ class TransactionFactory extends Factory
      */
     public function definition()
     {
-        $cryptocurrencies = Cryptocurrency::pluck('id')->all(); // get all crypto in table cryptocurrencies
-        $currencyId = $this->faker->randomElement($cryptocurrencies); // get random cryptocurrencies id
+        // get all crypto id in table cryptocurrencies with pluck
+        $cryptocurrencies = Cryptocurrency::pluck('id')->all(); 
+        // get random cryptocurrencies id
+        $currencyId = $this->faker->randomElement($cryptocurrencies); 
 
         // get random date between now and 30 days before
         $date_purchasing = date('Y-m-d', strtotime("-" . $this->faker->numberBetween(16, 29) . " days"));
         $date_selling = date('Y-m-d', strtotime("-" . $this->faker->numberBetween(0, 15) . " days"));
 
-        // get Progression crypto value of purchasing
+        // get Progression crypto value of purchasing date
         $progression = Progression::where('cryptocurrency_id', '=', $currencyId)->where('progress_date', '=', $date_purchasing)->first();
-        // get Progression crypto value of selling
+        // get Progression crypto value of selling date
         $progression_selling = Progression::where('cryptocurrency_id', '=', $currencyId)->where('progress_date', '=', $date_selling)->first();
 
-        // Transform date "2021-08-17" to "2021-08-17 14:45:37"
+        // Add Hours, minuts, seconds to date "2021-08-17" to "2021-08-17 14:45:37"
         $date_purchasing = $date_purchasing . " " . $this->faker->time();
         $date_selling = $date_selling . " " . $this->faker->time();
 
         // get all user where status = client
         $users = User::where('status', '=', 1)->get();
-        // get id of client users
+         // get all user client id
         $users = $users->pluck('id')->all();
 
         // faker quantity of crypto
@@ -69,11 +71,6 @@ class TransactionFactory extends Factory
             $sum_selling = 0;
             $balance = null;
         }
-
-
-
-
-
         return [
             'user_id' => $this->faker->randomElement($users),
             'sum_selling' => $sum_selling,

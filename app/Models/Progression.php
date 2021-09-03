@@ -22,15 +22,7 @@ class Progression extends Model
     public function transaction() {
         return $this->belongsTo(Transaction::class);
     }
-    //return the current value by One Crypto
-    // public function getCurrentValueByCrypto($id){
-    //     $currentValueByCrypto =  DB::table('progressions')
-    //         ->select('progress_value')
-    //         ->where('cryptocurrency_id',$id)
-    //         ->orderByDesc('progress_date')
-    //         ->first();
-    //     return $currentValueByCrypto;
-    // }
+
 
 
 

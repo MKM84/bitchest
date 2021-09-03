@@ -23,31 +23,35 @@ class ProgressionsTableSeeder extends Seeder
         {
             return ((rand(0, 99) > 40) ? 1 : -1) * ((rand(0, 99) > 49) ? ord(substr($cryptoname, 0, 1)) : ord(substr($cryptoname, -1))) * (rand(1, 10) * .01);
         }
-
-        $cryptocurrencies = \App\Models\Cryptocurrency::all(); // get all cryptocurrency
-
-        $date_now = now(); // date today now
-        $date_initial = date('Y-m-d', strtotime($date_now . ' - 30 days')); // date today before 30 days
+        // get all cryptocurrency
+        $cryptocurrencies = \App\Models\Cryptocurrency::all(); 
+        // date today now
+        $date_now = now(); 
+        // date today before 30 days
+        $date_initial = date('Y-m-d', strtotime($date_now . ' - 30 days')); 
 
         foreach ($cryptocurrencies as $crypto) {
-            $current_value = $crypto->current_value; // get current value of crypto
-            $cryptoname = $crypto->name; // get name of crypto
+            // get current value of crypto
+            $current_value = $crypto->current_value; 
+            // get name of crypto
+            $cryptoname = $crypto->name; 
 
             $progress_value = $current_value;
 
             for ($i = 0; $i < 30; $i++) {
-
                 //Add 1 days to date
                 $date = date('Y-m-d', strtotime($date_initial . ' + ' . ($i + 1) . ' days'));
 
-
-                $rate = getCotationFor($cryptoname) * 500; // get value of cotation
+                // get value of cotation
+                $rate = getCotationFor($cryptoname) * 500; 
                 if ($i == 0) {
                     $progress_value = $current_value;
                     $rate = "0";
                 } else {
-                    $progress_value += $rate; // update progress value with cotation
+                    // update progress value with cotation
+                    $progress_value += $rate; 
                 }
+
                 // Add in table progressions the value
                 DB::table('progressions')->insert([
                     [
