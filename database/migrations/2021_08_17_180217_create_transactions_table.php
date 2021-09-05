@@ -26,7 +26,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedDecimal("selling_price")->nullable();
             $table->unsignedDecimal("sum_selling", 12, 2)->default(0);
             $table->unsignedDecimal("sum_purchase", 12, 2)->default(0);
-            $table->float("balance")->nullable();
+            $table->decimal("balance")->nullable();
             $table->timestamps();
         });
     }
