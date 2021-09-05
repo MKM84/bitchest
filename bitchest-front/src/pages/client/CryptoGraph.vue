@@ -79,7 +79,6 @@ export default {
         this.CryptoEvolution.datasets[0].label = r.data.crypto.name;
         this.crypto = r.data.crypto;
         this.loaded = true;
-        console.log(r.data);
       })
       .catch((error) => console.error(error));
   },

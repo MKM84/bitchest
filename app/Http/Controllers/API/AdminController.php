@@ -24,15 +24,15 @@ class AdminController extends Controller
 
         //Get all last current value of cryptos
         $currencies = Progression::select(
-                'progressions.id',
-                'progress_value as current_value',
-                'cryptocurrency_id',
-                'cryptocurrencies.name',
-                'cryptocurrencies.current_value as initial_value',
-                'cryptocurrencies.id as id',
-                'cryptocurrencies.logo as logo',
-                'cryptocurrencies.name as name'
-            )
+            'progressions.id',
+            'progress_value as current_value',
+            'cryptocurrency_id',
+            'cryptocurrencies.name',
+            'cryptocurrencies.current_value as initial_value',
+            'cryptocurrencies.id as id',
+            'cryptocurrencies.logo as logo',
+            'cryptocurrencies.name as name'
+        )
             ->join('cryptocurrencies', 'progressions.cryptocurrency_id', '=', 'cryptocurrencies.id')
             ->orderByDesc("progressions.id")
             ->get()

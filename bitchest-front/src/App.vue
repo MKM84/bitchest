@@ -45,7 +45,7 @@ export default {
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
           //   if user email or password are not correct
           if (error.response.status === 422) {
             this.errors = error.response.data.errors;

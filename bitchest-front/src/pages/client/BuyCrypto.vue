@@ -117,17 +117,14 @@ export default {
         )
       ) {
 
-
       this.$emit("buy-new-crypto", this.cryptoToBuy);
 
-      console.log(this.cryptoToBuy);
       this.$router.push("/client/user-wallet");
       }
     },
     calculateTotal() {
       const id_crypto = this.$route.params.id;
       let crypto = this.cryptos.find((c) => c.id == id_crypto);
-      console.log(crypto.name);
       this.total = this.cryptoToBuy.quantity * crypto.current_value;
     },
   },

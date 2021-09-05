@@ -37,7 +37,6 @@ export default {
     getAllAdminCryptos() {
       User.getAllAdminCryptos().then((r) => {
         this.cryptos = r.data.currencies;
-        console.log(r);
       }).catch(error=>console.error(error));
     },
     newUser(user) {

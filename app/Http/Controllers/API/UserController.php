@@ -69,7 +69,7 @@ class UserController extends Controller
         $wallet_array = [];
         //Get id of User connection
         $id = Auth::user()->id;
-         // Get Wallets of one user group by Crypto (sum of quantity and price_sum)
+        // Get Wallets of one user group by Crypto (sum of quantity and price_sum)
         $walletsUser = DB::table('transactions')
             ->join('cryptocurrencies', 'transactions.cryptocurrency_id', '=', 'cryptocurrencies.id')
             ->join('users', 'transactions.user_id', '=', 'users.id')
@@ -102,7 +102,7 @@ class UserController extends Controller
 
         return ['userWallet' => $wallet_array];
     }
-     // Get History of transaction  of one user who have connected (sell and buy)
+    // Get History of transaction  of one user who have connected (sell and buy)
     public function getHistory()
     {
         //Get id of User connection
@@ -244,7 +244,7 @@ class UserController extends Controller
         //Update user_solde where user selling it transaction
         $userSolde = ($user->user_solde) + $transaction->sum_purchase;
 
-         //Update user_solde to table users
+        //Update user_solde to table users
         User::where('id', $user_id)
             ->update(['user_solde' => $userSolde]);
 

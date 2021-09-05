@@ -55,7 +55,6 @@ export default {
       User.getUserWallet()
         .then((r) => {
           this.wallet = r.data.userWallet;
-          console.log(r);
         })
         .catch((error) => console.error(error));
     },
@@ -64,7 +63,6 @@ export default {
       User.getUserHistory()
         .then((r) => {
           this.userHistory = r.data.historyByCrypto;
-          console.log(r.data);
         })
         .catch((error) => console.error(error));
     },
@@ -73,7 +71,6 @@ export default {
       User.getCryptoToSell(id)
         .then((r) => {
           this.cryptosToSell = r.data.cryptosToSellData;
-          console.log(r.data);
         })
         .catch((error) => console.error(error));
     },
@@ -81,7 +78,6 @@ export default {
     getUserInfos() {
       User.getUserInfos()
         .then((r) => {
-          console.log(r);
           this.userInfos = r.data.userInfos;
         })
         .catch((error) => console.error(error));
@@ -149,7 +145,7 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-      console.log(id);}
+      }
     },
     // hide alerte after 9 sec
     hideAlerte() {
