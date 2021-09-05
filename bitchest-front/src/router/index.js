@@ -3,13 +3,16 @@ import {
     createWebHistory
 } from 'vue-router';
 
+// login component
 import Login from "../pages/Login.vue";
 
+// admin components
 import Admin from "../pages/admin/Admin.vue"
 import AdminAllCryptos from "../pages/admin/AdminAllCryptos.vue";
 import Users from "../pages/admin/Users.vue";
 import AdminUserForm from "../pages/admin/AdminUserForm.vue";
 
+// cliet components
 import Client from "../pages/client/Client.vue"
 import UserAllCryptos from "../pages/client/UserAllCryptos.vue";
 import UserForm from "../pages/client/UserForm.vue";
@@ -19,10 +22,8 @@ import UserSellCrypto from "../pages/client/UserSellCrypto.vue";
 import CryptoGraph from "../pages/client/CryptoGraph.vue"
 import BuyCrypto from "../pages/client/BuyCrypto.vue"
 
-
+// 404 component
 import NotFound from "../pages/NotFound.vue";
-
-
 
 
 const routes = [{
@@ -93,8 +94,7 @@ const routes = [{
             authOnly: true,
             clientOnly: true
         },
-        redirect: '/client/cryptos'
-        ,
+        redirect: '/client/cryptos',
         children: [{
                 path: 'cryptos',
                 name: 'UserAllCryptos',
@@ -186,6 +186,8 @@ function isAdmin() {
     return localStorage.getItem("admin");
 }
 
+// redirection system : auth then admin or client
+
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.authOnly)) {
         // this route requires auth, check if logged in
@@ -201,8 +203,7 @@ router.beforeEach((to, from, next) => {
             next();
         }
     } else if (to.matched.some(record => record.meta.guestOnly)) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
+
         if (isLoggedIn() && isAdmin() === 'true') {
             next({
                 path: "/admin",
@@ -211,7 +212,8 @@ router.beforeEach((to, from, next) => {
                 }
             });
 
-        } if (isLoggedIn() && isAdmin() === 'false') {
+        }
+        if (isLoggedIn() && isAdmin() === 'false') {
             next({
                 path: "/client",
                 query: {
@@ -219,10 +221,10 @@ router.beforeEach((to, from, next) => {
                 }
             });
         } else {
-            next(); // make sure to always call next()!
+            next();
         }
     } else {
-        next(); // make sure to always call next()!
+        next();
     }
 });
 
@@ -250,10 +252,10 @@ router.beforeEach((to, from, next) => {
             });
 
         } else {
-            next(); // make sure to always call next()!
+            next();
         }
     } else {
-        next(); // make sure to always call next()!
+        next();
     }
 });
 export default router;

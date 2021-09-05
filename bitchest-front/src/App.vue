@@ -1,9 +1,7 @@
 <template>
+<!-- bootstrap pictos  -->
   <Pictos />
-  <router-view
-    @log-in="logIn"
-    :errors="errors"
-  />
+  <router-view @log-in="logIn" :errors="errors" />
 </template>
 
 <script>
@@ -12,15 +10,13 @@ import User from "./services/User";
 
 export default {
   name: "App",
-  mounted() {
-
-  },
+  mounted() {},
   components: {
     Pictos,
   },
   data() {
     return {
-        errors:{},
+      errors: {},
     };
   },
   methods: {
@@ -28,32 +24,34 @@ export default {
       User.login(form)
         .then((r) => {
           if (r.statusText == "OK") {
+            //   save user auth in localle storage
             localStorage.setItem("auth", "true");
             if (r.data.status == 0) {
+              // if user is admin
               localStorage.setItem("admin", "true");
               this.$router.push({
                 name: "AdminAllCryptos",
               });
-                    this.errors = {}
+              this.errors = {};
             } else {
+              // if user is client
               localStorage.setItem("admin", "false");
               this.$router.push({
                 name: "Client",
               });
-                    this.errors = {}
+              this.errors = {};
             }
             return r.data;
           }
         })
         .catch((error) => {
           console.log(error);
+          //   if user email or password are not correct
           if (error.response.status === 422) {
             this.errors = error.response.data.errors;
           }
         });
-
     },
-
   },
 };
 </script>
@@ -67,12 +65,16 @@ export default {
 }
 body {
   position: relative;
+  background-color: #0d6efd !important;
 }
-aside {
+.thead {
   position: sticky;
   top: 0;
-  width: 100%;
-  height: 100vh;
-  min-width: 200px;
+  background-color: #ffffff;
+}
+.ctn-content {
+  background-color: #ffffff;
+  border-radius: 30px;
+  margin: 20px 10px 23px 0px !important;
 }
 </style>

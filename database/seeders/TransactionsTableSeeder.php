@@ -17,11 +17,11 @@ class TransactionsTableSeeder extends Seeder
     public function run()
     {
         // Generate 100 transactions
-        \App\Models\Transaction::factory(100)->create();
+        \App\Models\Transaction::factory(200)->create();
 
         // Modify the faker data :
         // ---------------------------
-        
+
         // Get id (status => 0) in Table users
         $admins = DB::table('users')->where('status', 0)->get('id')->toArray();
 

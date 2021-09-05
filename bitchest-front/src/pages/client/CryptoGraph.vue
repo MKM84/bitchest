@@ -2,17 +2,29 @@
   <div class="row col-12">
     <Navigation :admin="false" :userSolde="userSolde" />
 
-    <section class="col-10">
-      <h3 class="text-left mt-5 mb-3 text-info mx-5" v-if="loaded">Progression de
+    <section class="col ctn-content">
+      <div v-if="loaded">
+        <div class="text-end col-11 mt-5">
+          <router-link :to="'/client/buy-crypto/' + crypto.id">
+            <button class="btn btn-primary">Acheter</button>
+          </router-link>
+        </div>
+        <h3 class="text-center mb-3 text-dark">
+          <div class="mb-2">
             <img :src="`/img/${crypto.logo}`" alt="" width="30" />
-         {{crypto.name}} durant les 30 derniers jours</h3>
-      <div class="m-5">
-        <Vue3ChartJs
-          v-if="loaded"
-          :id="doughnutChart.id"
-          :type="doughnutChart.type"
-          :data="CryptoEvolution"
-        />
+          </div>
+          Évolution de {{ crypto.name }}
+        </h3>
+
+        <div class="offset-md-1 col-10 mb-5">
+            <!-- Chart compoent  -->
+          <Vue3ChartJs
+            v-if="loaded"
+            :id="doughnutChart.id"
+            :type="doughnutChart.type"
+            :data="CryptoEvolution"
+          />
+        </div>
       </div>
     </section>
   </div>
@@ -58,6 +70,7 @@ export default {
     };
   },
   mounted() {
+    //   get selected crypto evolution
     const id = this.$route.params.id;
     User.getCryptoEvolution(id)
       .then((r) => {

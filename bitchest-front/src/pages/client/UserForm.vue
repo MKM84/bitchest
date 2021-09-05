@@ -2,10 +2,11 @@
   <div class="row col-12">
     <Navigation :admin="false" :userSolde="userSolde" />
 
-    <section class="offset-md-2 col-4" v-if="myProfile">
-      <h3 class="text-left mt-5 mb-3 text-info">Modifier mes informations</h3>
-
-      <form @submit.prevent="onSubmit">
+    <section class="col ctn-content" v-if="myProfile">
+      <h3 class="text-center mt-5 mb-5 text-dark">
+        <strong>Modifier mes informations</strong>
+      </h3>
+      <form @submit.prevent="onSubmit" class="offset-md-3 col-6">
         <div class="mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-3">Nom </label>
@@ -72,7 +73,7 @@
           <!-- Status  -->
         </div>
 
-        <button type="submit" class="btn btn-info mr-3">Valider</button>
+        <button type="submit" class="btn btn-primary mr-3">Valider</button>
         <router-link to="/client/user-wallet">
           <button type="button" class="btn btn-outline-dark m-3">Annuler</button>
         </router-link>
@@ -99,8 +100,8 @@ export default {
     };
   },
   props: {
-   userInfos: {},
-   userSolde: { type: Number },
+    userInfos: {},
+    userSolde: { type: Number },
   },
   data() {
     return {
@@ -115,11 +116,11 @@ export default {
   },
 
   mounted() {
-      this.myProfile = this.userInfos
+    this.myProfile = this.userInfos;
   },
-    beforeUpdate() {
-      this.myProfile = this.userInfos
-    },
+  beforeUpdate() {
+    this.myProfile = this.userInfos;
+  },
 
   validations() {
     return {
@@ -136,7 +137,7 @@ export default {
       if (this.v$.$error) {
         return false;
       }
-        this.$emit("edit-my-profile", this.myProfile);
+      this.$emit("edit-my-profile", this.myProfile);
 
       this.$router.push("/client/user-wallet");
     },

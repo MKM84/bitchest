@@ -117,6 +117,7 @@ class UserController extends Controller
                 "quantity",
                 "purchase_date",
                 "logo",
+                "purchase_price",
                 DB::raw("DATE_FORMAT(purchase_date, '%d/%m/%Y %H:%i:%s') as purchase_date"),
                 "sum_purchase",
                 DB::raw("DATE_FORMAT(selling_date, '%d/%m/%Y %H:%i:%s') as selling_date"),

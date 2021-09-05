@@ -41,6 +41,7 @@ export default {
     };
   },
   methods: {
+    //   get all cryptos
     getAllUserCryptos() {
       User.getAllUserCryptos()
         .then((r) => {
@@ -49,6 +50,7 @@ export default {
         })
         .catch((error) => console.error(error));
     },
+    // get user wallet
     getUserWallet() {
       User.getUserWallet()
         .then((r) => {
@@ -57,6 +59,7 @@ export default {
         })
         .catch((error) => console.error(error));
     },
+    // get transactions history
     getUserHistory() {
       User.getUserHistory()
         .then((r) => {
@@ -65,6 +68,7 @@ export default {
         })
         .catch((error) => console.error(error));
     },
+    // get one kind of crypto to sell by id crypto
     getCryptoToSell(id) {
       User.getCryptoToSell(id)
         .then((r) => {
@@ -73,6 +77,7 @@ export default {
         })
         .catch((error) => console.error(error));
     },
+    // get user informations
     getUserInfos() {
       User.getUserInfos()
         .then((r) => {
@@ -81,6 +86,7 @@ export default {
         })
         .catch((error) => console.error(error));
     },
+    // edit conected user innformations
     editMyProfile(user) {
       User.editUserInfos(user)
         .then((r) => {
@@ -88,6 +94,10 @@ export default {
             this.userInfos.lastname = user.lastname;
             this.userInfos.firstname = user.firstname;
             this.userInfos.email = user.email;
+            // confirmation alerte
+            this.showAlerte = true;
+            this.alerteContent = "Vos informations ont bien été modifiées!";
+            this.hideAlerte();
           }
         })
         .then(this.getUserInfos())
@@ -95,11 +105,11 @@ export default {
           console.error(error);
         });
     },
+    // Buy a crypto
     ByNewCryptos(crypto) {
       User.ByNewCryptos(crypto)
         .then((r) => {
           if (r.done) {
-
             this.getUserInfos();
             this.getUserWallet();
             this.getUserHistory();
@@ -114,8 +124,14 @@ export default {
           console.error(error);
         });
     },
+    // sell a crypto
     sellCryptos(id) {
-      User.sellCryptos(id)
+              if (
+        window.confirm(
+         " Êtes-vous sur de vouloir effectuer cet achat ?"
+        )
+      )
+{      User.sellCryptos(id)
         .then((r) => {
           if (r.done) {
             this.$router.push("/client/user-wallet");
@@ -124,6 +140,7 @@ export default {
             this.getUserHistory();
             this.getCryptoToSell();
             this.getAllUserCryptos();
+            // confirmation alerte
             this.showAlerte = true;
             this.alerteContent = "Votre vente a bien été effectuée !";
             this.hideAlerte();
@@ -132,13 +149,14 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-      console.log(id);
+      console.log(id);}
     },
+    // hide alerte after 9 sec
     hideAlerte() {
       setTimeout(() => {
         this.showAlerte = false;
         this.alerteContent = "";
-      }, 4000);
+      }, 9000);
     },
   },
 };

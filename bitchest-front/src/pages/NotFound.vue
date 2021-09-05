@@ -1,21 +1,26 @@
 <template>
-  <div
-    class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-4 mx-auto py-5 mt-5 bg-light p-5 rounded"
-  >
-      <div class="col-12 text-center mt-3 d-flex justify-content-center align-items-end">
-        <img src="../../public/img/bitchest_logo.png" alt="" width="200" />
-      </div>
+  <div class="not-found">
+    <div class="col-12 text-center mt-3 d-flex justify-content-center align-items-end">
+      <img src="../../public/img/bitchest_logo.png" alt="" width="200" />
+    </div>
 
-
-    <h1 class="text-center">404</h1>
-
+    <h1 class="text-center text-light display-1"><strong>404</strong></h1>
   </div>
 </template>
 
 <script>
-
 export default {
+    // page 404
   name: "NotFound",
-
 };
 </script>
+<style scoped>
+.not-found {
+  background-color: #0d6efd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+</style>

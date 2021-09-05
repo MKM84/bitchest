@@ -2,11 +2,12 @@
   <div class="row col-12">
     <Navigation :admin="false" :userSolde="userSolde" />
 
-    <section class="col">
-      <h3 class="text-left mt-5 mb-3 text-info">Mon portefeuille</h3>
+    <section class="col ctn-content">
+
+      <h3 class="text-center mt-5 mb-5 text-dark"><strong>Mon portefeuille</strong></h3>
 
       <table class="table" v-if="wallet">
-        <thead>
+        <thead class="thead">
           <tr>
             <th scope="col">Cryptomonnaies</th>
             <th scope="col">Quantité</th>
@@ -17,25 +18,24 @@
         </thead>
         <tbody>
           <tr v-for="wall in wallet" :key="wall.id">
-            <td class="fs-6 pt-3 pb-3">
+            <td class="align-middle p-3">
               <img :src="`/img/${wall.logo_crypto}`" alt="" width="30" />
               {{ wall.name_crypto }}
             </td>
-            <td class="fs-6 pt-3 pb-3">{{ wall.quantity_sum }}</td>
-            <td class="fs-6 pt-3 pb-3">{{ wall.prices_sum }} €</td>
-            <td class="fs-6 pt-3 pb-3">{{ wall.current_value }} €</td>
+            <td class="align-middle">{{ wall.quantity_sum }}</td>
+            <td class="align-middle">{{ wall.prices_sum }} €</td>
+            <td class="align-middle">{{ wall.current_value }} €</td>
 
-            <td class="fs-6 pt-3 pb-3">
+            <td class="align-middle">
               <router-link :to="'/client/user-sell-crypto/' + wall.id_crypto">
-                <button type="button" class="btn btn-light">
-                  <i class="fas fa-euro-sign"></i>
-                </button>
+                <button class="btn btn-primary"><i class="fas fa-euro-sign"></i></button>
               </router-link>
             </td>
           </tr>
         </tbody>
       </table>
-    <Alerte v-if="showAlerte" :showAlerte="showAlerte" :alerteContent="alerteContent"/>
+      <Alerte v-if="showAlerte" :showAlerte="showAlerte" :alerteContent="alerteContent" />
+
     </section>
   </div>
 </template>
@@ -53,9 +53,8 @@ export default {
   props: {
     wallet: { type: Array },
     userSolde: { type: Number },
-    showAlerte: {type: Boolean},
-    alerteContent: {type: String}
-
+    showAlerte: { type: Boolean },
+    alerteContent: { type: String },
   },
   mounted() {
     // this.$emit('get-user-wallet');
