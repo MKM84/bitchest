@@ -5,6 +5,8 @@
     @edit-user="editUser"
     @new-user="newUser"
     @delete-user="deleteUser"
+    :alerteContent="alerteContent"
+    :showAlerte="showAlerte"
   />
 </template>
 
@@ -21,6 +23,8 @@ export default {
     return {
       userList: [],
       cryptos: [],
+    alerteContent: "",
+      showAlerte: false,
     };
   },
   methods: {
@@ -41,6 +45,10 @@ export default {
         .then((r) => {
           if (r.done) {
             this.userList = [...this.userList, user];
+                        // confirmation alerte
+            this.showAlerte = true;
+            this.alerteContent = user.lastname + " a été ajouté(e) avec succes !";
+            this.hideAlerte();
           }
         })
         .then(this.getAllUsers())
@@ -57,6 +65,11 @@ export default {
             EditedUser.firstname = user.firstname;
             EditedUser.email = user.email;
             EditedUser.status = user.status;
+
+             // confirmation alerte
+            this.showAlerte = true;
+            this.alerteContent = "Les modifications ont été effectuées avec succes ! ";
+            this.hideAlerte();
           }
         })
         .then(this.getAllUsers())
@@ -73,12 +86,24 @@ export default {
       ) {
         User.deleteUser(id).then((r) => {
           if (r.done) {
-            this.userList = this.userList.filter((u) => u.id != id)
+            this.userList = this.userList.filter((u) => u.id != id);
+
+            // confirmation alerte
+            this.showAlerte = true;
+            this.alerteContent = "La suppression a été effectuée avec succes !";
+            this.hideAlerte();
           }
         })
             .catch(error=>console.error(error));
 
       }
+    },
+    // hide alerte after 9 sec
+    hideAlerte() {
+      setTimeout(() => {
+        this.showAlerte = false;
+        this.alerteContent = "";
+      }, 9000);
     },
   },
 };

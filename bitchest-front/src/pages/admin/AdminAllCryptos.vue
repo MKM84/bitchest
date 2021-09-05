@@ -2,8 +2,8 @@
   <div class="row col-12">
     <Navigation :admin="true" />
 
-    <section class="col">
-      <h3 class="text-left mt-5 mb-3 text-info">Les cryptomonnaies</h3>
+    <section class="col ctn-content">
+      <h3 class="text-center mt-5 mb-5 text-dark"><strong>Les cryptomonnaies</strong></h3>
       <table class="table" :v-if="cryptos">
         <thead>
           <tr>
@@ -13,10 +13,10 @@
         </thead>
         <tbody>
           <tr v-for="crypto in cryptos" :key="crypto.id">
-            <td class="fs-6 pt-3 pb-3">
+            <td class="fs-6 pt-3 pb-3 align-middle">
               <img :src="`/img/${crypto.logo}`" alt="" width="30" /> {{ crypto.name }}
             </td>
-            <td class="fs-6 pt-3 pb-3">{{ crypto.current_value }} €</td>
+            <td class="fs-6 pt-3 pb-3 align-middle">{{ crypto.current_value }} €</td>
           </tr>
         </tbody>
       </table>

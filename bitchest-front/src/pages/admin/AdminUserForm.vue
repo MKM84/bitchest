@@ -2,10 +2,10 @@
   <div class="row col-12">
     <Navigation :admin="true" />
 
-    <section class="offset-md-2 col-4" v-if="user">
-      <h3 class="text-left mt-5 mb-3 text-info">Formulaire - utilisateur</h3>
+    <section class="col ctn-content" v-if="user">
+      <h3 class="text-center mt-5 mb-5 text-dark"><strong>Formulaire - utilisateur</strong></h3>
 
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="onSubmit" class="offset-md-3 col-6">
         <div class="mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-3">Nom </label>
@@ -107,7 +107,7 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-info mr-3">Valider</button>
+        <button type="submit" class="btn btn-primary mr-3">Valider</button>
         <router-link to="/admin/user-list">
           <button type="button" class="btn btn-outline-dark m-3">Annuler</button>
         </router-link>

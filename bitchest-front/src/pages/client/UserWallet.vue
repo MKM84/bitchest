@@ -5,6 +5,7 @@
     <section class="col ctn-content">
 
       <h3 class="text-center mt-5 mb-5 text-dark"><strong>Mon portefeuille</strong></h3>
+      <Alerte v-if="showAlerte" :showAlerte="showAlerte" :alerteContent="alerteContent" />
 
       <table class="table" v-if="wallet">
         <thead class="thead">
@@ -34,7 +35,6 @@
           </tr>
         </tbody>
       </table>
-      <Alerte v-if="showAlerte" :showAlerte="showAlerte" :alerteContent="alerteContent" />
 
     </section>
   </div>
@@ -57,7 +57,6 @@ export default {
     alerteContent: { type: String },
   },
   mounted() {
-    // this.$emit('get-user-wallet');
   },
   data() {
     return {};

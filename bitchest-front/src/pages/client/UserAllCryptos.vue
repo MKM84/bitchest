@@ -63,5 +63,9 @@ export default {
 };
 </script>
 <style>
-
+.ctn-content {
+  background-color: #ffffff;
+  border-radius: 30px;
+  margin: 20px 10px 23px 0px !important;
+}
 </style>

@@ -4,11 +4,11 @@
       <img src="img/bitchest_logo.png" alt="" width="200" />
     </div>
     <div
-      class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-10 mx-auto py-5 mt-3 p-5 rounded"
+      class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-10 mx-auto py-5  p-5 rounded"
     >
       <form @submit.prevent="onLogin">
         <div class="mb-4">
-          <h4 class="text-center mb-4">Login</h4>
+          <h3 class="text-center mb-4"><strong>Login</strong></h3>
           <label for="email" class="form-label fs-5">Email* </label>
           <input
             name="email"
