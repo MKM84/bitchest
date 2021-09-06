@@ -46,7 +46,6 @@ export default {
       User.getAllUserCryptos()
         .then((r) => {
           this.cryptos = r.data.currencies;
-          this.userSolde = Number(r.data.userSolde);
         })
         .catch((error) => console.error(error));
     },
@@ -79,6 +78,7 @@ export default {
       User.getUserInfos()
         .then((r) => {
           this.userInfos = r.data.userInfos;
+          this.userSolde = Number(r.data.userSolde);
         })
         .catch((error) => console.error(error));
     },

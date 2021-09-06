@@ -61,7 +61,7 @@ class UserController extends Controller
             $i++;
         }
 
-        return ['currencies' => array_reverse($cryptosArray), 'userSolde' => $this->userSold];
+        return ['currencies' => array_reverse($cryptosArray)];
     }
     // Get Wallets of one user who have connected
     public function userWallet()
@@ -132,7 +132,7 @@ class UserController extends Controller
     // Return informations of User
     public function getUserInfos()
     {
-        return ['userInfos' => Auth::user()];
+        return ['userInfos' => Auth::user(), 'userSolde' => $this->userSold];
     }
     //Update user Info
     public function EditUserInfos($id, Request $request)
