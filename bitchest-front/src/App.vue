@@ -57,15 +57,28 @@ export default {
 </script>
 
 <style>
+
+:root {
+    --bs-primary-rgb: #375675 !important;
+}
+.btn-primary {
+    background-color: #375675 !important;
+    border-color: #375675 !important;
+}
+.bg-primary {
+     background-color: #375675 !important;
+     color: #375675 !important;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #375675;
 }
 body {
   position: relative;
-  background-color: #0d6efd !important;
+  background-color: #375675 !important;
+
 }
 .thead {
   position: sticky;

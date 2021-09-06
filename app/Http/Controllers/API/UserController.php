@@ -180,9 +180,9 @@ class UserController extends Controller
             ->orderByDesc('transactions.updated_at')
             ->get();
         // Get name of One crypto
-        $cryptoName = Cryptocurrency::all()->where('id', $crypto_id)->pluck('name')->toArray();
+        $cryptoName = Cryptocurrency::all()->where('id', $crypto_id)->pluck('name');
         //Get logo of One Crypto
-        $cryptoLogo = Cryptocurrency::all()->where('id', $crypto_id)->pluck('logo')->toArray();
+        $cryptoLogo = Cryptocurrency::all()->where('id', $crypto_id)->pluck('logo');
         //Get current Value of Crypto
         $actualValue = $this->getCurrentValueByCrypto($crypto_id);
 

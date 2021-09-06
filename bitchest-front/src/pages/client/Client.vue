@@ -70,6 +70,7 @@ export default {
       User.getCryptoToSell(id)
         .then((r) => {
           this.cryptosToSell = r.data.cryptosToSellData;
+          console.log(r.data.cryptosToSellData);
         })
         .catch((error) => console.error(error));
     },

@@ -228,34 +228,5 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.adminOnly)) {
-        if (isLoggedIn() && isAdmin() === 'false') {
-            next({
-                path: "/client",
-                query: {
-                    redirect: to.fullPath
-                }
-            });
-        } else {
-            next();
-        }
-    } else if (to.matched.some(record => record.meta.clientOnly)) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
-        if (isLoggedIn() && isAdmin() === 'true') {
-            next({
-                path: "/admin",
-                query: {
-                    redirect: to.fullPath
-                }
-            });
 
-        } else {
-            next();
-        }
-    } else {
-        next();
-    }
-});
 export default router;
