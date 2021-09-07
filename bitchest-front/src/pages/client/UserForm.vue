@@ -3,13 +3,11 @@
     <Navigation :admin="false" :userSolde="userSolde" />
 
     <section class="col ctn-content" v-if="myProfile">
-      <h3 class="text-center mt-5 mb-5 text-dark">
-        <strong>Modifier mes informations</strong>
-      </h3>
-      <form @submit.prevent="onSubmit" class="offset-md-3 col-6">
+
+      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5">
         <div class="mb-4">
           <!-- Lastname  -->
-          <label for="lastname" class="form-label fs-6 mt-3">Nom </label>
+          <label for="lastname" class="form-label fs-6 mt-5 text-light">Nom </label>
           <input
             name="lastname"
             type="text"
@@ -29,7 +27,7 @@
             {{ v$.myProfile.lastname.$errors[0].$message }}
           </div>
           <!-- Firstname -->
-          <label for="firstname" class="form-label fs-6 mt-3">Prénom</label>
+          <label for="firstname" class="form-label fs-6 mt-5 text-light">Prénom</label>
           <input
             name="firstname"
             type="text"
@@ -50,7 +48,7 @@
           </div>
 
           <!-- email  -->
-          <label for="email" class="form-label fs-6 mt-3">Email</label>
+          <label for="email" class="form-label fs-6 mt-5 text-light">Email</label>
           <input
             name="email"
             type="email"
@@ -73,9 +71,9 @@
           <!-- Status  -->
         </div>
 
-        <button type="submit" class="btn btn-primary mr-3">Valider</button>
+        <button type="submit" class="btn btn-secondary px-5 mt-5 btn-space">Valider</button>
         <router-link to="/client/user-wallet">
-          <button type="button" class="btn btn-outline-dark m-3">Annuler</button>
+          <button type="button" class="btn btn-outline-light px-5 mt-5">Annuler</button>
         </router-link>
       </form>
     </section>

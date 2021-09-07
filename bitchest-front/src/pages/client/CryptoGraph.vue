@@ -1,19 +1,20 @@
 <template>
   <div class="row col-12">
     <Navigation :admin="false" :userSolde="userSolde" />
-
     <section class="col ctn-content">
+<Spinner :loading="!loaded"/>
+
       <div v-if="loaded">
         <div class="text-end col-11 mt-5">
           <router-link :to="'/client/buy-crypto/' + crypto.id">
-            <button class="btn btn-primary">Acheter</button>
+            <button class="btn btn-secondary">Acheter</button>
           </router-link>
         </div>
-        <h3 class="text-center mb-3 text-dark">
+        <h3 class="text-center mb-3 text-light">
           <div class="mb-2">
             <img :src="`/img/${crypto.logo}`" alt="" width="30" />
           </div>
-          Évolution de {{ crypto.name }}
+          {{ crypto.name }}
         </h3>
 
         <div class="offset-md-1 col-10 mb-5">
@@ -33,15 +34,18 @@
 <script>
 import Navigation from "../../components/Navigation.vue";
 import Vue3ChartJs from "@j-t-mcc/vue3-chartjs";
+import Spinner from '../../components/Spinner.vue'
 import User from "../../services/User";
 export default {
   name: "CryptoGraph",
   components: {
     Navigation,
     Vue3ChartJs,
+    Spinner
   },
   props: {
     userSolde: {},
+    loading: {type: Boolean}
   },
   setup() {
     const doughnutChart = {

@@ -2,8 +2,9 @@
   <div class="row col-12">
     <Navigation :admin="false" :userSolde="userSolde" />
     <section class="col ctn-content">
-      <div v-if="cryptosToSell">
-        <h3 class="text-center mt-5 text-dark">
+        <Spinner :loading="loading" />
+      <div v-if="cryptosToSell && loading == false">
+        <h3 class="text-center mt-4 text-light">
           <div class="ml-3 mb-2">
             <img :src="`/img/${cryptosToSell.logo}`" alt="" width="30" />
           </div>
@@ -12,26 +13,26 @@
             <span v-if="cryptosToSell.name"> {{ cryptosToSell.name[0] }}</span>
           </strong>
         </h3>
-        <p class="mb-3 text-center" v-if="cryptosToSell.actualValue">
+        <p class="mb-3 text-center text-light" v-if="cryptosToSell.actualValue">
           Cours actuel : {{ cryptosToSell.actualValue.progress_value }}
         </p>
-        <table class="table">
+        <table class="table table-dark table-hover">
           <thead class="thead">
             <tr>
               <th scope="col">Quantité</th>
               <th scope="col">Cours à l'achat</th>
               <th scope="col">Date d'achat</th>
-              <th scope="col">Dépenses</th>
-              <th scope="col">Gains / Perte</th>
+              <th scope="col">Dépenses (€)</th>
+              <th scope="col">Gains / Perte (€)</th>
               <th scope="col">Vendre</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="crypto in cryptosToSell.cryptosToSell" :key="crypto.id">
               <td class="align-middle">{{ crypto.quantity }}</td>
-              <td class="align-middle">{{ crypto.purchase_price }} €</td>
+              <td class="align-middle">{{ crypto.purchase_price }} </td>
               <td class="align-middle">{{ crypto.purchase_date }}</td>
-              <td class="align-middle">{{ crypto.sum_purchase }} €</td>
+              <td class="align-middle">{{ crypto.sum_purchase }} </td>
               <td
                 :class="`fs-6 pt-3 pb-3 align-middle ${
                   cryptosToSell.actualValue.progress_value * crypto.quantity -
@@ -47,15 +48,13 @@
                       crypto.sum_purchase
                   )
                 }}
-                €
+
               </td>
-              <td class="align-middle">
+              <td class="align-middle ">
                 <button
                   @click="$emit('sell-cryptos', crypto.id_transaction)"
                   type="button"
-                  class="btn btn-primary"
-                >
-                  <i class="fas fa-euro-sign"></i>
+                  class="btn btn-primary text-info"><i class="fas fa-money-bill-wave"></i>
                 </button>
               </td>
             </tr>
@@ -68,14 +67,18 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
+import Spinner from '../../components/Spinner.vue'
+
 export default {
   name: "UserSellCrypto",
   components: {
     Navigation,
+    Spinner
   },
   props: {
     cryptosToSell: {},
     userSolde: { type: Number },
+    loading: { type: Boolean}
   },
   $emits: ["get-cryptos-to-sell", "sell-cryptos"],
   mounted() {

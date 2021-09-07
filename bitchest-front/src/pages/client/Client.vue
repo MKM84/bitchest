@@ -13,7 +13,9 @@
     @sell-cryptos="sellCryptos"
     :alerteContent="alerteContent"
     :showAlerte="showAlerte"
+    :loading="loading"
   />
+
 </template>
 
 <script>
@@ -38,22 +40,27 @@ export default {
       cryptosToSell: [],
       alerteContent: "",
       showAlerte: false,
+      loading : true
     };
   },
   methods: {
     //   get all cryptos
     getAllUserCryptos() {
+        this.loading = true
       User.getAllUserCryptos()
         .then((r) => {
           this.cryptos = r.data.currencies;
+          this.loading = false
         })
         .catch((error) => console.error(error));
     },
     // get user wallet
     getUserWallet() {
+         this.loading = true
       User.getUserWallet()
         .then((r) => {
           this.wallet = r.data.userWallet;
+         this.loading = false
         })
         .catch((error) => console.error(error));
     },
@@ -67,10 +74,11 @@ export default {
     },
     // get one kind of crypto to sell by id crypto
     getCryptoToSell(id) {
+        this.loading = true
       User.getCryptoToSell(id)
         .then((r) => {
           this.cryptosToSell = r.data.cryptosToSellData;
-          console.log(r.data.cryptosToSellData);
+          this.loading = false
         })
         .catch((error) => console.error(error));
     },
@@ -92,8 +100,7 @@ export default {
             this.userInfos.firstname = user.firstname;
             this.userInfos.email = user.email;
             // confirmation alerte
-            this.showAlerte = true;
-            this.alerteContent = "Vos informations ont bien été modifiées!";
+            this.activeAlerte("Vos informations ont bien été modifiées !")
             this.hideAlerte();
           }
         })
@@ -104,18 +111,23 @@ export default {
     },
     // Buy a crypto
     ByNewCryptos(crypto) {
+        this.loading = true
       User.ByNewCryptos(crypto)
         .then((r) => {
           if (r.done) {
+
             this.getUserInfos();
             this.getUserWallet();
-            this.getUserHistory();
-            this.getCryptoToSell();
-            this.getAllUserCryptos();
-            this.showAlerte = true;
-            this.alerteContent = "Votre achat a bien été effectué !";
-            this.hideAlerte();
+             this.getUserHistory();
+             this.getCryptoToSell();
+             this.getAllUserCryptos();
+            this.loading = false
+
           }
+        })
+        .then(() => {
+            this.activeAlerte("Votre achat a bien été effectué !");
+            this.hideAlerte();
         })
         .catch((error) => {
           console.error(error);
@@ -125,10 +137,12 @@ export default {
     sellCryptos(id) {
               if (
         window.confirm(
-         " Êtes-vous sur de vouloir effectuer cet achat ?"
+         " Êtes-vous sur de vouloir effectuer cette vente ?"
         )
       )
-{      User.sellCryptos(id)
+{
+        this.loading = true
+     User.sellCryptos(id)
         .then((r) => {
           if (r.done) {
             this.$router.push("/client/user-wallet");
@@ -137,11 +151,12 @@ export default {
             this.getUserHistory();
             this.getCryptoToSell();
             this.getAllUserCryptos();
-            // confirmation alerte
-            this.showAlerte = true;
-            this.alerteContent = "Votre vente a bien été effectuée !";
-            this.hideAlerte();
+            this.loading = false
           }
+        })
+       .then(() => {
+        this.activeAlerte("Votre vente a bien été effectuée !")
+        this.hideAlerte();
         })
         .catch((error) => {
           console.error(error);
@@ -155,6 +170,12 @@ export default {
         this.alerteContent = "";
       }, 9000);
     },
+        activeAlerte(t) {
+      setTimeout(() => {
+        this.showAlerte = true;
+        this.alerteContent = t;
+      }, 1000);
+    }
   },
 };
 </script>

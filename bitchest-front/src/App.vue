@@ -62,8 +62,8 @@ export default {
     --bs-primary-rgb: #375675 !important;
 }
 .btn-primary {
-    background-color: #375675 !important;
-    border-color: #375675 !important;
+    background-color: #212529 !important;
+    border-color: #212529 !important;
 }
 .bg-primary {
      background-color: #375675 !important;
@@ -77,7 +77,7 @@ export default {
 }
 body {
   position: relative;
-  background-color: #375675 !important;
+  background-color: #212529 !important;
 
 }
 .thead {
@@ -85,9 +85,15 @@ body {
   top: 0;
   background-color: #ffffff;
 }
+
 .ctn-content {
-  background-color: #ffffff;
+  background-color: #212529;
   border-radius: 30px;
-  margin: 20px 10px 23px 0px !important;
+  /* margin: 20px 10px 23px 0px !important; */
+
 }
+.btn-space {
+    margin-right: 10px;
+}
+
 </style>

@@ -3,20 +3,21 @@
     <Navigation :admin="false" :userSolde="userSolde" />
 
     <section class="col ctn-content">
-      <h3 class="text-center mt-5 text-dark" v-if="crypto">
+    <Spinner :loading="loading" />
+      <h3 class="text-center mt-5 text-light" v-if="crypto && loading == false">
         <div class="ml-3 mb-2">
           <img :src="`/img/${crypto.logo}`" alt="" width="30" />
         </div>
         Acheter des {{ crypto.name }}
       </h3>
 
-      <p class="mb-3 text-center" v-if="crypto">
+      <p class="mb-3 text-center text-light" v-if="crypto">
         Cours actuel : {{ crypto.current_value }}
       </p>
 
       <form @submit.prevent="onSubmit" class="offset-md-3 col-6">
         <div class="mb-4">
-          <label for="quantity" class="form-label fs-6 mt-3">Quantité </label>
+          <label for="quantity" class="form-label fs-6 mt-3 text-light">Quantité </label>
           <input
             name="quantity"
             type="text"
@@ -35,14 +36,14 @@
             {{ v$.cryptoToBuy.quantity.$errors[0].$message }}
           </div>
 
-          <div class="form-label fs-6 mt-3">
+          <div class="form-label fs-6 mt-3 text-light">
             <p>Total à payer : {{ this.total }} €</p>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mr-3">Acheter</button>
+        <button type="submit" class="btn btn-secondary  px-5 mt-5 btn-space">Acheter</button>
         <router-link to="/client/user-wallet">
-          <button type="button" class="btn btn-outline-dark m-3">Annuler</button>
+          <button type="button" class="btn btn-outline-light px-5 mt-5">Annuler</button>
         </router-link>
       </form>
     </section>
@@ -54,10 +55,13 @@ import Navigation from "../../components/Navigation.vue";
 import useVuelidate from "@vuelidate/core";
 import { required, minValue, maxValue, numeric, integer } from "@vuelidate/validators";
 
+import Spinner from '../../components/Spinner.vue'
+
 export default {
   name: "BuyCrypto",
   components: {
     Navigation,
+    Spinner
   },
   emits: ["buy-new-crypto"],
   setup() {
@@ -68,6 +72,7 @@ export default {
   props: {
     userSolde: { type: Number },
     cryptos: { type: Array },
+    loading: { type: Boolean}
   },
   data() {
     return {
