@@ -114,5 +114,11 @@ html {
     bottom: 10px;
     right: 0px;
 }
+table img {
+    background-color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    padding: 6px;
+}
 
 </style>
