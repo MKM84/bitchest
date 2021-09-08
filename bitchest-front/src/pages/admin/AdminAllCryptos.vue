@@ -3,9 +3,8 @@
     <Navigation :admin="true" />
 
     <section class="col ctn-content">
-      <h3 class="text-center mt-5 mb-5 text-dark"><strong>Les cryptomonnaies</strong></h3>
-      <table class="table" :v-if="cryptos">
-        <thead>
+      <table class="table mt-4 table-dark table-hover" :v-if="cryptos">
+        <thead class="thead">
           <tr>
             <th scope="col">Nom</th>
             <th scope="col">Cours actuel</th>

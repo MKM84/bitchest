@@ -3,12 +3,12 @@
     <Navigation :admin="true" />
 
     <section class="col ctn-content" v-if="user">
-      <h3 class="text-center mt-5 mb-5 text-dark"><strong>Formulaire - utilisateur</strong></h3>
 
-      <form @submit.prevent="onSubmit" class="offset-md-3 col-6">
+
+      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5">
         <div class="mb-4">
           <!-- Lastname  -->
-          <label for="lastname" class="form-label fs-6 mt-3">Nom </label>
+          <label for="lastname" class="form-label fs-6 mt-5 text-light">Nom </label>
           <input
             name="lastname"
             type="text"
@@ -28,7 +28,7 @@
             {{ v$.user.lastname.$errors[0].$message }}
           </div>
           <!-- Firstname -->
-          <label for="firstname" class="form-label fs-6 mt-3">Prénom</label>
+          <label for="firstname" class="form-label fs-6 mt-5 text-light">Prénom</label>
           <input
             name="firstname"
             type="text"
@@ -49,7 +49,7 @@
           </div>
 
           <!-- email  -->
-          <label for="email" class="form-label fs-6 mt-3">Email</label>
+          <label for="email" class="form-label fs-6 mt-5 text-light">Email</label>
           <input
             name="email"
             type="email"
@@ -75,14 +75,14 @@
 
           <div class="form-check mt-3">
             <input
-              class="form-check-input"
+              class="form-check-input "
               type="radio"
               name="client"
               id="client-radio"
               value="1"
               v-model="user.status"
             />
-            <label class="form-check-label" for="client-radio"> Client </label>
+            <label class="form-check-label text-light" for="client-radio"> Client </label>
           </div>
           <div class="form-check">
             <input
@@ -93,7 +93,7 @@
               value="0"
               v-model="user.status"
             />
-            <label class="form-check-label" for="admin-radio"> Admin </label>
+            <label class="form-check-label text-light" for="admin-radio"> Admin </label>
           </div>
                <div id="lastnameHelp" class="form-text text-danger" v-if="errors.status">
             {{ errors.status[0] }}
@@ -107,9 +107,9 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mr-3">Valider</button>
+        <button type="submit" class="btn btn-secondary text-dark px-5 mt-5 btn-space">Valider</button>
         <router-link to="/admin/user-list">
-          <button type="button" class="btn btn-outline-dark m-3">Annuler</button>
+          <button type="button" class="btn btn-outline-light px-5 mt-5">Annuler</button>
         </router-link>
       </form>
     </section>

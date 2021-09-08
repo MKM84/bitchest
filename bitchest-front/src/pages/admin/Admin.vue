@@ -23,32 +23,37 @@ export default {
     return {
       userList: [],
       cryptos: [],
-    alerteContent: "",
+      alerteContent: "",
       showAlerte: false,
+      loading: true,
     };
   },
   methods: {
     getAllUsers() {
-      User.getAllUsers().then((r) => {
-        this.userList = r.data.userList;
-      }).catch(error=>console.error(error));
+      User.getAllUsers()
+        .then((r) => {
+          this.userList = r.data.userList;
+        })
+        .catch((error) => console.error(error));
     },
 
     getAllAdminCryptos() {
-      User.getAllAdminCryptos().then((r) => {
-        this.cryptos = r.data.currencies;
-      }).catch(error=>console.error(error));
+      User.getAllAdminCryptos()
+        .then((r) => {
+          this.cryptos = r.data.currencies;
+        })
+        .catch((error) => console.error(error));
     },
     newUser(user) {
       User.addUser(user)
         .then((r) => {
           if (r.done) {
             this.userList = [...this.userList, user];
-                        // confirmation alerte
-            this.showAlerte = true;
-            this.alerteContent = user.lastname + " a été ajouté(e) avec succes !";
-            this.hideAlerte();
           }
+        })
+        .then(() => {
+          this.activeAlerte(user.lastname + " a été ajouté(e) avec succes !");
+          this.hideAlerte();
         })
         .then(this.getAllUsers())
         .catch((error) => {
@@ -64,12 +69,11 @@ export default {
             EditedUser.firstname = user.firstname;
             EditedUser.email = user.email;
             EditedUser.status = user.status;
-
-             // confirmation alerte
-            this.showAlerte = true;
-            this.alerteContent = "Les modifications ont été effectuées avec succes ! ";
-            this.hideAlerte();
           }
+        })
+        .then(() => {
+          this.activeAlerte("Les modifications ont été effectuées avec succes !");
+          this.hideAlerte();
         })
         .then(this.getAllUsers())
         .catch((error) => {
@@ -83,18 +87,17 @@ export default {
           `Êtes-vous sur de vouloir supprimmer ${user.firstname} ${user.lastname} ?`
         )
       ) {
-        User.deleteUser(id).then((r) => {
-          if (r.done) {
-            this.userList = this.userList.filter((u) => u.id != id);
-
-            // confirmation alerte
-            this.showAlerte = true;
-            this.alerteContent = "La suppression a été effectuée avec succes !";
+        User.deleteUser(id)
+          .then((r) => {
+            if (r.done) {
+              this.userList = this.userList.filter((u) => u.id != id);
+            }
+          })
+          .then(() => {
+            this.activeAlerte("La suppression a été effectuée avec succes !");
             this.hideAlerte();
-          }
-        })
-            .catch(error=>console.error(error));
-
+          })
+          .catch((error) => console.error(error));
       }
     },
     // hide alerte after 9 sec
@@ -103,6 +106,13 @@ export default {
         this.showAlerte = false;
         this.alerteContent = "";
       }, 9000);
+    },
+    // show alerte
+    activeAlerte(t) {
+      setTimeout(() => {
+        this.showAlerte = true;
+        this.alerteContent = t;
+      }, 1000);
     },
   },
 };

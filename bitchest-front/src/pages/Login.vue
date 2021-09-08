@@ -1,15 +1,14 @@
 <template>
-  <div class="login col-8 offset-2">
-    <div class="col-12 text-center d-flex justify-content-center align-items-end">
+  <div class="login col-4 offset-4 d-flex align-items-center justify-content-end ">
+    <div class="col-12 text-center d-flex justify-content-center align-items-end mb-4">
       <img src="img/bitchest_logo.png" alt="" width="200" />
     </div>
     <div
-      class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-10 mx-auto py-5  p-5 rounded"
+      class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-10 mx-auto    rounded"
     >
       <form @submit.prevent="onLogin">
         <div class="mb-4">
-          <h3 class="text-center mb-4"><strong>Login</strong></h3>
-          <label for="email" class="form-label fs-5">Email* </label>
+          <label for="email" class="form-label fs-5 text-light">Email* </label>
           <input
             name="email"
             type="email"
@@ -27,7 +26,7 @@
           </div>
         </div>
         <div class="mb-4">
-          <label for="password" class="form-label fs-5">Password* </label>
+          <label for="password" class="form-label fs-5 text-light">Password* </label>
           <input
             name="password"
             type="password"
@@ -47,7 +46,7 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary fs-5">Login</button>
+        <div class="text-center"><button type="submit" class="btn btn-secondary text-dark text-center mt-3 fs-5 px-4">Login</button></div>
       </form>
     </div>
   </div>
@@ -95,12 +94,12 @@ export default {
 </script>
 <style scoped>
 .login {
-  background-color: #ffffff;
+  background-color: #212529;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 6rem;
+  margin-top: 10rem;
   padding: 3rem;
   border-radius: 30px;
 }

@@ -4,20 +4,19 @@
       <img src="../../public/img/bitchest_logo.png" alt="" width="180" />
     </div>
     <!-- admin  -->
-    <div v-if="admin" class="col mt-5">
-      <router-link to="/admin/user-list" class="nav-link text-light fs-6">
+    <div v-if="admin" class=" mt-5">
+              <router-link to="/admin/cryptos" class="nav-link text-light fs-6 px-4">
+        <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
+      </router-link>
+      <router-link to="/admin/user-list" class="nav-link text-light fs-6 px-4">
         <i class="fas fa-users-cog"></i> Utilisateurs
       </router-link>
 
-      <router-link to="/admin/cryptos" class="nav-link text-light fs-6">
-        <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
-      </router-link>
-
-      <router-link to="/admin/user-form/0" class="nav-link text-light fs-6">
+      <router-link to="/admin/user-form/0" class="nav-link text-light fs-6 px-4">
         <i class="fas fa-plus-circle"></i> Ajouter un utilisateur
       </router-link>
 
-      <a class="nav-link nav-link text-light fs-6" href="#" @click.prevent="logout"
+      <a class="nav-link nav-link text-light fs-6 px-4  pt-4" href="#" @click.prevent="logout"
         ><i class="fas fa-power-off"></i> Logout</a
       >
     </div>

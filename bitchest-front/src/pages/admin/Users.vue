@@ -3,9 +3,7 @@
     <Navigation :admin="true" />
 
     <section class="col ctn-content">
-      <h3 class="text-center mt-5 mb-5 text-dark"><strong>Les clients</strong></h3>
-      <Alerte v-if="showAlerte" :showAlerte="showAlerte" :alerteContent="alerteContent" />
-      <table class="table" :v-if="userList">
+      <table class="table mt-4 table-dark table-hover" :v-if="userList">
         <thead>
           <tr>
             <th scope="col">Nom</th>
@@ -30,14 +28,14 @@
             <td class="fs-6 align-middle">
               <span
                 :class="`badge ${
-                  user.status === 0 ? 'bg-warning text-dark' : 'bg-light text-dark'
+                  user.status === 0 ? 'bg-info text-dark' : 'bg-light text-dark'
                 }`"
                 >{{ user.status === 0 ? "Admin" : "Client" }}</span
               >
             </td>
             <td class="fs-6 align-middle">
               <router-link :to="'/admin/user-form/' + user.id">
-                <button type="button" class="btn text-primary">
+                <button type="button" class="btn color-success">
                   <i class="fas fa-edit"></i>
                 </button>
               </router-link>
@@ -54,6 +52,8 @@
           </tr>
         </tbody>
       </table>
+      <Alerte v-if="showAlerte" :showAlerte="showAlerte" :alerteContent="alerteContent" />
+
     </section>
   </div>
 </template>
