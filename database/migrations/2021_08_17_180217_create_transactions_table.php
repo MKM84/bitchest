@@ -22,11 +22,11 @@ class CreateTransactionsTable extends Migration
             $table->boolean("state")->default(0);
             $table->datetime("purchase_date");
             $table->datetime("selling_date")->nullable();
-            $table->unsignedDecimal("purchase_price");
-            $table->unsignedDecimal("selling_price")->nullable();
-            $table->unsignedDecimal("sum_selling", 12, 2)->default(0);
-            $table->unsignedDecimal("sum_purchase", 12, 2)->default(0);
-            $table->decimal("balance")->nullable();
+            $table->unsignedDecimal("purchase_price",8, 2);
+            $table->unsignedDecimal("selling_price", 8, 2)->nullable();
+            $table->unsignedDecimal("sum_selling", 30, 2)->default(0);
+            $table->unsignedDecimal("sum_purchase", 30, 2)->default(0);
+            $table->decimal("balance", 30, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="false" :userSolde="userSolde" />
+    <Navigation :admin="false" :userInfos="userInfos" />
 
     <section class="col ctn-content">
 <Spinner :loading="loading" />
@@ -49,7 +49,7 @@
                 </td>
                 <td
                   :class="`fs-6 pt-3 pb-3 align-middle ${
-                   transaction.balance > 1 ? ' text-success' : 'text-danger'
+                   transaction.balance > 1 ? 'color-success' : 'text-danger'
                   }`"
                 >
                   {{ transaction.balance }}
@@ -73,7 +73,7 @@ export default {
     Spinner
   },
   props: {
-    userSolde: { type: Number },
+    userInfos: { type: Object },
     userHistory: { type: Array },
     loading: { type: Boolean}
 

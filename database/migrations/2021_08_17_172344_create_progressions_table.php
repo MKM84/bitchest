@@ -15,7 +15,7 @@ class CreateProgressionsTable extends Migration
     {
         Schema::create('progressions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedDecimal("progress_value");
+            $table->unsignedDecimal("progress_value", 8, 2);
             $table->float("rate");
             $table->date("progress_date");
             $table->timestamps();

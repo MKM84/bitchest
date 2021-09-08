@@ -3,6 +3,7 @@
     <div class="col-12 text-center mt-4 d-flex justify-content-center align-items-end">
       <img src="../../public/img/bitchest_logo.png" alt="" width="180" />
     </div>
+    <!-- admin  -->
     <div v-if="admin" class="col mt-5">
       <router-link to="/admin/user-list" class="nav-link text-light fs-6">
         <i class="fas fa-users-cog"></i> Utilisateurs
@@ -20,12 +21,14 @@
         ><i class="fas fa-power-off"></i> Logout</a
       >
     </div>
+
+    <!-- client  -->
     <div v-else class="mt-5">
       <router-link to="/client/cryptos" class="nav-link text-light fs-6 px-4">
         <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
       </router-link>
       <router-link to="/client/user-wallet" class="nav-link text-light fs-6 px-4">
-        <i class="fas fa-wallet 3x"></i> Mon portefeuille
+        <i class="fas fa-wallet 3x"></i> Portefeuille
       </router-link>
 
       <router-link to="/client/purchase-history" class="nav-link text-light fs-6 px-4">
@@ -35,14 +38,20 @@
       <router-link to="/client/user-form" class="nav-link nav-link text-light fs-6 px-4">
         <i class="fas fa-user-circle 3x"></i> Mon compte
       </router-link>
-
-      <a class="nav-link nav-link text-light fs-6 px-4" href="#" @click.prevent="logout"
-        ><i class="fas fa-power-off"></i> Logout</a
+                    <a class="nav-link nav-link text-light fs-6 px-4  pt-4" href="#" @click.prevent="logout"
+        ><i class="fas fa-power-off"></i> Me déconnecter</a
       >
-      <div v-if="userSolde" class=" mt-5 px-4 text-center">
-        <p class="mb-1 text-light">Votre solde :</p>
-        <p class="mb-0 text-light"><strong>{{ userSolde }} €</strong></p>
-      </div>
+
+
+          <div  class="mt-5 px-4 ">
+              <h5 v-if="userInfos.firstname" class="text-light">Bonjour {{ userInfos.firstname }},</h5>
+            <p v-if="userInfos.user_solde" class="mb-1 text-light">Votre solde est de :</p>
+            <p v-if="userInfos.user_solde" :class="`mb-0 ${userInfos.user_solde > 0 ? 'color-success' : 'text-danger'}`">
+              <strong>{{ userInfos.user_solde }} €</strong>
+            </p>
+          </div>
+
+
     </div>
   </aside>
 </template>
@@ -54,7 +63,7 @@ export default {
   name: "Navigation",
   props: {
     admin: { type: Boolean },
-    userSolde: { type: Number },
+    userInfos: { type: Object}
   },
   methods: {
     logout() {
@@ -83,6 +92,7 @@ aside {
 .router-link-active {
   font-weight: 700;
   background-color: #212529;
+  color: #00fe17 !important;
   /* border-radius: 0px 50px 50px 0px; */
 }
 </style>

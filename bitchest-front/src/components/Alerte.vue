@@ -1,5 +1,5 @@
 <template>
-  <div class=" col alert alert-info d-flex align-items-center m-5 fixed-alerte" role="alert">
+  <div class=" col-4 alert alert-light d-flex align-items-center m-5 fixed-alerte" role="alert">
     <svg
       class="bi flex-shrink-0 me-2"
       width="24"
@@ -24,5 +24,6 @@ export default {
 </script>
 
 <style>
+
 
 </style>

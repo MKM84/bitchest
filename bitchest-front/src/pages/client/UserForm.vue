@@ -1,10 +1,11 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="false" :userSolde="userSolde" />
+    <Navigation :admin="false" :userInfos="userInfos" />
 
     <section class="col ctn-content" v-if="myProfile">
+<Spinner :loading="loading" />
 
-      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5">
+      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5" v-if="loading == false">
         <div class="mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-5 text-light">Nom </label>
@@ -71,7 +72,7 @@
           <!-- Status  -->
         </div>
 
-        <button type="submit" class="btn btn-secondary px-5 mt-5 btn-space">Valider</button>
+        <button type="submit" class="btn btn-secondary text-dark px-5 mt-5 btn-space">Valider</button>
         <router-link to="/client/user-wallet">
           <button type="button" class="btn btn-outline-light px-5 mt-5">Annuler</button>
         </router-link>
@@ -82,7 +83,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-
+import Spinner from '../../components/Spinner.vue'
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength } from "@vuelidate/validators";
 
@@ -90,6 +91,7 @@ export default {
   name: "UserForm",
   components: {
     Navigation,
+    Spinner
   },
   emits: ["edit-my-profile"],
   setup() {
@@ -98,8 +100,8 @@ export default {
     };
   },
   props: {
-    userInfos: {},
-    userSolde: { type: Number },
+    userInfos: { type: Object},
+     loading: { type: Boolean}
   },
   data() {
     return {

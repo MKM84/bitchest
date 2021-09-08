@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="false" :userSolde="userSolde" />
+    <Navigation :admin="false"  :userInfos="userInfos" />
     <section class="col ctn-content">
         <Spinner :loading="loading" />
       <div v-if="cryptosToSell && loading == false">
@@ -38,7 +38,7 @@
                   cryptosToSell.actualValue.progress_value * crypto.quantity -
                     crypto.sum_purchase >
                   0
-                    ? ' text-success'
+                    ? ' color-success'
                     : 'text-danger'
                 }`"
               >
@@ -77,7 +77,7 @@ export default {
   },
   props: {
     cryptosToSell: {},
-    userSolde: { type: Number },
+    userInfos: { type: Object },
     loading: { type: Boolean}
   },
   $emits: ["get-cryptos-to-sell", "sell-cryptos"],

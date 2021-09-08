@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('lastname', 100);
             $table->string('email')->unique();
             $table->boolean("status");
-            $table->unsignedDecimal('user_solde', 20, 2);
+            $table->decimal('user_solde', 30, 2);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

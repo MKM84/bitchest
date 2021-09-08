@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="false" :userSolde="userSolde" />
+    <Navigation :admin="false"  :userInfos="userInfos" />
     <section class="col ctn-content">
       <Spinner :loading="loading" />
       <div v-if="wallet">
@@ -35,6 +35,7 @@
           </table>
       </div>
       <Alerte v-if="showAlerte" :showAlerte="showAlerte" :alerteContent="alerteContent" />
+
     </section>
   </div>
 </template>
@@ -53,7 +54,7 @@ export default {
   },
   props: {
     wallet: { type: Array },
-    userSolde: { type: Number },
+    userInfos: { type: Object},
     showAlerte: { type: Boolean },
     alerteContent: { type: String },
     loading : { type: Boolean }

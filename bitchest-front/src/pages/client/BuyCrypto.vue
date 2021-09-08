@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="false" :userSolde="userSolde" />
+    <Navigation :admin="false" :userInfos="userInfos" />
 
     <section class="col ctn-content">
     <Spinner :loading="loading" />
@@ -15,9 +15,9 @@
         Cours actuel : {{ crypto.current_value }}
       </p>
 
-      <form @submit.prevent="onSubmit" class="offset-md-3 col-6">
-        <div class="mb-4">
-          <label for="quantity" class="form-label fs-6 mt-3 text-light">Quantité </label>
+      <form @submit.prevent="onSubmit" class="offset-md-4 col-4">
+        <div class="mb-4 text-center">
+          <label for="quantity" class="form-label fs-6 mt-3 text-light ">Quantité </label>
           <input
             name="quantity"
             type="text"
@@ -26,25 +26,29 @@
             aria-describedby="quantity"
             v-model="cryptoToBuy.quantity"
             @keyup="calculateTotal"
+            autocomplete="off"
           />
 
           <div
             id="lastnameError"
-            class="form-text text-danger"
+            class="form-text text-danger text-center"
             v-if="v$.cryptoToBuy.quantity.$error"
           >
             {{ v$.cryptoToBuy.quantity.$errors[0].$message }}
           </div>
 
-          <div class="form-label fs-6 mt-3 text-light">
-            <p>Total à payer : {{ this.total }} €</p>
+          <div class="form-label fs-6 mt-4 text-light text-center">
+            <p>Total à payer :</p>
+            <p class="color-success"> <strong>{{ this.total }} €</strong></p>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-secondary  px-5 mt-5 btn-space">Acheter</button>
-        <router-link to="/client/user-wallet">
-          <button type="button" class="btn btn-outline-light px-5 mt-5">Annuler</button>
-        </router-link>
+        <div class="text-center">
+            <button type="submit" class="btn btn-secondary text-dark  px-4 mt-3 btn-space">Acheter</button>
+            <router-link to="/client/user-wallet">
+              <button type="button" class="btn btn-outline-light px-4 mt-3">Annuler</button>
+            </router-link>
+        </div>
       </form>
     </section>
   </div>
@@ -70,7 +74,7 @@ export default {
     };
   },
   props: {
-    userSolde: { type: Number },
+    userInfos: { type: Object },
     cryptos: { type: Array },
     loading: { type: Boolean}
   },
@@ -102,7 +106,7 @@ export default {
         quantity: {
           required,
           minValue: minValue(1),
-          maxValue: maxValue(20),
+          maxValue: maxValue(300),
           numeric,
         },
       },
