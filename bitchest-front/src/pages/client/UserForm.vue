@@ -3,12 +3,16 @@
     <Navigation :admin="false" :userInfos="userInfos" />
 
     <section class="col ctn-content" v-if="myProfile">
-<Spinner :loading="loading" />
+      <Spinner :loading="loading" />
 
-      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5" v-if="loading == false">
+      <form
+        @submit.prevent="onSubmit"
+        class="offset-md-3 col-6 mt-5"
+        v-if="loading == false"
+      >
         <div class="mb-4">
           <!-- Lastname  -->
-          <label for="lastname" class="form-label fs-6 mt-5 text-light">Nom </label>
+          <label for="lastname" class="form-label fs-6 mt-4 text-light">Nom </label>
           <input
             name="lastname"
             type="text"
@@ -28,7 +32,7 @@
             {{ v$.myProfile.lastname.$errors[0].$message }}
           </div>
           <!-- Firstname -->
-          <label for="firstname" class="form-label fs-6 mt-5 text-light">Prénom</label>
+          <label for="firstname" class="form-label fs-6 mt-4 text-light">Prénom</label>
           <input
             name="firstname"
             type="text"
@@ -37,11 +41,11 @@
             aria-describedby="firstname"
             v-model="myProfile.firstname"
           />
-          <div id="lastnameHelp" class="form-text text-danger" v-if="errors.firstname">
+          <div id="firstnameHelp" class="form-text text-danger" v-if="errors.firstname">
             {{ errors.firstname[0] }}
           </div>
           <div
-            id="lastnameError"
+            id="firstnameError"
             class="form-text text-danger"
             v-if="v$.myProfile.firstname.$error"
           >
@@ -49,7 +53,7 @@
           </div>
 
           <!-- email  -->
-          <label for="email" class="form-label fs-6 mt-5 text-light">Email</label>
+          <label for="email" class="form-label fs-6 mt-4 text-light">Email</label>
           <input
             name="email"
             type="email"
@@ -58,41 +62,43 @@
             aria-describedby="email"
             v-model="myProfile.email"
           />
-          <div id="lastnameHelp" class="form-text text-danger" v-if="errors.email">
+          <div id="emailHelp" class="form-text text-danger" v-if="errors.email">
             {{ errors.email[0] }}
           </div>
           <div
-            id="lastnameError"
+            id="emailError"
             class="form-text text-danger"
             v-if="v$.myProfile.email.$error"
           >
             {{ v$.myProfile.email.$errors[0].$message }}
           </div>
 
-
-                    <!-- password  -->
-          <label for="password" class="form-label fs-6 mt-5 text-light">Nouveau mot de passe</label>
+          <!-- password  -->
+          <label for="password" class="form-label fs-6 mt-4 text-light"
+            >Nouveau mot de passe</label
+          >
           <input
             name="password"
             type="password"
             class="form-control"
-            id="email"
+            id="password"
             aria-describedby="password"
             v-model="myProfile.password"
           />
-          <div id="lastnameHelp" class="form-text text-danger" v-if="errors.password">
+          <div id="passwordHelp" class="form-text text-danger" v-if="errors.password">
             {{ errors.password[0] }}
           </div>
           <div
-            id="lastnameError"
+            id="passwordError"
             class="form-text text-danger"
             v-if="v$.myProfile.password.$error"
           >
             {{ v$.myProfile.password.$errors[0].$message }}
           </div>
 
-
-          <label for="repeatPassword" class="form-label fs-6 mt-5 text-light">Confirmer le mot passe</label>
+          <label for="repeatPassword" class="form-label fs-6 mt-4 text-light"
+            >Confirmer le mot passe</label
+          >
           <input
             name="repeatPassword"
             type="password"
@@ -101,9 +107,7 @@
             aria-describedby="repeatPassword"
             v-model="myProfile.repeatPassword"
           />
-          <!-- <div id="lastnameHelp" class="form-text text-danger" v-if="errors.sameAsPassword">
-            {{ errors.sameAsPassword[0] }}
-          </div> -->
+
           <div
             id="lastnameError"
             class="form-text text-danger"
@@ -111,13 +115,13 @@
           >
             {{ v$.myProfile.repeatPassword.$errors[0].$message }}
           </div>
-
-
         </div>
 
-        <button type="submit" class="btn btn-secondary text-dark px-5 mt-5 btn-space">Valider</button>
+        <button type="submit" class="btn btn-secondary text-dark px-5 mt-4 btn-space">
+          Valider
+        </button>
         <router-link to="/client/user-wallet">
-          <button type="button" class="btn btn-outline-light px-5 mt-5">Annuler</button>
+          <button type="button" class="btn btn-outline-light px-5 mt-4">Annuler</button>
         </router-link>
       </form>
     </section>
@@ -126,15 +130,15 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import Spinner from '../../components/Spinner.vue'
+import Spinner from "../../components/Spinner.vue";
 import useVuelidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required, email, minLength, sameAs, alphaNum } from "@vuelidate/validators";
 
 export default {
   name: "UserForm",
   components: {
     Navigation,
-    Spinner
+    Spinner,
   },
   emits: ["edit-my-profile"],
   setup() {
@@ -143,8 +147,8 @@ export default {
     };
   },
   props: {
-    userInfos: { type: Object},
-     loading: { type: Boolean}
+    userInfos: { type: Object },
+    loading: { type: Boolean },
   },
   data() {
     return {
@@ -152,7 +156,7 @@ export default {
         lastname: "",
         firstname: "",
         email: "",
-        password: ""
+        password: "",
       },
 
       errors: [],
@@ -172,10 +176,10 @@ export default {
         lastname: { required, minLength: minLength(3) },
         firstname: { required, minLength: minLength(3) },
         email: { required, email },
-        password: {required},
+        password: { alphaNum },
         repeatPassword: {
-        sameAsPassword: sameAs('password')
-    }
+          sameAsPassword: sameAs(this.myProfile.password),
+        },
       },
     };
   },

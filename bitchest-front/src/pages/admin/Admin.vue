@@ -36,7 +36,7 @@ export default {
         .then((r) => {
           this.userList = r.data.userList;
           this.loading = false;
-
+    console.log(r)
         })
         .catch((error) => console.error(error));
     },

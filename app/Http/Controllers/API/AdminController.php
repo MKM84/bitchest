@@ -7,8 +7,10 @@ use App\Models\Cryptocurrency;
 use App\Models\Progression;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -17,40 +19,17 @@ class AdminController extends Controller
         $this->middleware('auth');
         $this->middleware('admin');
     }
-    // Get Cryptos
-    public function index()
-    {
-        $cryptosArray = array();
 
-        //Get all last current value of cryptos
-        $currencies = Progression::select(
-            'progressions.id',
-            'progress_value as current_value',
-            'cryptocurrency_id',
-            'cryptocurrencies.name',
-            'cryptocurrencies.current_value as initial_value',
-            'cryptocurrencies.id as id',
-            'cryptocurrencies.logo as logo',
-            'cryptocurrencies.name as name'
-        )
-            ->join('cryptocurrencies', 'progressions.cryptocurrency_id', '=', 'cryptocurrencies.id')
-            ->orderByDesc("progressions.id")
-            ->get()
-            ->unique('cryptocurrency_id');
 
-        $i = 0;
-        foreach ($currencies as $value) {
-            $cryptosArray[$i] = $value;
-            $i++;
-        }
-        return ['currencies' => array_reverse($cryptosArray)];
-    }
     // Get all users
     public function users()
     {
         //get all users (client and admin)
-        $users = array_reverse(User::all()->toArray());
-        return ['userList' => $users];
+        $connectedUser = Auth::user();
+        $users = array_reverse(User::all()->where('id', '!=', $connectedUser->id)->toArray());
+
+        return ['userList' =>  $users ];
+
     }
     // add user
     public function addUser(Request $request)

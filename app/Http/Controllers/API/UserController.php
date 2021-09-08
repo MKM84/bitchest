@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -35,34 +36,7 @@ class UserController extends Controller
             ->first();
         return $currentValueByCrypto;
     }
-    // Get Cryptos && actual vaule & user sold
-    public function index()
-    {
-        $cryptosArray = array();
 
-        $currencies = Progression::select(
-            'progressions.id',
-            'progress_value as current_value',
-            'cryptocurrency_id',
-            'cryptocurrencies.name',
-            'cryptocurrencies.current_value as initial_value',
-            'cryptocurrencies.id as id',
-            'cryptocurrencies.logo as logo',
-            'cryptocurrencies.name as name'
-        )
-            ->join('cryptocurrencies', 'progressions.cryptocurrency_id', '=', 'cryptocurrencies.id')
-            ->orderByDesc("progressions.id")
-            ->get()
-            ->unique('cryptocurrency_id');
-
-        $i = 0;
-        foreach ($currencies as $value) {
-            $cryptosArray[$i] = $value;
-            $i++;
-        }
-
-        return ['currencies' => array_reverse($cryptosArray)];
-    }
     // Get Wallets of one user who have connected
     public function userWallet()
     {
@@ -139,23 +113,22 @@ class UserController extends Controller
     {
         //Get id of User connection
         $user = User::find($id);
-        $user->update($request->all());
+
+        // $password = $request->password;
+        // $request->password = Hash::make($request->password);
+        // $user->update($request->all());
+
+        $user->update([
+            'firstname' => $request->input('firstname'),
+            'lastname' => $request->input('lastname'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password'))
+        ]);
 
         return response()->json(['done' => true]);
     }
     //
-    public function getCryptoEvolution($id)
-    {
-        //Get all date of current value changing of one crypto during 30 days
-        $dateCryptoEvolution = Progression::all()->sortByDesc("id")->where('cryptocurrency_id', $id)->pluck('progress_date')->toArray();
 
-        //Get all current value of one crypto during 30 days
-        $valueCryptoEvolution = Progression::all()->sortByDesc("id")->where('cryptocurrency_id', $id)->pluck('progress_value')->toArray();
-        //Get  Information of one Crypto
-        $crypto = Cryptocurrency::find($id);
-
-        return ['dateCryptoEvolution' => array_reverse($dateCryptoEvolution), 'valueCryptoEvolution' => array_reverse($valueCryptoEvolution), 'crypto' => $crypto];
-    }
     //Get All Transactions To sell by one user who have connected
     public function getCryptosToSell($crypto_id)
     {

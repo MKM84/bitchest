@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\API\AdminController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\CryptoController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,25 +34,23 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
     // Route::get('/', [AdminController::class, 'index']);
 
+
     Route::middleware(['auth', 'admin'])->group(function () {
-        Route::get('/admin', [AdminController::class, 'index']);
+        Route::get('/admin', [CryptoController::class, 'index']);
         Route::get('/admin/user-list', [AdminController::class, 'users']);
         Route::post('/admin/add-user', [AdminController::class, 'addUser']);
         Route::put('/admin/edit-user/{id}', [AdminController::class, 'editUser']);
         Route::delete('/admin/delete-user/{id}', [AdminController::class, 'deleteUser']);
-
     });
 
-
     Route::middleware(['auth', 'client'])->group(function () {
-        Route::get('/client', [UserController::class, 'index']);
+        Route::get('/client', [CryptoController::class, 'index']);
+        Route::get('/client/crypto-graph/{id}', [CryptoController::class, 'getCryptoEvolution']);
         Route::get('/client/user-wallet', [UserController::class, 'userWallet']);
         Route::get('/client/user-infos', [UserController::class, 'getUserInfos']);
         Route::put('/client/edit-user-infos/{id}', [UserController::class, 'EditUserInfos']);
-        Route::get('/client/crypto-graph/{id}', [UserController::class, 'getCryptoEvolution']);
         Route::get('/client/purchase-history', [UserController::class, 'getHistory']);
         Route::get('/client/user-sell-crypto/{id}', [UserController::class, 'getCryptosToSell']);
         Route::post('/client/add-transaction/', [UserController::class, 'addTransaction']);
         Route::patch('/client/sell-transaction/{id}', [UserController::class, 'sellTransaction']);
-
     });

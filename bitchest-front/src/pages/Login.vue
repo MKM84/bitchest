@@ -17,6 +17,7 @@
             aria-describedby="emailHelp"
             v-model="form.email"
             autofocus
+            autocomplete="off"
           />
           <div id="emailHelp" class="form-text text-danger" v-if="errors.email">
             {{ errors.email[0] }}
@@ -33,6 +34,7 @@
             class="form-control"
             id="exampleInputPassword1"
             v-model="form.password"
+            autocomplete="off"
           />
           <div id="emailHelp" class="form-text text-danger" v-if="errors.password">
             {{ errors.password[0] }}
