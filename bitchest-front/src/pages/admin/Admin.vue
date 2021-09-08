@@ -7,6 +7,7 @@
     @delete-user="deleteUser"
     :alerteContent="alerteContent"
     :showAlerte="showAlerte"
+    :loading="loading"
   />
 </template>
 
@@ -30,25 +31,32 @@ export default {
   },
   methods: {
     getAllUsers() {
+      this.loading = true;
       User.getAllUsers()
         .then((r) => {
           this.userList = r.data.userList;
+          this.loading = false;
+
         })
         .catch((error) => console.error(error));
     },
 
     getAllAdminCryptos() {
+      this.loading = true;
       User.getAllAdminCryptos()
         .then((r) => {
           this.cryptos = r.data.currencies;
+          this.loading = false;
         })
         .catch((error) => console.error(error));
     },
     newUser(user) {
+      this.loading = true;
       User.addUser(user)
         .then((r) => {
           if (r.done) {
             this.userList = [...this.userList, user];
+          this.loading = false;
           }
         })
         .then(() => {
@@ -61,6 +69,7 @@ export default {
         });
     },
     editUser(user) {
+      this.loading = true;
       User.editUser(user)
         .then((r) => {
           if (r.done) {
@@ -69,6 +78,7 @@ export default {
             EditedUser.firstname = user.firstname;
             EditedUser.email = user.email;
             EditedUser.status = user.status;
+          this.loading = false;
           }
         })
         .then(() => {
@@ -81,16 +91,19 @@ export default {
         });
     },
     deleteUser(id) {
+
       let user = this.userList.find((u) => u.id == id);
       if (
         window.confirm(
           `Êtes-vous sur de vouloir supprimmer ${user.firstname} ${user.lastname} ?`
         )
       ) {
+      this.loading = true;
         User.deleteUser(id)
           .then((r) => {
             if (r.done) {
               this.userList = this.userList.filter((u) => u.id != id);
+          this.loading = false;
             }
           })
           .then(() => {

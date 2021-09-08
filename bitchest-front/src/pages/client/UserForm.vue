@@ -69,7 +69,7 @@
             {{ v$.myProfile.email.$errors[0].$message }}
           </div>
 
-          <!-- Status  -->
+
         </div>
 
         <button type="submit" class="btn btn-secondary text-dark px-5 mt-5 btn-space">Valider</button>

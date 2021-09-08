@@ -2,10 +2,11 @@
   <div class="row col-12">
     <Navigation :admin="true" />
 
-    <section class="col ctn-content" v-if="user">
+    <section class="col ctn-content" >
 
+      <Spinner :loading="loading" />
 
-      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5">
+      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5" :v-if="user">
         <div class="mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-5 text-light">Nom </label>
@@ -121,11 +122,13 @@ import Navigation from "../../components/Navigation.vue";
 
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, numeric } from "@vuelidate/validators";
+import Spinner from "../../components/Spinner.vue";
 
 export default {
   name: "AdminUserForm",
   components: {
     Navigation,
+    Spinner,
   },
   emits:['new-user', 'edit-user'],
   setup() {
@@ -136,7 +139,9 @@ export default {
   props: {
       userList: {
           type: Array
-      }
+      },
+    loading: { type: Boolean },
+
   },
   data() {
     return {
