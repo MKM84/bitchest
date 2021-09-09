@@ -4,8 +4,11 @@
       <img src="../../public/img/bitchest_logo.png" alt="" width="180" />
     </div>
     <!-- admin  -->
-    <div v-if="admin" class=" mt-5">
-              <router-link to="/admin/cryptos" class="nav-link text-light fs-6 px-4">
+    <div v-if="admin" class="mt-5">
+      <div class="mt-5 px-4 mb-5">
+        <h5 v-if="adminInfos" class="text-light">Bonjour {{ adminInfos.firstname }},</h5>
+      </div>
+      <router-link to="/admin/cryptos" class="nav-link text-light fs-6 px-4">
         <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
       </router-link>
       <router-link to="/admin/user-list" class="nav-link text-light fs-6 px-4">
@@ -16,13 +19,33 @@
         <i class="fas fa-plus-circle"></i> Ajouter un utilisateur
       </router-link>
 
-      <a class="nav-link nav-link text-light fs-6 px-4  pt-4" href="#" @click.prevent="logout"
+      <router-link to="/admin/admin-form" class="nav-link text-light fs-6 px-4">
+        <i class="fas fa-user-circle 3x"></i> Mon compte
+      </router-link>
+
+      <a
+        class="nav-link nav-link text-light fs-6 px-4 pt-4"
+        href="#"
+        @click.prevent="logout"
         ><i class="fas fa-power-off"></i> Logout</a
       >
     </div>
 
     <!-- client  -->
     <div v-else class="mt-5">
+      <div class="mt-5 px-4 mb-5">
+        <h5 v-if="userInfos.firstname" class="text-light">
+          Bonjour {{ userInfos.firstname }},
+        </h5>
+        <p v-if="userInfos.user_solde" class="mb-1 text-light">Votre solde est de :</p>
+        <p
+          v-if="userInfos.user_solde"
+          :class="`mb-0 ${userInfos.user_solde > 0 ? 'color-success' : 'text-danger'}`"
+        >
+          <strong>{{ userInfos.user_solde }} €</strong>
+        </p>
+      </div>
+
       <router-link to="/client/cryptos" class="nav-link text-light fs-6 px-4">
         <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
       </router-link>
@@ -37,20 +60,12 @@
       <router-link to="/client/user-form" class="nav-link nav-link text-light fs-6 px-4">
         <i class="fas fa-user-circle 3x"></i> Mon compte
       </router-link>
-                    <a class="nav-link nav-link text-light fs-6 px-4  pt-4" href="#" @click.prevent="logout"
+      <a
+        class="nav-link nav-link text-light fs-6 px-4 pt-4"
+        href="#"
+        @click.prevent="logout"
         ><i class="fas fa-power-off"></i> Me déconnecter</a
       >
-
-
-          <div  class="mt-5 px-4 ">
-              <h5 v-if="userInfos.firstname" class="text-light">Bonjour {{ userInfos.firstname }},</h5>
-            <p v-if="userInfos.user_solde" class="mb-1 text-light">Votre solde est de :</p>
-            <p v-if="userInfos.user_solde" :class="`mb-0 ${userInfos.user_solde > 0 ? 'color-success' : 'text-danger'}`">
-              <strong>{{ userInfos.user_solde }} €</strong>
-            </p>
-          </div>
-
-
     </div>
   </aside>
 </template>
@@ -62,7 +77,8 @@ export default {
   name: "Navigation",
   props: {
     admin: { type: Boolean },
-    userInfos: { type: Object}
+    userInfos: { type: Object },
+    adminInfos: { type: Object },
   },
   methods: {
     logout() {

@@ -5,7 +5,7 @@
     <section class="col ctn-content">
       <Spinner :loading="loading" />
 
-      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5" v-if="user">
+      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5" v-if="myProfile">
         <div class="mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-5 text-light">Nom </label>
@@ -15,15 +15,15 @@
             class="form-control"
             id="lastname"
             aria-describedby="lastname"
-            v-model="user.lastname"
+            v-model="myProfile.lastname"
           />
 
           <div
             id="lastnameError"
             class="form-text text-danger"
-            v-if="v$.user.lastname.$error"
+            v-if="v$.myProfile.lastname.$error"
           >
-            {{ v$.user.lastname.$errors[0].$message }}
+            {{ v$.myProfile.lastname.$errors[0].$message }}
           </div>
           <!-- Firstname -->
           <label for="firstname" class="form-label fs-6 mt-5 text-light">Prénom</label>
@@ -33,15 +33,15 @@
             class="form-control"
             id="firstname"
             aria-describedby="firstname"
-            v-model="user.firstname"
+            v-model="myProfile.firstname"
           />
 
           <div
             id="lastnameError"
             class="form-text text-danger"
-            v-if="v$.user.firstname.$error"
+            v-if="v$.myProfile.firstname.$error"
           >
-            {{ v$.user.firstname.$errors[0].$message }}
+            {{ v$.myProfile.firstname.$errors[0].$message }}
           </div>
 
           <!-- email  -->
@@ -52,14 +52,14 @@
             class="form-control"
             id="email"
             aria-describedby="email"
-            v-model="user.email"
+            v-model="myProfile.email"
           />
           <div
             id="lastnameError"
             class="form-text text-danger"
-            v-if="v$.user.email.$error"
+            v-if="v$.myProfile.email.$error"
           >
-            {{ v$.user.email.$errors[0].$message }}
+            {{ v$.myProfile.email.$errors[0].$message }}
           </div>
 
           <!-- Status  -->
@@ -70,7 +70,7 @@
               name="client"
               id="client-radio"
               value="1"
-              v-model="user.status"
+              v-model="myProfile.status"
             />
             <label class="form-check-label text-light" for="client-radio"> Client </label>
           </div>
@@ -81,7 +81,7 @@
               name="admin"
               id="admin-radio"
               value="0"
-              v-model="user.status"
+              v-model="myProfile.status"
             />
             <label class="form-check-label text-light" for="admin-radio"> Admin </label>
           </div>
@@ -89,9 +89,9 @@
           <div
             id="lastnameError"
             class="form-text text-danger"
-            v-if="v$.user.status.$error"
+            v-if="v$.myProfile.status.$error"
           >
-            {{ v$.user.status.$errors[0].$message }}
+            {{ v$.myProfile.status.$errors[0].$message }}
           </div>
         </div>
 
@@ -114,21 +114,18 @@ import { required, email, minLength, numeric } from "@vuelidate/validators";
 import Spinner from "../../components/Spinner.vue";
 
 export default {
-  name: "AdminUserForm",
+  name: "AdminEditMyProfile",
   components: {
     Navigation,
     Spinner,
   },
-  emits: ["new-user", "edit-user"],
+  emits: ["admin-edit-my-profile"],
   setup() {
     return {
       v$: useVuelidate(),
     };
   },
   props: {
-    userList: {
-      type: Array,
-    },
     loading: { type: Boolean },
     adminInfos: {
       type: Object,
@@ -136,35 +133,26 @@ export default {
   },
   data() {
     return {
-      user: {
+      myProfile: {
         lastname: "",
         firstname: "",
         email: "",
         status: null,
       },
 
-      errors: [],
+
     };
   },
-
-  beforeUpdate() {
-    const id = this.$route.params.id;
-    if (id > 0) {
-      const user = this.userList.find((u) => u.id == id);
-      this.user = user;
-    }
-  },
   mounted() {
-    const id = this.$route.params.id;
-    if (id > 0) {
-      const user = this.userList.find((u) => u.id == id);
-      this.user = user;
-    }
+this.myProfile = this.adminInfos;
+  },
+    beforeUpdate() {
+this.myProfile = this.adminInfos;
   },
 
   validations() {
     return {
-      user: {
+      myProfile: {
         lastname: { required, minLength: minLength(3) },
         firstname: { required, minLength: minLength(3) },
         email: { required, email },
@@ -178,15 +166,8 @@ export default {
       if (this.v$.$error) {
         return false;
       }
-      const id = this.$route.params.id;
-
-      if (id == 0) {
-        this.$emit("new-user", this.user);
-      } else {
-        this.$emit("edit-user", this.user);
-      }
-
-      this.user = {};
+        this.$emit("admin-edit-my-profile", this.myProfile);
+      this.myProfile = {};
       this.$router.push("/admin/user-list");
     },
   },

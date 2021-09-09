@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="true" />
+    <Navigation :admin="true" :adminInfos="adminInfos"/>
 
     <section class="col ctn-content">
       <Spinner :loading="loading" />
@@ -38,7 +38,10 @@ export default {
   },
   props: {
     cryptos: { type: Array},
-       loading: { type: Boolean },
+    loading: { type: Boolean },
+    adminInfos: {
+      type: Object,
+    },
   },
 
 };

@@ -38,6 +38,12 @@ export default {
     deleteUser(id) {
         return Api.delete(`admin/delete-user/${id}`).then((r) => sendActionResult(r));
     },
+    getAdminInfos() {
+        return Api.get('admin/admin-infos/');
+    },
+    AdminEditMyProfile(admin) {
+        return Api.put(`admin/edit-user/${admin.id}`, admin).then((r) => sendActionResult(r));
+    },
     // get cryptos list for client
     getAllUserCryptos() {
         return Api.get("/client");

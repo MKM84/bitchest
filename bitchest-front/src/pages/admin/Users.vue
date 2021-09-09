@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12">
-    <Navigation :admin="true" />
+    <Navigation :admin="true" :adminInfos="adminInfos"/>
 
     <section class="col ctn-content">
       <Spinner :loading="loading" />
@@ -76,10 +76,12 @@ export default {
   },
   props: {
     userList: { type: Array },
-    userSolde: { type: Number },
     showAlerte: { type: Boolean },
     alerteContent: { type: String },
     loading: { type: Boolean },
+    adminInfos: {
+      type: Object,
+    },
 
   },
   emits: ["delete-user"],

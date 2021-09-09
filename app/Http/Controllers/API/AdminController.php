@@ -68,4 +68,9 @@ class AdminController extends Controller
         $user->delete();
         return response()->json(['done' => true]);
     }
+        // Return informations of User
+        public function getAdminInfos()
+        {
+            return ['adminInfos' => Auth::user()];
+        }
 }

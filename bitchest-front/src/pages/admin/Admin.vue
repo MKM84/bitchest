@@ -8,6 +8,8 @@
     :alerteContent="alerteContent"
     :showAlerte="showAlerte"
     :loading="loading"
+    :adminInfos="adminInfos"
+    @admin-edit-my-profile="AdminEditMyProfile"
   />
 </template>
 
@@ -19,6 +21,7 @@ export default {
   mounted() {
     this.getAllUsers();
     this.getAllAdminCryptos();
+    this.getAdminInfos();
   },
   data() {
     return {
@@ -27,6 +30,7 @@ export default {
       alerteContent: "",
       showAlerte: false,
       loading: true,
+      adminInfos: {}
     };
   },
   methods: {
@@ -91,7 +95,6 @@ export default {
         });
     },
     deleteUser(id) {
-
       let user = this.userList.find((u) => u.id == id);
       if (
         window.confirm(
@@ -112,6 +115,32 @@ export default {
           })
           .catch((error) => console.error(error));
       }
+    },
+    getAdminInfos() {
+              User.getAdminInfos()
+        .then((r) => {
+          this.adminInfos = r.data.adminInfos;
+          console.log(r);
+        })
+        .catch((error) => console.error(error));
+    },
+    AdminEditMyProfile(admin) {
+      this.loading = true;
+      User.AdminEditMyProfile(admin)
+        .then((r) => {
+          if (r.done) {
+            this.getAdminInfos()
+          this.loading = false;
+          }
+        })
+        .then(() => {
+          this.activeAlerte("Vos informations ont été modifiées avec succes !");
+          this.hideAlerte();
+        })
+        .then(this.getAllUsers())
+        .catch((error) => {
+          console.error(error);
+        });
     },
     // hide alerte after 9 sec
     hideAlerte() {

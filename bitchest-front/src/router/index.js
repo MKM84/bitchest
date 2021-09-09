@@ -11,6 +11,7 @@ import Admin from "../pages/admin/Admin.vue"
 import AdminAllCryptos from "../pages/admin/AdminAllCryptos.vue";
 import Users from "../pages/admin/Users.vue";
 import AdminUserForm from "../pages/admin/AdminUserForm.vue";
+import AdminEditMyProfile from "../pages/admin/AdminEditMyProfile.vue";
 
 // cliet components
 import Client from "../pages/client/Client.vue"
@@ -75,6 +76,16 @@ const routes = [{
                 path: 'user-form/:id',
                 name: 'AdminUserForm',
                 component: AdminUserForm,
+                meta: {
+                    authOnly: true,
+                    adminOnly: true
+
+                }
+            },
+            {
+                path: 'admin-form',
+                name: 'AdminEditMyProfile',
+                component: AdminEditMyProfile,
                 meta: {
                     authOnly: true,
                     adminOnly: true
