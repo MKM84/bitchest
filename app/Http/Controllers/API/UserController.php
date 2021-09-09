@@ -252,12 +252,41 @@ class UserController extends Controller
         ]);
     }
     public function sellAllByCrypto($id)
-     {
-
+    {
+        //Get id of User connection
+        $user_id = Auth::user()->id;
+       
+        // Get transactions by users  by crypto and not selling
+        $TransactionsToSell= DB::table('transactions')
+        ->select("transactions.id as id_transaction")
+        ->where('transactions.state', 0)
+        ->where('user_id', $user_id)
+        ->where('cryptocurrency_id', $id)
+        ->get();
+        foreach($TransactionsToSell as $TransactionToSell)
+        {
+            // Get one Transaction by id
+            $transaction = Transaction::find($TransactionToSell->id_transaction);
+             // Get info of One User
+            $user = User::find($user_id);
+             //Update one transaction to change state and completely informations.
+             Transaction::where('id',  $TransactionToSell->id_transaction)->update([
+                'state' => 1,
+                'selling_date' => now(),
+                'selling_price' => $this->getCurrentValueByCrypto($transaction->cryptocurrency_id)->progress_value,
+                'sum_selling' => $this->getCurrentValueByCrypto($transaction->cryptocurrency_id)->progress_value * $transaction->quantity,
+                'balance' => ($this->getCurrentValueByCrypto($transaction->cryptocurrency_id)->progress_value * $transaction->quantity) - $transaction->sum_purchase,
+            ]);
+            //Update user_solde where user selling it transaction
+            $userSolde = ($user->user_solde) + $transaction->sum_purchase;
+            //Update user_solde to table users
+            User::where('id', $user_id)
+                ->update(['user_solde' => $userSolde]);
+        }
         return response()->json([
-            'done' => true,
-            'id' => $id
-        ]);
+            'done' => true
+        ]);   
+     
 
-     }
+    }
 }
