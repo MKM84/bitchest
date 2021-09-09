@@ -17,7 +17,7 @@ class TransactionsTableSeeder extends Seeder
     public function run()
     {
         // Generate 100 transactions
-        \App\Models\Transaction::factory(200)->create();
+        \App\Models\Transaction::factory(400)->create();
 
         // Modify the faker data :
         // ---------------------------

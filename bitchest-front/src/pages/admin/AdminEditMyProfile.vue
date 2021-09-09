@@ -8,7 +8,7 @@
       <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5" v-if="myProfile">
         <div class="mb-4">
           <!-- Lastname  -->
-          <label for="lastname" class="form-label fs-6 mt-5 text-light">Nom </label>
+          <label for="lastname" class="form-label fs-6 mt-4 text-light">Nom </label>
           <input
             name="lastname"
             type="text"
@@ -26,7 +26,7 @@
             {{ v$.myProfile.lastname.$errors[0].$message }}
           </div>
           <!-- Firstname -->
-          <label for="firstname" class="form-label fs-6 mt-5 text-light">Prénom</label>
+          <label for="firstname" class="form-label fs-6 mt-4 text-light">Prénom</label>
           <input
             name="firstname"
             type="text"
@@ -45,7 +45,7 @@
           </div>
 
           <!-- email  -->
-          <label for="email" class="form-label fs-6 mt-5 text-light">Email</label>
+          <label for="email" class="form-label fs-6 mt-4 text-light">Email</label>
           <input
             name="email"
             type="email"

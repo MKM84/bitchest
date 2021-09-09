@@ -5,6 +5,7 @@
     </div>
 
     <h1 class="text-center text-light display-1"><strong>404</strong></h1>
+    <p class="text-center text-light">Page non trouvée !</p>
   </div>
 </template>
 
@@ -16,7 +17,7 @@ export default {
 </script>
 <style scoped>
 .not-found {
-  background-color: #0d6efd;
+  background-color: #2c3034;
   display: flex;
   flex-direction: column;
   justify-content: center;

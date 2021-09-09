@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style>
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,300;1,500;1,700&display=swap');
 :root {
     --bs-primary-rgb: #375675 !important;
 }
@@ -78,7 +78,7 @@ export default {
         border-color: #02b911 !important;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 background-color: #2c3034 !important;
