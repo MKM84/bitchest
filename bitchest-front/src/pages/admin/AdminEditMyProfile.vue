@@ -63,6 +63,50 @@
           </div>
 
           <!-- Status  -->
+
+
+        <!-- password  -->
+
+           <label for="password" class="form-label fs-6 mt-4 text-light"
+            >Nouveau mot de passe</label
+          >
+          <input
+            name="password"
+            type="password"
+            class="form-control"
+            id="password"
+            aria-describedby="password"
+            v-model="myProfile.password"
+          />
+
+          <div
+            id="passwordError"
+            class="form-text text-danger"
+            v-if="v$.myProfile.password.$error"
+          >
+            {{ v$.myProfile.password.$errors[0].$message }}
+          </div>
+
+          <label for="repeatPassword" class="form-label fs-6 mt-4 text-light"
+            >Confirmer le mot passe</label
+          >
+          <input
+            name="repeatPassword"
+            type="password"
+            class="form-control"
+            id="repeatPassword"
+            aria-describedby="repeatPassword"
+            v-model="myProfile.repeatPassword"
+          />
+
+          <div
+            id="lastnameError"
+            class="form-text text-danger"
+            v-if="v$.myProfile.repeatPassword.$error"
+          >
+            {{ v$.myProfile.repeatPassword.$errors[0].$message }}
+          </div>
+
           <div class="form-check mt-3">
             <input
               class="form-check-input"
@@ -95,6 +139,8 @@
           </div>
         </div>
 
+
+
         <button type="submit" class="btn btn-secondary text-dark px-5 mt-5 btn-space">
           Valider
         </button>
@@ -110,7 +156,7 @@
 import Navigation from "../../components/Navigation.vue";
 
 import useVuelidate from "@vuelidate/core";
-import { required, email, minLength, numeric } from "@vuelidate/validators";
+import { required, email, minLength, sameAs, alphaNum } from "@vuelidate/validators";
 import Spinner from "../../components/Spinner.vue";
 
 export default {
@@ -137,7 +183,8 @@ export default {
         lastname: "",
         firstname: "",
         email: "",
-        status: null,
+        password: "",
+        status : ""
       },
 
 
@@ -156,7 +203,11 @@ this.myProfile = this.adminInfos;
         lastname: { required, minLength: minLength(3) },
         firstname: { required, minLength: minLength(3) },
         email: { required, email },
-        status: { required, numeric },
+        password: { alphaNum },
+        repeatPassword: {
+          sameAsPassword: sameAs(this.myProfile.password),
+        },
+        status : {required},
       },
     };
   },
