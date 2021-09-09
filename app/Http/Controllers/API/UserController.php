@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -111,20 +112,41 @@ class UserController extends Controller
     //Update user Info
     public function EditUserInfos($id, Request $request)
     {
+        // validator request informations user
+        $validator_user = Validator::make($request->all(), [
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'email' => 'required|string|email'
+        ]);
+        // validator request for password user
+        $validator_user_password = Validator::make($request->all(), [
+            'password' => 'required',
+            'repeatPassword' => 'required|same:password'
+        ]);
+        if($validator_user->fails())
+        {
+            return response()->json(['done' => false]);
+        }
         //Get id of User connection
         $user = User::find($id);
-
-        // $password = $request->password;
-        // $request->password = Hash::make($request->password);
-        // $user->update($request->all());
-
-        $user->update([
+        if($validator_user_password->fails())
+        {
+            //update informations of user
+            $user->update([
+            'firstname' => $request->input('firstname'),
+            'lastname' => $request->input('lastname'),
+            'email' => $request->input('email')
+        ]);
+        }
+        else{
+            //update informations and password of user
+            $user->update([
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password'))
-        ]);
-
+            ]);
+        }
         return response()->json(['done' => true]);
     }
     //
@@ -163,6 +185,9 @@ class UserController extends Controller
     }
     public function addTransaction(Request $request)
     {
+        $request->validate([
+            'quantity' => 'required'
+        ]);
         //Get id of User connection
         $user_id = Auth::user()->id;
         // Get info of One User

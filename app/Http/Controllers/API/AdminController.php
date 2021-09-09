@@ -34,6 +34,13 @@ class AdminController extends Controller
     // add user
     public function addUser(Request $request)
     {
+        // Validate format data request
+        $request->validate([
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'email' => 'required|email|string|unique:users,email',
+            'status' => 'required'
+        ]);
         $user = new User([
             'lastname' => $request->input('lastname'),
             'firstname' => $request->input('firstname'),
@@ -53,6 +60,13 @@ class AdminController extends Controller
     // Edit user
     public function editUser($id, Request $request)
     {
+        //Validate format request
+        $request->validate([
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'email' => 'required|email|string',
+            'status' => 'required'
+        ]);
         // Get one user by $id
         $user = User::find($id);
         //Update user to database
