@@ -13,6 +13,7 @@
     :alerteContent="alerteContent"
     :showAlerte="showAlerte"
     :loading="loading"
+    @sell-all-by-crypto="sellAllByCrypto"
   />
 </template>
 
@@ -156,6 +157,32 @@ export default {
               this.loading = false;
           console.log(r);
 
+            }
+          })
+          .then(() => {
+            this.activeAlerte("Votre vente a bien été effectuée !");
+            this.hideAlerte();
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    },
+    sellAllByCrypto(id) {
+      if (window.confirm(" Êtes-vous sur de vouloir tout vendre ?")) {
+        this.loading = true;
+        console.log(id)
+        User.sellAllByCrypto(id)
+          .then((r) => {
+            if (r.done) {
+              this.$router.push("/client/user-wallet");
+              this.getUserInfos();
+              this.getUserWallet();
+              this.getUserHistory();
+              this.getCryptoToSell();
+              this.getAllUserCryptos();
+              this.loading = false;
+          console.log(r);
             }
           })
           .then(() => {

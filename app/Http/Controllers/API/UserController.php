@@ -162,6 +162,7 @@ class UserController extends Controller
             ->join('users', 'transactions.user_id', '=', 'users.id')
             ->select(
                 "cryptocurrencies.name as crypto_name",
+                "cryptocurrencies.id as crypto_id",
                 "state",
                 "quantity",
                 DB::raw("DATE_FORMAT(purchase_date, '%d/%m/%Y %H:%i:%s') as purchase_date"),
@@ -250,4 +251,13 @@ class UserController extends Controller
             'done' => true
         ]);
     }
+    public function sellAllByCrypto($id)
+     {
+
+        return response()->json([
+            'done' => true,
+            'id' => $id
+        ]);
+
+     }
 }

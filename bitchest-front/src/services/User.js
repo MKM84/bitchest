@@ -42,7 +42,7 @@ export default {
         return Api.get('admin/admin-infos/');
     },
     AdminEditMyProfile(admin) {
-        return Api.put(`admin/edit-user/${admin.id}`, admin).then((r) => sendActionResult(r));
+        return Api.put(`admin/edit-admin/${admin.id}`, admin).then((r) => sendActionResult(r));
     },
     // get cryptos list for client
     getAllUserCryptos() {
@@ -80,6 +80,9 @@ export default {
     sellCryptos(id) {
         return Api.patch(`/client/sell-transaction/${id}`).then((r) => sendActionResult(r));
 
+    },
+    sellAllByCrypto(id){
+        return Api.get(`/client/sell-all/${id}`).then((r) => sendActionResult(r));
     }
 };
 

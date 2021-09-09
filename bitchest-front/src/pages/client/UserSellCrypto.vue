@@ -2,9 +2,13 @@
   <div class="row col-12">
     <Navigation :admin="false"  :userInfos="userInfos" />
     <section class="col ctn-content">
+
         <Spinner :loading="loading" />
       <div v-if="cryptosToSell && loading == false">
-        <h3 class="text-center mt-4 text-light">
+        <div class="text-end col-11 mt-5">
+            <button v-if="cryptosToSell" @click="$emit('sell-all-by-crypto', idCrypto)" class="btn btn-secondary text-dark">Tout vendre</button>
+        </div>
+        <h3 class="text-center mt-0 text-light">
           <div class="ml-3 mb-2">
             <img :src="`/img/${cryptosToSell.logo}`" alt="" width="30" />
           </div>
@@ -80,7 +84,7 @@ export default {
     userInfos: { type: Object },
     loading: { type: Boolean}
   },
-  $emits: ["get-cryptos-to-sell", "sell-cryptos"],
+  $emits: ["get-cryptos-to-sell", "sell-cryptos", "sell-all-by-crypto"],
   mounted() {
     const crypto_id = this.$route.params.id;
     this.$emit("get-cryptos-to-sell", crypto_id);
@@ -89,6 +93,7 @@ export default {
   data() {
     return {
       crypto: {},
+      idCrypto: this.$route.params.id
     };
   },
   methods: {},
