@@ -40,7 +40,6 @@ export default {
         .then((r) => {
           this.userList = r.data.userList;
           this.loading = false;
-    console.log(r)
         })
         .catch((error) => console.error(error));
     },
@@ -96,9 +95,17 @@ export default {
     },
     deleteUser(id) {
       let user = this.userList.find((u) => u.id == id);
+    let clientSolde = user.user_solde;
+    let clientHasSold;
+    if (clientSolde > 0) {
+         clientHasSold = "Il possède toujours de la cryptomonnaies dans son portefeuille.";
+    }
+    else {
+        clientHasSold = "Il n'a plus de cryptomonaies dans son portefeuille.";
+    }
       if (
         window.confirm(
-          `Êtes-vous sur de vouloir supprimmer ${user.firstname} ${user.lastname} ?`
+          `Êtes-vous sur de vouloir supprimmer ${user.firstname} ${user.lastname} ?  ${clientHasSold}`
         )
       ) {
       this.loading = true;
@@ -120,7 +127,6 @@ export default {
               User.getAdminInfos()
         .then((r) => {
           this.adminInfos = r.data.adminInfos;
-          console.log(r);
         })
         .catch((error) => console.error(error));
     },
