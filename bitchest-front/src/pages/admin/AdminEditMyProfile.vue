@@ -7,7 +7,7 @@
     <section class="col ctn-content">
       <Spinner :loading="loading" />
 
-      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5" v-if="myProfile">
+      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-4 mb-3" v-if="myProfile">
         <div class="mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-4 text-light">Nom </label>

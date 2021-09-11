@@ -24,15 +24,15 @@
       </router-link>
 
       <a
-        class="nav-link nav-link text-light fs-6 px-4 pt-4"
+        class="nav-link nav-link text-info fs-6 px-4 pt-4"
         href="#"
         @click.prevent="logout"
-        ><i class="fas fa-power-off"></i> Logout</a
+        ><i class="fas fa-power-off"></i> Me déconnecter</a
       >
     </div>
 
     <!-- client  -->
-    <div v-else class="mt-5">
+    <div v-else class="mt-5 ">
       <router-link to="/client/cryptos" class="nav-link text-light fs-6 px-4">
         <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
       </router-link>
@@ -47,12 +47,7 @@
       <router-link to="/client/user-form" class="nav-link nav-link text-light fs-6 px-4">
         <i class="fas fa-user-circle 3x"></i> Mon compte
       </router-link>
-      <a
-        class="nav-link nav-link text-light fs-6 px-4 pt-4"
-        href="#"
-        @click.prevent="logout"
-        ><i class="fas fa-power-off"></i> Me déconnecter</a
-      >
+
       <div class="mt-5 px-4 mb-5">
         <h5 v-if="userInfos.firstname" class="text-light">
           Bonjour {{ userInfos.firstname }},
@@ -65,6 +60,13 @@
           <strong>{{ userInfos.user_solde }} €</strong>
         </p>
       </div>
+
+            <a
+        class="nav-link nav-link text-info fs-6 px-4 pt-4"
+        href="#"
+        @click.prevent="logout"
+        ><i class="fas fa-power-off"></i> Me déconnecter</a
+      >
     </div>
   </aside>
 </template>

@@ -1,14 +1,23 @@
 <template>
   <div class="row col-12 m-0">
-    <Nav-mobile :admin="false" :userInfos="userInfos"/>
+    <Nav-mobile :admin="false" :userInfos="userInfos" />
     <Navigation :admin="false" :userInfos="userInfos" />
+    <Modal
+      v-if="showModal"
+      :showModal="activModal"
+      :modalContent="modalContent"
+      :positivAction="positivAction"
+      :NegativAction="NegativAction"
+    />
     <section class="col ctn-content">
       <Spinner :loading="loading" />
       <div v-if="cryptosToSell && loading == false">
         <div class="text-end col-11 mt-5">
           <button
             v-if="cryptosToSell"
-            @click="$emit('sell-all-by-crypto', idCrypto)"
+            @click="
+              activModal2(`Êtes-vous sûr de vouloir effectuer cette vente ?`, idCrypto)
+            "
             class="btn btn-secondary text-dark"
           >
             Tout vendre
@@ -61,7 +70,12 @@
               </td>
               <td class="align-middle">
                 <button
-                  @click="$emit('sell-cryptos', crypto.id_transaction)"
+                  @click="
+                    activModal(
+                      `Êtes-vous sûr de vouloir effectuer cette vente ?`,
+                      crypto.id_transaction
+                    )
+                  "
                   type="button"
                   class="btn btn-primary text-info"
                 >
@@ -78,15 +92,16 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import NavMobile from "../../components/NavMobile.vue"
+import NavMobile from "../../components/NavMobile.vue";
 import Spinner from "../../components/Spinner.vue";
-
+import Modal from "../../components/Modal.vue";
 export default {
   name: "UserSellCrypto",
   components: {
     Navigation,
     NavMobile,
     Spinner,
+    Modal,
   },
   props: {
     cryptosToSell: {},
@@ -103,7 +118,29 @@ export default {
     return {
       crypto: {},
       idCrypto: this.$route.params.id,
+      showModal: false,
+      modalContent: "",
+      positivAction: null,
+      NegativAction: () => (this.showModal = false),
     };
+  },
+  methods: {
+    activModal(t, crypto_id) {
+      this.showModal = true;
+      this.modalContent = t;
+      this.positivAction = async () => {
+        await this.$emit("sell-cryptos", crypto_id);
+        return (this.showModal = false);
+      };
+    },
+    activModal2(t, crypto_id) {
+      this.showModal = true;
+      this.modalContent = t;
+      this.positivAction = async () => {
+        await this.$emit("sell-all-by-crypto", crypto_id);
+        return (this.showModal = false);
+      };
+    },
   },
 };
 </script>

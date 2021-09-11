@@ -130,54 +130,50 @@ export default {
     },
     // sell a crypto
     sellCryptos(id) {
-      if (window.confirm(" Êtes-vous sur de vouloir effectuer cette vente ?")) {
-        this.loading = true;
-        User.sellCryptos(id)
-          .then((r) => {
-            if (r.done) {
-              this.$router.push("/client/user-wallet");
-              this.getUserInfos();
-              this.getUserWallet();
-              this.getUserHistory();
-              this.getCryptoToSell();
-              this.getAllUserCryptos();
-              this.loading = false;
-            }
-          })
-          .then(() => {
-            this.activeAlerte("Votre vente a bien été effectuée !");
-            this.hideAlerte();
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
+      this.loading = true;
+      User.sellCryptos(id)
+        .then((r) => {
+          if (r.done) {
+            this.$router.push("/client/user-wallet");
+            this.getUserInfos();
+            this.getUserWallet();
+            this.getUserHistory();
+            this.getCryptoToSell();
+            this.getAllUserCryptos();
+            this.loading = false;
+          }
+        })
+        .then(() => {
+          this.activeAlerte("Votre vente a bien été effectuée !");
+          this.hideAlerte();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     // sell all cryptos
     sellAllByCrypto(id) {
-      if (window.confirm(" Êtes-vous sur de vouloir tout vendre ?")) {
-        this.loading = true;
-        console.log(id);
-        User.sellAllByCrypto(id)
-          .then((r) => {
-            if (r.done) {
-              this.$router.push("/client/user-wallet");
-              this.getUserInfos();
-              this.getUserWallet();
-              this.getUserHistory();
-              this.getCryptoToSell();
-              this.getAllUserCryptos();
-              this.loading = false;
-            }
-          })
-          .then(() => {
-            this.activeAlerte("Votre vente a bien été effectuée !");
-            this.hideAlerte();
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
+      this.loading = true;
+      console.log(id);
+      User.sellAllByCrypto(id)
+        .then((r) => {
+          if (r.done) {
+            this.$router.push("/client/user-wallet");
+            this.getUserInfos();
+            this.getUserWallet();
+            this.getUserHistory();
+            this.getCryptoToSell();
+            this.getAllUserCryptos();
+            this.loading = false;
+          }
+        })
+        .then(() => {
+          this.activeAlerte("Votre vente a bien été effectuée !");
+          this.hideAlerte();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     // hide alerte after 9 sec
     hideAlerte() {

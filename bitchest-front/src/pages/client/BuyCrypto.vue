@@ -1,10 +1,16 @@
 <template>
   <div class="row col-12 m-0">
-    <Nav-mobile :admin="false" :userInfos="userInfos"/>
+    <Nav-mobile :admin="false" :userInfos="userInfos" />
     <Navigation :admin="false" :userInfos="userInfos" />
-
+    <Modal
+      v-if="showModal"
+      :showModal="activModal"
+      :modalContent="modalContent"
+      :positivAction="positivAction"
+      :NegativAction="NegativAction"
+    />
     <section class="col ctn-content">
-    <Spinner :loading="loading" />
+      <Spinner :loading="loading" />
       <h3 class="text-center mt-5 text-light" v-if="crypto && loading == false">
         <div class="ml-3 mb-2">
           <img :src="`/img/${crypto.logo}`" alt="" width="30" />
@@ -16,9 +22,12 @@
         Cours actuel : {{ crypto.current_value }}
       </p>
 
-      <form @submit.prevent="onSubmit" class="offset-md-4 col-4 mt-5">
+      <form
+        @submit.prevent="activModal('Êtes-vous sûr de vouloir effectuer cet achat ?')"
+        class="offset-md-4 col-4 mt-5"
+      >
         <div class="mb-4 text-center">
-          <label for="quantity" class="form-label fs-6 mt-3 text-light ">Quantité </label>
+          <label for="quantity" class="form-label fs-6 mt-3 text-light">Quantité </label>
           <input
             name="quantity"
             type="text"
@@ -40,15 +49,19 @@
 
           <div class="form-label fs-6 mt-4 text-light text-center">
             <p>Total à payer :</p>
-            <p class="color-success"> <strong>{{ this.total }} €</strong></p>
+            <p class="color-success">
+              <strong>{{ this.total }} €</strong>
+            </p>
           </div>
         </div>
 
         <div class="text-center mt-5">
-            <button type="submit" class="btn btn-secondary text-dark  px-4 mt-3 btn-space">Acheter</button>
-            <router-link to="/client/user-wallet">
-              <button type="button" class="btn btn-outline-light px-4 mt-3">Annuler</button>
-            </router-link>
+          <button type="submit" class="btn btn-secondary text-dark px-4 mt-3 btn-space">
+            Acheter
+          </button>
+          <router-link to="/client/user-wallet">
+            <button type="button" class="btn btn-outline-light px-4 mt-3">Annuler</button>
+          </router-link>
         </div>
       </form>
     </section>
@@ -57,18 +70,20 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import NavMobile from "../../components/NavMobile.vue"
+import NavMobile from "../../components/NavMobile.vue";
+import Modal from "../../components/Modal.vue";
 import useVuelidate from "@vuelidate/core";
 import { required, minValue, maxValue, numeric, integer } from "@vuelidate/validators";
 
-import Spinner from '../../components/Spinner.vue'
+import Spinner from "../../components/Spinner.vue";
 
 export default {
   name: "BuyCrypto",
   components: {
     Navigation,
     NavMobile,
-    Spinner
+    Spinner,
+    Modal,
   },
   emits: ["buy-new-crypto"],
   setup() {
@@ -79,7 +94,7 @@ export default {
   props: {
     userInfos: { type: Object },
     cryptos: { type: Array },
-    loading: { type: Boolean}
+    loading: { type: Boolean },
   },
   data() {
     return {
@@ -89,6 +104,10 @@ export default {
         cryptocurrency_id: 0,
         quantity: 0,
       },
+      showModal: false,
+      modalContent: "",
+      positivAction: null,
+      NegativAction: () => (this.showModal = false),
     };
   },
 
@@ -123,21 +142,27 @@ export default {
       }
       const id_crypto = this.$route.params.id;
       this.cryptoToBuy.cryptocurrency_id = id_crypto;
-      if (
-        window.confirm(
-          "Êtes-vous sur de vouloir effectuer cet achat ?"
-        )
-      ) {
 
       this.$emit("buy-new-crypto", this.cryptoToBuy);
 
       this.$router.push("/client/user-wallet");
-      }
     },
     calculateTotal() {
       const id_crypto = this.$route.params.id;
       let crypto = this.cryptos.find((c) => c.id == id_crypto);
       this.total = this.cryptoToBuy.quantity * crypto.current_value;
+    },
+    activModal(t) {
+      this.v$.$validate();
+      if (this.v$.$error) {
+        return false;
+      }
+      this.showModal = true;
+      this.modalContent = t;
+      this.positivAction = async () => {
+        await this.onSubmit();
+        return (this.showModal = false);
+      };
     },
   },
 };
