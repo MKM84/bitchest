@@ -1,61 +1,62 @@
 <template>
-  <div class="login col-4 offset-4 d-flex align-items-center justify-content-end">
-    <div class="col-12 text-center d-flex justify-content-center align-items-end mb-4">
-      <h2 class="text-info"><strong>BitChest</strong></h2>
-    </div>
-    <div class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-10 mx-auto rounded">
-      <form @submit.prevent="onLogin">
-        <div class="mb-4">
-          <label for="email" class="form-label fs-5 text-light">Email* </label>
-          <input
-            name="email"
-            type="email"
-            class="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            v-model="form.email"
-            autofocus
-            autocomplete="off"
-          />
-          <div id="emailHelp" class="form-text text-danger" v-if="errors.email">
-            {{ errors.email[0] }}
-          </div>
-          <div id="emailError" class="form-text text-danger" v-if="v$.form.email.$error">
-            {{ v$.form.email.$errors[0].$message }}
-          </div>
+  <div class="login-ctn">
+      <div class="login col-4 offset-4 d-flex align-items-center justify-content-end">
+        <div class="col-12 text-center d-flex justify-content-center align-items-end mb-4">
+          <h2 class="text-info"><strong>BitChest</strong></h2>
         </div>
-        <div class="mb-4">
-          <label for="password" class="form-label fs-5 text-light">Password* </label>
-          <input
-            name="password"
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            v-model="form.password"
-            autocomplete="off"
-          />
-          <div id="emailHelp" class="form-text text-danger" v-if="errors.password">
-            {{ errors.password[0] }}
-          </div>
-          <div
-            id="passError"
-            class="form-text text-danger"
-            v-if="v$.form.password.$error"
-          >
-            {{ v$.form.password.$errors[0].$message }}
-          </div>
+        <div class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-10 mx-auto rounded">
+          <form @submit.prevent="onLogin">
+            <div class="mb-4">
+              <label for="email" class="form-label fs-5 text-light">Email* </label>
+              <input
+                name="email"
+                type="email"
+                class="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+                v-model="form.email"
+                autofocus
+                autocomplete="off"
+              />
+              <div id="emailHelp" class="form-text text-danger" v-if="errors.email">
+                {{ errors.email[0] }}
+              </div>
+              <div id="emailError" class="form-text text-danger" v-if="v$.form.email.$error">
+                {{ v$.form.email.$errors[0].$message }}
+              </div>
+            </div>
+            <div class="mb-4">
+              <label for="password" class="form-label fs-5 text-light">Password* </label>
+              <input
+                name="password"
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                v-model="form.password"
+                autocomplete="off"
+              />
+              <div id="emailHelp" class="form-text text-danger" v-if="errors.password">
+                {{ errors.password[0] }}
+              </div>
+              <div
+                id="passError"
+                class="form-text text-danger"
+                v-if="v$.form.password.$error"
+              >
+                {{ v$.form.password.$errors[0].$message }}
+              </div>
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn btn-secondary text-dark text-center mt-3 fs-5 px-4"
+              >
+                Login
+              </button>
+            </div>
+          </form>
         </div>
-
-        <div class="text-center">
-          <button
-            type="submit"
-            class="btn btn-secondary text-dark text-center mt-3 fs-5 px-4"
-          >
-            Login
-          </button>
-        </div>
-      </form>
-    </div>
+  </div>
   </div>
 </template>
 
@@ -106,8 +107,12 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
+  margin-top: 5rem;
   padding: 3rem;
   border-radius: 30px;
+}
+.login-ctn {
+    height: 100vh;
+
 }
 </style>

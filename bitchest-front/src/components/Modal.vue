@@ -1,6 +1,6 @@
 <template>
   <div class="modal-ctn">
-    <div class="modal-popup rounded border border-light p-3 bg-dark">
+    <div class="modal-popup rounded border border-info p-3 bg-dark">
       <p class="modal-content bg-dark text-light border-dark text-center mt-3 mb-4">
         {{modalContent}}
       </p>

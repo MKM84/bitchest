@@ -1,13 +1,14 @@
 <template>
   <aside class="col-2 px-0">
-    <div class="text-start mt-4 px-4">
+    <div class="text-start mt-5 px-4">
+      <router-link to="/" class="nav-link text-light fs-6 px-4">
       <h2 class="text-info"><strong>BitChest</strong></h2>
+      </router-link>
+
     </div>
     <!-- admin  -->
     <div v-if="admin" class="mt-5">
-      <div class="mt-5 px-4 mb-5">
-        <h5 v-if="adminInfos" class="text-light">Bonjour {{ adminInfos.firstname }},</h5>
-      </div>
+
       <router-link to="/admin/cryptos" class="nav-link text-light fs-6 px-4">
         <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
       </router-link>
@@ -22,7 +23,9 @@
       <router-link to="/admin/admin-form" class="nav-link text-light fs-6 px-4">
         <i class="fas fa-user-circle 3x"></i> Mon compte
       </router-link>
-
+      <div class="mt-5 px-4 mb-5">
+        <h5 v-if="adminInfos" class="text-light">Bonjour {{ adminInfos.firstname }} !</h5>
+      </div>
       <a
         class="nav-link nav-link text-info fs-6 px-4 pt-4"
         href="#"
@@ -61,6 +64,7 @@
         </p>
       </div>
 
+
             <a
         class="nav-link nav-link text-info fs-6 px-4 pt-4"
         href="#"
@@ -80,6 +84,8 @@ export default {
     admin: { type: Boolean },
     userInfos: { type: Object },
     adminInfos: { type: Object },
+
+
   },
   methods: {
     logout() {
@@ -90,6 +96,7 @@ export default {
       });
     },
   },
+
 };
 </script>
 

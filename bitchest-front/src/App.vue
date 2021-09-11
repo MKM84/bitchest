@@ -2,6 +2,7 @@
   <!-- bootstrap pictos  -->
   <Pictos />
   <router-view @log-in="logIn" :errors="errors" />
+  <footer class="col-12 text-center fs-6 py-3">Copyright - BitChest</footer>
 </template>
 
 <script>
@@ -79,6 +80,11 @@ html {
 .bg-primary {
   background-color: #375675 !important;
   color: #375675 !important;
+}
+footer {
+    position: relative;
+    bottom: 0px;
+  background-color: #0dcaf0;
 }
 .btn-secondary {
   background-color: #0dcaf0 !important;

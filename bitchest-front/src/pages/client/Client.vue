@@ -14,6 +14,7 @@
     :showAlerte="showAlerte"
     :loading="loading"
     @sell-all-by-crypto="sellAllByCrypto"
+    @get-history="getUserHistory"
   />
 </template>
 
