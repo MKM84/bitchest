@@ -1,5 +1,6 @@
 <template>
-  <div class="row col-12">
+  <div class="row col-12 m-0">
+    <Nav-mobile :admin="false" :userInfos="userInfos"/>
     <Navigation :admin="false" :userInfos="userInfos" />
 
     <section class="col ctn-content">
@@ -52,22 +53,20 @@
 <script>
 import Navigation from "../../components/Navigation.vue";
 import Spinner from "../../components/Spinner.vue";
+import NavMobile from "../../components/NavMobile.vue"
 export default {
   name: "UserAllCryptos",
   components: {
     Navigation,
     Spinner,
+    NavMobile
   },
   props: {
     cryptos: { type: Array },
     userInfos: { type: Object },
     loading: { type: Boolean },
   },
-  mounted() {},
-  data() {
-    return {};
-  },
-  methods: {},
+
 };
 </script>
 <style></style>

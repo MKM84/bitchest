@@ -1,5 +1,5 @@
 <template>
-<!-- bootstrap pictos  -->
+  <!-- bootstrap pictos  -->
   <Pictos />
   <router-view @log-in="logIn" :errors="errors" />
 </template>
@@ -57,68 +57,110 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,300;1,500;1,700&display=swap');
-:root {
-    --bs-primary-rgb: #375675 !important;
-}
-.btn-primary {
-    background-color: #212529 !important;
-    border-color: #212529 !important;
-}
-.bg-primary {
-     background-color: #375675 !important;
-     color: #375675 !important;
-}
-.btn-secondary {
-    background-color: #00fe17 !important;
-    border-color: #00fe17 !important;
-}
-.btn-secondary:hover {
-    background-color: #02b911 !important;
-        border-color: #02b911 !important;
-}
-#app {
-font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-background-color: #2c3034 !important;
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,300;1,500;1,700&display=swap");
+
 body {
   position: relative;
   background-color: #2c3034 !important;
 }
 html {
   background-color: #2c3034 !important;
-
+}
+#app {
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #2c3034 !important;
+}
+.btn-primary {
+  background-color: #212529 !important;
+  border-color: #212529 !important;
+}
+.bg-primary {
+  background-color: #375675 !important;
+  color: #375675 !important;
+}
+.btn-secondary {
+  background-color: #0dcaf0 !important;
+  border-color: #0dcaf0 !important;
+}
+.btn-secondary:hover {
+  background-color: #09a6c5 !important;
+  border-color: #09a6c5 !important;
 }
 .thead {
   position: sticky;
   top: 0;
-  background-color: #ffffff;
 }
 
 .ctn-content {
   background-color: #212529;
   border-radius: 30px;
-  margin: 20px 10px 23px 0px !important;
-
 }
 .btn-space {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 .color-success {
-    color: #00fe17 !important;
+  color: #0dcaf0 !important;
+}
+.color-green {
+  color: #46ea9b !important;
+}
+.color-red {
+  color: #f82c55 !important;
 }
 .fixed-alerte {
-    position: fixed !important;
-    bottom: 10px;
-    right: 0px;
+  position: fixed !important;
+  bottom: 10px;
+  right: 0px;
 }
-table img {
-    background-color: #fff;
-    border-radius: 50%;
-    width: 40px;
-    padding: 6px;
+img {
+  background-color: #fff;
+  border-radius: 50%;
+  width: 48px;
+  padding: 6px;
+  margin-right: 6px;
+  border: 3px solid #0dcaf0;
+}
+a {
+  text-decoration: none !important;
 }
 
+aside {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-color: #2c3034 !important;
+}
+.router-link-active {
+  font-weight: 700;
+  background-color: #212529;
+}
+
+@media (min-width: 300px) and (max-width: 1100px) {
+  aside {
+    display: none;
+  }
+  nav {
+    display: initial;
+  }
+  .ctn-content {
+    margin: 20px 10px 23px 10px !important;
+  }
+  .router-link-active {
+    background-color: transparent;
+  }
+}
+
+@media (min-width: 1099px) {
+  aside {
+    display: block;
+  }
+  nav {
+    display: none !important;
+  }
+  .ctn-content {
+    margin: 20px 10px 23px 0px !important;
+  }
+}
 </style>

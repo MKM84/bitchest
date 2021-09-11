@@ -1,6 +1,8 @@
 <template>
-  <div class="row col-12">
-    <Navigation :admin="true" :adminInfos="adminInfos"/>
+  <div class="row col-12 m-0">
+    <Nav-mobile :admin="true" :adminInfos="adminInfos"/>
+
+    <Navigation :admin="true" :adminInfos="adminInfos" />
 
     <section class="col ctn-content">
       <Spinner :loading="loading" />
@@ -62,12 +64,9 @@
             {{ v$.myProfile.email.$errors[0].$message }}
           </div>
 
-          <!-- Status  -->
+          <!-- password  -->
 
-
-        <!-- password  -->
-
-           <label for="password" class="form-label fs-6 mt-4 text-light"
+          <label for="password" class="form-label fs-6 mt-4 text-light"
             >Nouveau mot de passe</label
           >
           <input
@@ -106,6 +105,7 @@
           >
             {{ v$.myProfile.repeatPassword.$errors[0].$message }}
           </div>
+          <!-- Status  -->
 
           <div class="form-check mt-3">
             <input
@@ -139,8 +139,6 @@
           </div>
         </div>
 
-
-
         <button type="submit" class="btn btn-secondary text-dark px-5 mt-5 btn-space">
           Valider
         </button>
@@ -154,7 +152,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-
+import NavMobile from "../../components/NavMobile.vue"
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, sameAs, alphaNum } from "@vuelidate/validators";
 import Spinner from "../../components/Spinner.vue";
@@ -163,6 +161,7 @@ export default {
   name: "AdminEditMyProfile",
   components: {
     Navigation,
+    NavMobile,
     Spinner,
   },
   emits: ["admin-edit-my-profile"],
@@ -184,17 +183,15 @@ export default {
         firstname: "",
         email: "",
         password: "",
-        status : ""
+        status: "",
       },
-
-
     };
   },
   mounted() {
-this.myProfile = this.adminInfos;
+    this.myProfile = this.adminInfos;
   },
-    beforeUpdate() {
-this.myProfile = this.adminInfos;
+  beforeUpdate() {
+    this.myProfile = this.adminInfos;
   },
 
   validations() {
@@ -207,7 +204,7 @@ this.myProfile = this.adminInfos;
         repeatPassword: {
           sameAsPassword: sameAs(this.myProfile.password),
         },
-        status : {required},
+        status: { required },
       },
     };
   },
@@ -217,7 +214,7 @@ this.myProfile = this.adminInfos;
       if (this.v$.$error) {
         return false;
       }
-        this.$emit("admin-edit-my-profile", this.myProfile);
+      this.$emit("admin-edit-my-profile", this.myProfile);
       this.myProfile = {};
       this.$router.push("/admin/user-list");
     },

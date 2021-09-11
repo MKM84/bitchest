@@ -1,5 +1,6 @@
 <template>
-  <div class="row col-12">
+  <div class="row col-12 m-0">
+    <Nav-mobile :admin="true" :adminInfos="adminInfos"/>
     <Navigation :admin="true" :adminInfos="adminInfos"/>
 
     <section class="col ctn-content">
@@ -31,7 +32,7 @@
                 <td class="fs-6 align-middle">
                   <span
                     :class="`badge ${
-                      user.status === 0 ? 'bg-info text-dark' : 'bg-light text-dark'
+                      user.status === 0 ? 'bg-warning text-dark' : 'bg-light text-dark'
                     }`"
                     >{{ user.status === 0 ? "Admin" : "Client" }}</span
                   >
@@ -64,6 +65,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
+import NavMobile from "../../components/NavMobile.vue"
 import Alerte from "../../components/Alerte.vue";
 import Spinner from "../../components/Spinner.vue";
 
@@ -71,6 +73,7 @@ export default {
   name: "Users",
   components: {
     Navigation,
+    NavMobile,
     Alerte,
     Spinner,
   },

@@ -59,7 +59,6 @@ export default {
         .then((r) => {
           this.wallet = r.data.userWallet;
           this.loading = false;
-
         })
         .catch((error) => console.error(error));
     },
@@ -68,7 +67,6 @@ export default {
       User.getUserHistory()
         .then((r) => {
           this.userHistory = r.data.historyByCrypto;
-
         })
         .catch((error) => console.error(error));
     },
@@ -79,7 +77,6 @@ export default {
         .then((r) => {
           this.cryptosToSell = r.data.cryptosToSellData;
           this.loading = false;
-
         })
         .catch((error) => console.error(error));
     },
@@ -88,7 +85,6 @@ export default {
       User.getUserInfos()
         .then((r) => {
           this.userInfos = r.data.userInfos;
-
         })
         .catch((error) => console.error(error));
     },
@@ -103,7 +99,6 @@ export default {
             // confirmation alerte
             this.activeAlerte("Vos informations ont bien été modifiées !");
             this.hideAlerte();
-
           }
         })
         .then(this.getUserInfos())
@@ -123,7 +118,6 @@ export default {
             this.getCryptoToSell();
             this.getAllUserCryptos();
             this.loading = false;
-
           }
         })
         .then(() => {
@@ -148,7 +142,6 @@ export default {
               this.getCryptoToSell();
               this.getAllUserCryptos();
               this.loading = false;
-
             }
           })
           .then(() => {
@@ -160,10 +153,11 @@ export default {
           });
       }
     },
+    // sell all cryptos
     sellAllByCrypto(id) {
       if (window.confirm(" Êtes-vous sur de vouloir tout vendre ?")) {
         this.loading = true;
-        console.log(id)
+        console.log(id);
         User.sellAllByCrypto(id)
           .then((r) => {
             if (r.done) {
@@ -192,7 +186,7 @@ export default {
         this.alerteContent = "";
       }, 9000);
     },
-     // show alerte
+    // show alerte
     activeAlerte(t) {
       setTimeout(() => {
         this.showAlerte = true;

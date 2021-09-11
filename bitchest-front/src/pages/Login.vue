@@ -1,11 +1,9 @@
 <template>
-  <div class="login col-4 offset-4 d-flex align-items-center justify-content-end ">
+  <div class="login col-4 offset-4 d-flex align-items-center justify-content-end">
     <div class="col-12 text-center d-flex justify-content-center align-items-end mb-4">
-      <img src="img/bitchest_logo.png" alt="" width="200" />
+      <h2 class="text-info"><strong>BitChest</strong></h2>
     </div>
-    <div
-      class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-10 mx-auto    rounded"
-    >
+    <div class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-10 mx-auto rounded">
       <form @submit.prevent="onLogin">
         <div class="mb-4">
           <label for="email" class="form-label fs-5 text-light">Email* </label>
@@ -48,7 +46,14 @@
           </div>
         </div>
 
-        <div class="text-center"><button type="submit" class="btn btn-secondary text-dark text-center mt-3 fs-5 px-4">Login</button></div>
+        <div class="text-center">
+          <button
+            type="submit"
+            class="btn btn-secondary text-dark text-center mt-3 fs-5 px-4"
+          >
+            Login
+          </button>
+        </div>
       </form>
     </div>
   </div>

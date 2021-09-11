@@ -1,7 +1,7 @@
 <template>
   <div class="not-found">
     <div class="col-12 text-center mt-3 d-flex justify-content-center align-items-end">
-      <img src="../../public/img/bitchest_logo.png" alt="" width="200" />
+      <h2 class="text-info"><strong>BitChest</strong></h2>
     </div>
 
     <h1 class="text-center text-light display-1"><strong>404</strong></h1>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    // page 404
+  // page 404
   name: "NotFound",
 };
 </script>

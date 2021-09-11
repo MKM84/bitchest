@@ -1,7 +1,7 @@
 <template>
   <aside class="col-2 px-0">
-    <div class="col-12 text-center mt-4 d-flex justify-content-center align-items-end">
-      <img src="../../public/img/bitchest_logo.png" alt="" width="180" />
+    <div class="text-start mt-4 px-4">
+      <h2 class="text-info"><strong>BitChest</strong></h2>
     </div>
     <!-- admin  -->
     <div v-if="admin" class="mt-5">
@@ -33,19 +33,6 @@
 
     <!-- client  -->
     <div v-else class="mt-5">
-      <div class="mt-5 px-4 mb-5">
-        <h5 v-if="userInfos.firstname" class="text-light">
-          Bonjour {{ userInfos.firstname }},
-        </h5>
-        <p v-if="userInfos.user_solde" class="mb-1 text-light">Votre solde est de :</p>
-        <p
-          v-if="userInfos.user_solde"
-          :class="`mb-0 ${userInfos.user_solde > 0 ? 'color-success' : 'text-danger'}`"
-        >
-          <strong>{{ userInfos.user_solde }} €</strong>
-        </p>
-      </div>
-
       <router-link to="/client/cryptos" class="nav-link text-light fs-6 px-4">
         <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
       </router-link>
@@ -66,6 +53,18 @@
         @click.prevent="logout"
         ><i class="fas fa-power-off"></i> Me déconnecter</a
       >
+      <div class="mt-5 px-4 mb-5">
+        <h5 v-if="userInfos.firstname" class="text-light">
+          Bonjour {{ userInfos.firstname }},
+        </h5>
+        <p v-if="userInfos.user_solde" class="mb-1 text-light">Votre solde est de :</p>
+        <p
+          v-if="userInfos.user_solde"
+          :class="`mb-0 ${userInfos.user_solde > 0 ? 'color-success' : 'text-danger'}`"
+        >
+          <strong>{{ userInfos.user_solde }} €</strong>
+        </p>
+      </div>
     </div>
   </aside>
 </template>
@@ -93,21 +92,5 @@ export default {
 </script>
 
 <style>
-a {
-  text-decoration: none !important;
-}
 
-aside {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  /* min-width: 250px; */
-  background-color: #2c3034 !important;
-}
-.router-link-active {
-  font-weight: 700;
-  background-color: #212529;
-  color: #00fe17 !important;
-  /* border-radius: 0px 50px 50px 0px; */
-}
 </style>

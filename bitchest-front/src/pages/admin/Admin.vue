@@ -30,10 +30,11 @@ export default {
       alerteContent: "",
       showAlerte: false,
       loading: true,
-      adminInfos: {}
+      adminInfos: {},
     };
   },
   methods: {
+    //   get user liste
     getAllUsers() {
       this.loading = true;
       User.getAllUsers()
@@ -43,7 +44,7 @@ export default {
         })
         .catch((error) => console.error(error));
     },
-
+    // get all cryptos
     getAllAdminCryptos() {
       this.loading = true;
       User.getAllAdminCryptos()
@@ -53,13 +54,14 @@ export default {
         })
         .catch((error) => console.error(error));
     },
+    // add user
     newUser(user) {
       this.loading = true;
       User.addUser(user)
         .then((r) => {
           if (r.done) {
             this.userList = [...this.userList, user];
-          this.loading = false;
+            this.loading = false;
           }
         })
         .then(() => {
@@ -71,6 +73,7 @@ export default {
           console.error(error);
         });
     },
+    // edit user
     editUser(user) {
       this.loading = true;
       User.editUser(user)
@@ -81,7 +84,7 @@ export default {
             EditedUser.firstname = user.firstname;
             EditedUser.email = user.email;
             EditedUser.status = user.status;
-          this.loading = false;
+            this.loading = false;
           }
         })
         .then(() => {
@@ -93,27 +96,27 @@ export default {
           console.error(error);
         });
     },
+    // delete user
     deleteUser(id) {
       let user = this.userList.find((u) => u.id == id);
-    let clientSolde = user.user_solde;
-    let clientHasSold;
-    if (clientSolde > 0) {
-         clientHasSold = "Il possède toujours de la cryptomonnaies dans son portefeuille.";
-    }
-    else {
+      let clientSolde = user.user_solde;
+      let clientHasSold;
+      if (clientSolde > 0) {
+        clientHasSold = "Il possède toujours de la cryptomonnaies dans son portefeuille.";
+      } else {
         clientHasSold = "Il n'a plus de cryptomonaies dans son portefeuille.";
-    }
+      }
       if (
         window.confirm(
           `Êtes-vous sur de vouloir supprimmer ${user.firstname} ${user.lastname} ?  ${clientHasSold}`
         )
       ) {
-      this.loading = true;
+        this.loading = true;
         User.deleteUser(id)
           .then((r) => {
             if (r.done) {
               this.userList = this.userList.filter((u) => u.id != id);
-          this.loading = false;
+              this.loading = false;
             }
           })
           .then(() => {
@@ -123,8 +126,9 @@ export default {
           .catch((error) => console.error(error));
       }
     },
+    // get admin's informations
     getAdminInfos() {
-              User.getAdminInfos()
+      User.getAdminInfos()
         .then((r) => {
           this.adminInfos = r.data.adminInfos;
         })
@@ -135,8 +139,8 @@ export default {
       User.AdminEditMyProfile(admin)
         .then((r) => {
           if (r.done) {
-            this.getAdminInfos()
-          this.loading = false;
+            this.getAdminInfos();
+            this.loading = false;
           }
         })
         .then(() => {

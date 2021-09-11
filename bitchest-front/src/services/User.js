@@ -81,7 +81,8 @@ export default {
         return Api.patch(`/client/sell-transaction/${id}`).then((r) => sendActionResult(r));
 
     },
-    sellAllByCrypto(id){
+    // sell all cryptos
+    sellAllByCrypto(id) {
         return Api.get(`/client/sell-all/${id}`).then((r) => sendActionResult(r));
     }
 };

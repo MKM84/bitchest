@@ -1,5 +1,6 @@
 <template>
-  <div class="row col-12">
+  <div class="row col-12 m-0">
+    <Nav-mobile :admin="false" :userInfos="userInfos"/>
     <Navigation :admin="false" :userInfos="userInfos" />
     <section class="col ctn-content">
       <Spinner :loading="!loaded" />
@@ -17,7 +18,7 @@
         </h3>
 
         <div class="offset-md-1 col-10 mb-5">
-          <!-- Chart compoent  -->
+          <!-- Chart component  -->
           <Vue3ChartJs
             v-if="loaded"
             :id="doughnutChart.id"
@@ -32,6 +33,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
+import NavMobile from "../../components/NavMobile.vue"
 import Vue3ChartJs from "@j-t-mcc/vue3-chartjs";
 import Spinner from "../../components/Spinner.vue";
 import User from "../../services/User";
@@ -40,6 +42,7 @@ export default {
   components: {
     Navigation,
     Vue3ChartJs,
+    NavMobile,
     Spinner,
   },
   props: {
@@ -63,7 +66,7 @@ export default {
           {
             backgroundColor: ["#000"],
             data: [],
-            borderColor: "#00fe17",
+            borderColor: "#0dcaf0",
             label: "Bitcoin",
           },
         ],

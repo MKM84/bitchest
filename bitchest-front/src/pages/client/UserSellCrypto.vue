@@ -1,12 +1,18 @@
 <template>
-  <div class="row col-12">
-    <Navigation :admin="false"  :userInfos="userInfos" />
+  <div class="row col-12 m-0">
+    <Nav-mobile :admin="false" :userInfos="userInfos"/>
+    <Navigation :admin="false" :userInfos="userInfos" />
     <section class="col ctn-content">
-
-        <Spinner :loading="loading" />
+      <Spinner :loading="loading" />
       <div v-if="cryptosToSell && loading == false">
         <div class="text-end col-11 mt-5">
-            <button v-if="cryptosToSell" @click="$emit('sell-all-by-crypto', idCrypto)" class="btn btn-secondary text-dark">Tout vendre</button>
+          <button
+            v-if="cryptosToSell"
+            @click="$emit('sell-all-by-crypto', idCrypto)"
+            class="btn btn-secondary text-dark"
+          >
+            Tout vendre
+          </button>
         </div>
         <h3 class="text-center mt-0 text-light">
           <div class="ml-3 mb-2">
@@ -34,16 +40,16 @@
           <tbody>
             <tr v-for="crypto in cryptosToSell.cryptosToSell" :key="crypto.id">
               <td class="align-middle">{{ crypto.quantity }}</td>
-              <td class="align-middle">{{ crypto.purchase_price }} </td>
+              <td class="align-middle">{{ crypto.purchase_price }}</td>
               <td class="align-middle">{{ crypto.purchase_date }}</td>
-              <td class="align-middle">{{ crypto.sum_purchase }} </td>
+              <td class="align-middle">{{ crypto.sum_purchase }}</td>
               <td
                 :class="`fs-6 pt-3 pb-3 align-middle ${
                   cryptosToSell.actualValue.progress_value * crypto.quantity -
                     crypto.sum_purchase >
                   0
-                    ? ' color-success'
-                    : 'text-danger'
+                    ? ' color-green'
+                    : 'color-red'
                 }`"
               >
                 {{
@@ -52,13 +58,14 @@
                       crypto.sum_purchase
                   )
                 }}
-
               </td>
-              <td class="align-middle ">
+              <td class="align-middle">
                 <button
                   @click="$emit('sell-cryptos', crypto.id_transaction)"
                   type="button"
-                  class="btn btn-primary text-info"><i class="fas fa-money-bill-wave"></i>
+                  class="btn btn-primary text-info"
+                >
+                  <i class="fas fa-money-bill-wave"></i>
                 </button>
               </td>
             </tr>
@@ -71,18 +78,20 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import Spinner from '../../components/Spinner.vue'
+import NavMobile from "../../components/NavMobile.vue"
+import Spinner from "../../components/Spinner.vue";
 
 export default {
   name: "UserSellCrypto",
   components: {
     Navigation,
-    Spinner
+    NavMobile,
+    Spinner,
   },
   props: {
     cryptosToSell: {},
     userInfos: { type: Object },
-    loading: { type: Boolean}
+    loading: { type: Boolean },
   },
   $emits: ["get-cryptos-to-sell", "sell-cryptos", "sell-all-by-crypto"],
   mounted() {
@@ -93,10 +102,9 @@ export default {
   data() {
     return {
       crypto: {},
-      idCrypto: this.$route.params.id
+      idCrypto: this.$route.params.id,
     };
   },
-  methods: {},
 };
 </script>
 <style></style>

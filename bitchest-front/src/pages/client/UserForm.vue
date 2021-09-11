@@ -1,13 +1,13 @@
 <template>
-  <div class="row col-12">
+  <div class="row col-12 m-0">
+    <Nav-mobile :admin="false" :userInfos="userInfos"/>
     <Navigation :admin="false" :userInfos="userInfos" />
-
     <section class="col ctn-content" v-if="myProfile">
       <Spinner :loading="loading" />
 
       <form
         @submit.prevent="onSubmit"
-        class="offset-md-3 col-6 mt-5"
+        class="offset-md-3 col-6 mt-3 mb-5"
         v-if="loading == false"
       >
         <div class="mb-4">
@@ -130,6 +130,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
+import NavMobile from "../../components/NavMobile.vue"
 import Spinner from "../../components/Spinner.vue";
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, sameAs, alphaNum } from "@vuelidate/validators";
@@ -139,6 +140,7 @@ export default {
   components: {
     Navigation,
     Spinner,
+    NavMobile
   },
   emits: ["edit-my-profile"],
   setup() {

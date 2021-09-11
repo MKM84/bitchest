@@ -1,6 +1,7 @@
 <template>
-  <div class="row col-12">
+  <div class="row col-12 m-0">
     <Navigation :admin="true" :adminInfos="adminInfos"/>
+    <Nav-mobile :admin="true" :adminInfos="adminInfos"/>
 
     <section class="col ctn-content">
       <Spinner :loading="loading" />
@@ -108,7 +109,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-
+import NavMobile from "../../components/NavMobile.vue"
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, numeric } from "@vuelidate/validators";
 import Spinner from "../../components/Spinner.vue";
@@ -117,6 +118,7 @@ export default {
   name: "AdminUserForm",
   components: {
     Navigation,
+    NavMobile,
     Spinner,
   },
   emits: ["new-user", "edit-user"],

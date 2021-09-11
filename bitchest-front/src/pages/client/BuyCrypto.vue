@@ -1,5 +1,6 @@
 <template>
-  <div class="row col-12">
+  <div class="row col-12 m-0">
+    <Nav-mobile :admin="false" :userInfos="userInfos"/>
     <Navigation :admin="false" :userInfos="userInfos" />
 
     <section class="col ctn-content">
@@ -15,7 +16,7 @@
         Cours actuel : {{ crypto.current_value }}
       </p>
 
-      <form @submit.prevent="onSubmit" class="offset-md-4 col-4">
+      <form @submit.prevent="onSubmit" class="offset-md-4 col-4 mt-5">
         <div class="mb-4 text-center">
           <label for="quantity" class="form-label fs-6 mt-3 text-light ">Quantité </label>
           <input
@@ -43,7 +44,7 @@
           </div>
         </div>
 
-        <div class="text-center">
+        <div class="text-center mt-5">
             <button type="submit" class="btn btn-secondary text-dark  px-4 mt-3 btn-space">Acheter</button>
             <router-link to="/client/user-wallet">
               <button type="button" class="btn btn-outline-light px-4 mt-3">Annuler</button>
@@ -56,6 +57,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
+import NavMobile from "../../components/NavMobile.vue"
 import useVuelidate from "@vuelidate/core";
 import { required, minValue, maxValue, numeric, integer } from "@vuelidate/validators";
 
@@ -65,6 +67,7 @@ export default {
   name: "BuyCrypto",
   components: {
     Navigation,
+    NavMobile,
     Spinner
   },
   emits: ["buy-new-crypto"],
