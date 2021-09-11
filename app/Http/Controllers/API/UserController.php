@@ -211,11 +211,11 @@ class UserController extends Controller
         ]);
 
         //Update user_solde where user buy crypto
-        $userSolde = ($user->user_solde) - ($this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->progress_value * $request->input('quantity'));
+        // $userSolde = ($user->user_solde) - ($this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->progress_value * $request->input('quantity'));
 
         //Update user_solde to table users
-        User::where('id', $user_id)
-            ->update(['user_solde' => $userSolde]);
+        // User::where('id', $user_id)
+        //     ->update(['user_solde' => $userSolde]);
 
         return response()->json([
             'done' => true
@@ -255,7 +255,7 @@ class UserController extends Controller
     {
         //Get id of User connection
         $user_id = Auth::user()->id;
-       
+
         // Get transactions by users  by crypto and not selling
         $TransactionsToSell= DB::table('transactions')
         ->select("transactions.id as id_transaction")
@@ -285,8 +285,8 @@ class UserController extends Controller
         }
         return response()->json([
             'done' => true
-        ]);   
-     
+        ]);
+
 
     }
 }

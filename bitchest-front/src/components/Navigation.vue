@@ -58,7 +58,7 @@
         <p v-if="userInfos.user_solde" class="mb-1 text-light">Votre solde est de :</p>
         <p
           v-if="userInfos.user_solde"
-          :class="`mb-0 ${userInfos.user_solde > 0 ? 'color-success' : 'text-danger'}`"
+          :class="`mb-0 ${userInfos.user_solde > 0 ? 'color-green' : 'text-danger'}`"
         >
           <strong>{{ userInfos.user_solde }} €</strong>
         </p>
