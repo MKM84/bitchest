@@ -1,63 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Bitchest
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Description :
+BitChest est une application web qui a pour vocation de permettre à des particuliers d’acheter et de vendre des cryptomonnaies (Cryptocurrencies), tel que le Bitcoin ou l’Ethereum.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Après installation du projet sur votre environnement de développement, vous pourriez vous y connecter en tant que client où vous pouvez acheter ou vendre des cryptomonnaies, consulter les cours actuels de ces dernières, consulter l'historique de vos trannsactions... Si vous vous connectez e tant que admin, vous pourriez consulter également les cryptomonnnaies supportées par l'application et gérer les clients, modifier, supprimer...
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Avant propos :
 
-## Learning Laravel
+Ce projet est ue SPA, vous aurez besoin de la lancer sur deux serveurs locals.
+L'authentification se fera à l'aide des cookies lorsque la demande entrante provient de votre propre interface SPA, cela vous impliquera de lancer le back et le front sur le même domaie.
+Ex : 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Front : http://localhost:8080/
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Back : http://localhost:8000/
 
-## Laravel Sponsors
+Technologies :
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Back :
+- composer 2.1.3
+- Laravel 8.58.0
+- Laravel Sanctum
 
-### Premium Partners
+Front
+- Node v16.3.0
+- npm 7.15.1
+- Vue.js 3 / Vue CLI 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
+## Initialisation du projet :
 
-## Contributing
+télécharger le repo. 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Créez une base de donnée sur phpMyAdmin.
 
-## Code of Conduct
+Créez un fichier .env à la racine du projet, copier-coller le contenu du fichier .env.example et modifier les lignes suivantes comme suit :
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- APP_NAME = BitChest
+- APP_KEY = Générez une clé avec la commande :
 
-## Security Vulnerabilities
+        - `php artisan key:generate`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- DB_DATABASE =  "Nom de votre base de donnée"
+- DB_PORT = "Port de votre base de donnée"
+- DB_USERNAME = "L'identifiant de votre base de donnée"
+- DB_PASSWORD = "Mot de passe de connexion à votre base de donnée"
+- SESSION_DRIVER = cookie
+- Ajouter les ligne suivantes :
 
-## License
+    - “SESSION_DOMAIN=localhost:8080"  ou l'adresse de votre localhost dans lequel est lancé la partie front du projet.
+    - “SANCTUM_STATEFUL_DOMAINS=localhost:8000” ou l'adresse du localhost ou est lancé le projet.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Modifier le fichier database.php selon votre DB.
+
+### Dans votre ligne de commande à la racine du projet :
+    - `composer install`
+    - `php artisan migrate:fresh --seed`
+    - `php artisan serve`
+
+### Dans votre ligne de commande à la racine du projet :
+    - `cd bitchest-front`
+    - `npm install`
+    - `npm run serve ou yarn serve`
