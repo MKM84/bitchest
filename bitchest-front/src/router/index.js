@@ -223,8 +223,7 @@ router.beforeEach((to, from, next) => {
                 }
             });
 
-        }
-        if (isLoggedIn() && isAdmin() === 'false') {
+        } else if (isLoggedIn() && isAdmin() === 'false') {
             next({
                 path: "/client",
                 query: {
@@ -238,6 +237,46 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.adminOnly)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (isLoggedIn() && isAdmin() === "false") {
+            next({
+                path: "/client",
+                query: {
+                    redirect: to.fullPath
+                }
+            });
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.clientOnly)) {
+
+        if (isLoggedIn() && isAdmin() === 'true') {
+            next({
+                path: "/admin",
+                query: {
+                    redirect: to.fullPath
+                }
+            });
+
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+});
+
+
+
+
+
+
+
 
 
 export default router;
