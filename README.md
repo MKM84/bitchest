@@ -81,4 +81,4 @@ Pour vous connecter en tant que admin :
 
 `mot de passe : password2`
 
-Vous pouvez récuperez les adresses mail des utilisateurs sur phpMyAdmin et vous connecter avec le mot de passe `password`
+Vous pouvez récuperer les adresses mail des utilisateurs sur phpMyAdmin et vous connecter avec le mot de passe `password`
