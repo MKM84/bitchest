@@ -102,6 +102,7 @@ footer {
 .ctn-content {
   background-color: #212529;
   border-radius: 30px;
+  min-height: 95vh;
 }
 .btn-space {
   margin-right: 10px;

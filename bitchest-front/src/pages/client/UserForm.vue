@@ -7,7 +7,7 @@
 
       <form
         @submit.prevent="onSubmit"
-        class="mt-3 mb-5"
+        class="mt-5 mb-5"
         v-if="loading == false"
       >
         <div class="col-sm-6 offset-sm-3 mt-3 mb-5 col-md-6 offset-md-3 mb-4">

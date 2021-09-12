@@ -1,6 +1,6 @@
 <template>
   <div class="login-ctn">
-      <div class="login col-lg-4 offset-lg-4 col-xl-4  offset-xl-4 col-md-4 offset-md-4 col-sm-8 offset-sm-2 col-10 offset-1 d-flex align-items-center justify-content-end">
+      <div class="login col-lg-6 offset-lg-3 col-xl-4  offset-xl-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1 d-flex align-items-center justify-content-end">
         <div class="col-12 text-center d-flex justify-content-center align-items-end mb-4">
           <h2 class="text-info"><strong>BitChest</strong></h2>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-      <h2 class="text-info mb-0"><strong>BitChest</strong></h2>
+      <h2 class="text-info mb-0 mx-5"><strong>BitChest</strong></h2>
       <button
         class="navbar-toggler"
         type="button"
@@ -17,35 +17,35 @@
       <div v-if="admin" class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link to="/admin/cryptos" class="nav-link text-light fs-6 px-2">
-              Cryptomonnaies
+            <router-link to="/admin/cryptos" class="nav-link text-light fs-9 px-2">
+             <i class="fab fa-bitcoin 3x"></i>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/admin/user-list" class="nav-link text-light fs-6 px-2">
-              Utilisateurs
+            <router-link to="/admin/user-list" class="nav-link text-light fs-9 px-2">
+              <i class="fas fa-users-cog"></i>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link
               to="/admin/user-form/0"
-              class="nav-link text-light fs-6 px-2"
+              class="nav-link text-light fs-9 px-2"
             >
-              Ajouter un utilisateur
+             <i class="fas fa-plus-circle"></i>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/admin/admin-form" class="nav-link text-light fs-6 px-2">
-              Mon compte
+            <router-link to="/admin/admin-form" class="nav-link text-light fs-9 px-2">
+             <i class="fas fa-user-circle 3x"></i>
             </router-link>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link nav-link text-light fs-6 px-2"
+              class="nav-link nav-link text-light fs-9 px-2"
               href="#"
               @click.prevent="logout"
             >
-              Me déconnecter</a
+             <i class="fas fa-power-off"></i> </a
             >
           </li>
         </ul>
@@ -55,35 +55,35 @@
       <div v-else class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link to="/client/cryptos" class="nav-link text-light fs-6 px-2">
-              Cryptomonnaies
+            <router-link to="/client/cryptos" class="nav-link text-light fs-9 px-2">
+              <i class="fab fa-bitcoin 3x"></i>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/client/user-wallet" class="nav-link text-light fs-6 px-2">
-              Portefeuille
+            <router-link to="/client/user-wallet" class="nav-link text-light fs-9 px-2">
+              <i class="fas fa-wallet 3x"></i>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link
               to="/client/purchase-history"
-              class="nav-link text-light fs-6 px-2"
+              class="nav-link text-light fs-9 px-2"
             >
-              Historique
+              <i class="fas fa-history 3x"></i>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/client/user-form" class="nav-link text-light fs-6 px-2">
-              Mon compte
+            <router-link to="/client/user-form" class="nav-link text-light fs-9 px-2">
+             <i class="fas fa-user-circle 3x"></i>
             </router-link>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link nav-link text-light fs-6 px-2"
+              class="nav-link nav-link text-light fs-9 px-2"
               href="#"
               @click.prevent="logout"
             >
-              Me déconnecter</a
+               <i class="fas fa-power-off"></i></a
             >
           </li>
         </ul>
@@ -96,6 +96,15 @@
               }`"
             >
               Solde : {{ userInfos.user_solde }} €
+            </li>
+
+                        <li
+              v-if="userInfos.user_money"
+              :class="`nav-item ${
+                userInfos.user_money > 0 ? 'color-success' : 'text-danger'
+              }`"
+            >
+              Bank : {{ userInfos.user_money }} €
             </li>
           </ul>
         </div>

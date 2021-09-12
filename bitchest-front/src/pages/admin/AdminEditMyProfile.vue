@@ -105,38 +105,9 @@
           >
             {{ v$.myProfile.repeatPassword.$errors[0].$message }}
           </div>
-          <!-- Status  -->
 
-          <div class="form-check mt-3">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="client"
-              id="client-radio"
-              value="1"
-              v-model="myProfile.status"
-            />
-            <label class="form-check-label text-light" for="client-radio"> Client </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="admin"
-              id="admin-radio"
-              value="0"
-              v-model="myProfile.status"
-            />
-            <label class="form-check-label text-light" for="admin-radio"> Admin </label>
-          </div>
 
-          <div
-            id="lastnameError"
-            class="form-text text-danger"
-            v-if="v$.myProfile.status.$error"
-          >
-            {{ v$.myProfile.status.$errors[0].$message }}
-          </div>
+
         </div>
         <div class="text-center mt-5">
         <button type="submit" class="btn btn-secondary text-dark px-5 mt-2 btn-space">
