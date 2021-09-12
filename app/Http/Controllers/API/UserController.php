@@ -24,6 +24,7 @@ class UserController extends Controller
         $this->middleware('client');
         $this->middleware(function ($request, $next) {
             $this->userSold = Auth::user()->user_solde;
+            $this->userMoney = Auth::user()->user_money;
             return $next($request);
         });
     }
@@ -107,7 +108,7 @@ class UserController extends Controller
     // Return informations of User
     public function getUserInfos()
     {
-        return ['userInfos' => Auth::user(), 'userSolde' => $this->userSold];
+        return ['userInfos' => Auth::user()];
     }
     //Update user Info
     public function EditUserInfos($id, Request $request)
@@ -210,12 +211,17 @@ class UserController extends Controller
             'balance' => null,
         ]);
 
-        //Update user_solde where user buy crypto
-        // $userSolde = ($user->user_solde) - ($this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->progress_value * $request->input('quantity'));
+        // Update user_solde where user buy crypto
+        $userSolde = ($user->user_solde) + ($this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->progress_value * $request->input('quantity'));
 
-        //Update user_solde to table users
-        // User::where('id', $user_id)
-        //     ->update(['user_solde' => $userSolde]);
+        $userMoney = ($user->user_money) - ($this->getCurrentValueByCrypto($request->input('cryptocurrency_id'))->progress_value * $request->input('quantity'));
+
+        // Update user_solde to table users
+        User::where('id', $user_id)
+            ->update(['user_solde' => $userSolde]);
+
+            User::where('id', $user_id)
+            ->update(['user_money' => $userMoney]);
 
         return response()->json([
             'done' => true
@@ -241,11 +247,17 @@ class UserController extends Controller
             'balance' => ($this->getCurrentValueByCrypto($transaction->cryptocurrency_id)->progress_value * $transaction->quantity) - $transaction->sum_purchase,
         ]);
         //Update user_solde where user selling it transaction
-        $userSolde = ($user->user_solde) + $transaction->sum_purchase;
+        $userSolde = ($user->user_solde) - $transaction->sum_purchase;
+
+        $userMoney = ($user->user_money) + $transaction->sum_purchase;
+
 
         //Update user_solde to table users
         User::where('id', $user_id)
             ->update(['user_solde' => $userSolde]);
+
+            User::where('id', $user_id)
+            ->update(['user_money' => $userMoney]);
 
         return response()->json([
             'done' => true
@@ -278,10 +290,17 @@ class UserController extends Controller
                 'balance' => ($this->getCurrentValueByCrypto($transaction->cryptocurrency_id)->progress_value * $transaction->quantity) - $transaction->sum_purchase,
             ]);
             //Update user_solde where user selling it transaction
-            $userSolde = ($user->user_solde) + $transaction->sum_purchase;
+            $userSolde = ($user->user_solde) - $transaction->sum_purchase;
+
+            $userMoney = ($user->user_money) + $transaction->sum_purchase;
+
+
             //Update user_solde to table users
             User::where('id', $user_id)
                 ->update(['user_solde' => $userSolde]);
+
+                User::where('id', $user_id)
+                ->update(['user_money' => $userMoney]);
         }
         return response()->json([
             'done' => true

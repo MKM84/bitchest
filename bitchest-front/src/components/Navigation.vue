@@ -2,13 +2,11 @@
   <aside class="col-2 px-0">
     <div class="text-start mt-5 px-4">
       <router-link to="/" class="nav-link text-light fs-6 px-4">
-      <h2 class="text-info"><strong>BitChest</strong></h2>
+        <h2 class="text-info"><strong>BitChest</strong></h2>
       </router-link>
-
     </div>
     <!-- admin  -->
     <div v-if="admin" class="mt-5">
-
       <router-link to="/admin/cryptos" class="nav-link text-light fs-6 px-4">
         <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
       </router-link>
@@ -35,7 +33,7 @@
     </div>
 
     <!-- client  -->
-    <div v-else class="mt-5 ">
+    <div v-else class="mt-5">
       <router-link to="/client/cryptos" class="nav-link text-light fs-6 px-4">
         <i class="fab fa-bitcoin 3x"></i> Cryptomonnaies
       </router-link>
@@ -55,17 +53,26 @@
         <h5 v-if="userInfos.firstname" class="text-light">
           Bonjour {{ userInfos.firstname }},
         </h5>
-        <p v-if="userInfos.user_solde" class="mb-1 text-light">Votre solde est de :</p>
+        <p v-if="userInfos.user_solde" class="mb-1 text-light">
+          La valeur de vos cryptomonnaies :
+        </p>
         <p
           v-if="userInfos.user_solde"
           :class="`mb-0 ${userInfos.user_solde > 0 ? 'color-green' : 'text-danger'}`"
         >
           <strong>{{ userInfos.user_solde }} €</strong>
         </p>
+
+        <p v-if="userInfos.user_money" class="mb-1 mt-3 text-light">Votre solde bancaire :</p>
+        <p
+          v-if="userInfos.user_money"
+          :class="`mb-0 ${userInfos.user_money > 0 ? 'color-green' : 'text-danger'}`"
+        >
+          <strong>{{ userInfos.user_money }} €</strong>
+        </p>
       </div>
 
-
-            <a
+      <a
         class="nav-link nav-link text-info fs-6 px-4 pt-4"
         href="#"
         @click.prevent="logout"
@@ -84,8 +91,6 @@ export default {
     admin: { type: Boolean },
     userInfos: { type: Object },
     adminInfos: { type: Object },
-
-
   },
   methods: {
     logout() {
@@ -96,10 +101,7 @@ export default {
       });
     },
   },
-
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

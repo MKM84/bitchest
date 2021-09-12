@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
                 'email' => 'majed@majed.fr',
                 'password' => Hash::make('password1'),
                 'status' => 1,
-                'user_solde' => 500000
+                'user_solde' => 500000,
+                'user_money' => 1000000,
             ],
 
             [
@@ -32,7 +33,8 @@ class DatabaseSeeder extends Seeder
                 'email' => 'ludovic@ludovic.fr',
                 'password' => Hash::make('password2'),
                 'status' => 0,
-                'user_solde' => 500000
+                'user_solde' => 0,
+                'user_money' => 0,
             ],
         ]);
         $this->call(CryptocurrenciesTableSeeder::class);
