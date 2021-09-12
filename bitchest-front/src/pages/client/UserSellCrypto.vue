@@ -40,9 +40,9 @@
             <tr>
               <th scope="col">Quantité</th>
               <th scope="col">Cours à l'achat</th>
-              <th scope="col">Date d'achat</th>
+              <th scope="col" class="mobile-device">Date d'achat</th>
               <th scope="col">Dépenses (€)</th>
-              <th scope="col">Gains / Perte (€)</th>
+              <th scope="col" class="mobile-device">Gains / Perte (€)</th>
               <th scope="col">Vendre</th>
             </tr>
           </thead>
@@ -50,10 +50,10 @@
             <tr v-for="crypto in cryptosToSell.cryptosToSell" :key="crypto.id">
               <td class="align-middle">{{ crypto.quantity }}</td>
               <td class="align-middle">{{ crypto.purchase_price }}</td>
-              <td class="align-middle">{{ crypto.purchase_date }}</td>
+              <td class="align-middle mobile-device">{{ crypto.purchase_date }}</td>
               <td class="align-middle">{{ crypto.sum_purchase }}</td>
               <td
-                :class="`fs-6 pt-3 pb-3 align-middle ${
+                :class="`fs-6 pt-3 pb-3 align-middle mobile-device ${
                   cryptosToSell.actualValue.progress_value * crypto.quantity -
                     crypto.sum_purchase >
                   0

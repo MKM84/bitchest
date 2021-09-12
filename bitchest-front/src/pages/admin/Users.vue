@@ -18,8 +18,8 @@
             <tr>
               <th scope="col">Nom</th>
               <th scope="col">Prénom</th>
-              <th scope="col">Email</th>
-              <th scope="col">Rôle</th>
+              <th scope="col" class="mobile-device">Email</th>
+              <th scope="col" class="mobile-device">Rôle</th>
               <th scope="col">Modifier</th>
               <th scope="col">Supprimer</th>
             </tr>
@@ -32,10 +32,10 @@
               <td class="fs-6 align-middle">
                 {{ user.firstname }}
               </td>
-              <td class="fs-6 align-middle">
+              <td class="fs-6 align-middle mobile-device">
                 {{ user.email }}
               </td>
-              <td class="fs-6 align-middle">
+              <td class="fs-6 align-middle mobile-device">
                 <span
                   :class="`badge ${
                     user.status === 0 ? 'bg-warning text-dark' : 'bg-light text-dark'

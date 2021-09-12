@@ -12,11 +12,11 @@
               <th scope="col">Nom</th>
               <th scope="col">Q</th>
               <th scope="col">Date d'achat</th>
-              <th scope="col">C.A. (€)</th>
-              <th scope="col">Dépenses</th>
+              <th scope="col" class="mobile-device">C.A. (€)</th>
+              <th scope="col" class="mobile-device">Dépenses</th>
               <th scope="col">État</th>
-              <th scope="col">Date de vente</th>
-              <th scope="col">C.V. (€)</th>
+              <th scope="col" class="mobile-device">Date de vente</th>
+              <th scope="col" class="mobile-device">C.V. (€)</th>
               <th scope="col">Gains / Pertes</th>
             </tr>
           </thead>
@@ -28,10 +28,10 @@
               </td>
               <td class="fs-6 pt-3 pb-3 align-middle">{{ transaction.quantity }}</td>
               <td class="fs-6 pt-3 pb-3 align-middle">{{ transaction.purchase_date }}</td>
-              <td class="fs-6 pt-3 pb-3 align-middle">
+              <td class="fs-6 pt-3 pb-3 align-middle mobile-device">
                 {{ transaction.purchase_price }}
               </td>
-              <td class="fs-6 pt-3 pb-3 align-middle">{{ transaction.sum_purchase }}</td>
+              <td class="fs-6 pt-3 pb-3 align-middle mobile-device">{{ transaction.sum_purchase }}</td>
               <td class="align-middle">
                 <span
                   :class="`badge ${
@@ -41,10 +41,10 @@
                   {{ transaction.state === 0 ? "N" : "V" }}</span
                 >
               </td>
-              <td class="fs-6 pt-3 pb-3 align-middle">
+              <td class="fs-6 pt-3 pb-3 align-middle mobile-device">
                 {{ transaction.selling_date }}
               </td>
-              <td class="fs-6 pt-3 pb-3 align-middle">
+              <td class="fs-6 pt-3 pb-3 align-middle mobile-device">
                 {{ transaction.selling_price }}
               </td>
               <td

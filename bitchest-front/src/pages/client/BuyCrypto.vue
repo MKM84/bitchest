@@ -24,7 +24,7 @@
 
       <form
         @submit.prevent="activModal('Êtes-vous sûr de vouloir effectuer cet achat ?')"
-        class="offset-md-4 col-4 mt-5"
+        class="col-6 offset-3 mt-5 col-sm-6  offset-sm-3 mt-5 col-md-6 offset-md-3 mt-5 mb-5"
       >
         <div class="mb-4 text-center">
           <label for="quantity" class="form-label fs-6 mt-3 text-light">Quantité </label>
@@ -56,11 +56,11 @@
         </div>
 
         <div class="text-center mt-5">
-          <button type="submit" class="btn btn-secondary text-dark px-4 mt-3 btn-space">
+          <button type="submit" class="btn btn-secondary text-dark mt-2 btn-space">
             Acheter
           </button>
           <router-link to="/client/user-wallet">
-            <button type="button" class="btn btn-outline-light px-4 mt-3">Annuler</button>
+            <button type="button" class="btn btn-outline-light mt-2">Annuler</button>
           </router-link>
         </div>
       </form>

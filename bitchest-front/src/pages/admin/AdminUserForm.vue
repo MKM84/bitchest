@@ -6,8 +6,8 @@
     <section class="col ctn-content">
       <Spinner :loading="loading" />
 
-      <form @submit.prevent="onSubmit" class="offset-md-3 col-6 mt-5" v-if="user">
-        <div class="mb-4">
+      <form @submit.prevent="onSubmit" class="mt-3 mb-5" v-if="user">
+        <div class="col-sm-6 offset-sm-3 mt-3 mb-5 col-md-6 offset-md-3 mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-5 text-light">Nom </label>
           <input
@@ -95,13 +95,14 @@
             {{ v$.user.status.$errors[0].$message }}
           </div>
         </div>
-
-        <button type="submit" class="btn btn-secondary text-dark px-5 mt-5 btn-space">
+        <div class="text-center mt-5">
+        <button type="submit" class="btn btn-secondary text-dark px-5 mt-2 btn-space">
           Valider
         </button>
         <router-link to="/admin/user-list">
-          <button type="button" class="btn btn-outline-light px-5 mt-5">Annuler</button>
+          <button type="button" class="btn btn-outline-light px-5 mt-2">Annuler</button>
         </router-link>
+        </div>
       </form>
     </section>
   </div>

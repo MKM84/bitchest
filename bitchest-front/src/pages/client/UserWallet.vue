@@ -10,7 +10,7 @@
             <tr>
               <th scope="col">Cryptomonnaies</th>
               <th scope="col">Quantité</th>
-              <th scope="col">Dépenses </th>
+              <th scope="col" class="mobile-device">Dépenses </th>
               <th scope="col">C.A.(€)</th>
               <th scope="col">Vendre</th>
             </tr>
@@ -23,7 +23,7 @@
               </td>
               <td class="align-middle">{{ wall.quantity_sum }}</td>
               <td class="align-middle">{{ wall.prices_sum }}</td>
-              <td class="align-middle">{{ wall.current_value }}</td>
+              <td class="align-middle mobile-device">{{ wall.current_value }}</td>
               <td class="align-middle">
                 <router-link :to="'/client/user-sell-crypto/' + wall.id_crypto">
                   <button class="btn btn-primary text-info">

@@ -169,4 +169,10 @@ aside {
     margin: 20px 10px 23px 0px !important;
   }
 }
+/* hide some columns for mobile device*/
+@media (min-width: 300px) and (max-width: 800px) {
+  .mobile-device {
+    display:none;
+  }
+}
 </style>

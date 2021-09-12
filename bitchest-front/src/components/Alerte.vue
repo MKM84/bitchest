@@ -1,5 +1,5 @@
 <template>
-  <div class=" col-4 alert alert-info d-flex align-items-center m-5 fixed-alerte" role="alert">
+  <div class="col-md-5 col-8 alert alert-info d-flex align-items-center m-5 fixed-alerte" role="alert">
     <svg
       class="bi flex-shrink-0 me-2"
       width="24"

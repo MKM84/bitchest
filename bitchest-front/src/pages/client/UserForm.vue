@@ -7,10 +7,10 @@
 
       <form
         @submit.prevent="onSubmit"
-        class="offset-md-3 col-6 mt-3 mb-5"
+        class="mt-3 mb-5"
         v-if="loading == false"
       >
-        <div class="mb-4">
+        <div class="col-sm-6 offset-sm-3 mt-3 mb-5 col-md-6 offset-md-3 mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-4 text-light">Nom </label>
           <input
@@ -116,13 +116,14 @@
             {{ v$.myProfile.repeatPassword.$errors[0].$message }}
           </div>
         </div>
-
-        <button type="submit" class="btn btn-secondary text-dark px-5 mt-4 btn-space">
+        <div class="text-center mt-5">
+        <button type="submit" class="btn btn-secondary text-dark px-5  mt-2 btn-space">
           Valider
         </button>
         <router-link to="/client/user-wallet">
-          <button type="button" class="btn btn-outline-light px-5 mt-4">Annuler</button>
+          <button type="button" class="btn btn-outline-light px-5  mt-2">Annuler</button>
         </router-link>
+        </div>
       </form>
     </section>
   </div>

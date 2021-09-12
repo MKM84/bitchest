@@ -1,10 +1,10 @@
 <template>
   <div class="login-ctn">
-      <div class="login col-4 offset-4 d-flex align-items-center justify-content-end">
+      <div class="login col-lg-4 offset-lg-4 col-xl-4  offset-xl-4 col-md-4 offset-md-4 col-sm-8 offset-sm-2 col-10 offset-1 d-flex align-items-center justify-content-end">
         <div class="col-12 text-center d-flex justify-content-center align-items-end mb-4">
           <h2 class="text-info"><strong>BitChest</strong></h2>
         </div>
-        <div class="col-10 col-sm-10 col-lg-6 col-md-8 col-xl-10 mx-auto rounded">
+        <div class="col-10 p-0 col-sm p-0 col-lg p-0 col-xl p-0 col-md p-0 mx-auto rounded">
           <form @submit.prevent="onLogin">
             <div class="mb-4">
               <label for="email" class="form-label fs-5 text-light">Email* </label>
