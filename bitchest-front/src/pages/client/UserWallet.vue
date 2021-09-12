@@ -1,8 +1,8 @@
 <template>
   <div class="row col-12 m-0">
-    <Nav-mobile :admin="false" :userInfos="userInfos"/>
+    <Nav-mobile :admin="false" :userInfos="userInfos" />
     <Navigation :admin="false" :userInfos="userInfos" />
-    <section class="col  ctn-content">
+    <section class="col ctn-content">
       <Spinner :loading="loading" />
       <div v-if="wallet">
         <table class="table table-dark table-hover mt-4" v-if="loading == false">
@@ -10,7 +10,7 @@
             <tr>
               <th scope="col">Cryptomonnaies</th>
               <th scope="col">Quantité</th>
-              <th scope="col" class="mobile-device">Dépenses </th>
+              <th scope="col" class="mobile-device">Dépenses</th>
               <th scope="col">C.A.(€)</th>
               <th scope="col">Vendre</th>
             </tr>
@@ -42,7 +42,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import NavMobile from "../../components/NavMobile.vue"
+import NavMobile from "../../components/NavMobile.vue";
 import Alerte from "../../components/Alerte.vue";
 import Spinner from "../../components/Spinner.vue";
 

@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12 m-0">
-    <Nav-mobile :admin="true" :adminInfos="adminInfos"/>
+    <Nav-mobile :admin="true" :adminInfos="adminInfos" />
 
     <Navigation :admin="true" :adminInfos="adminInfos" />
 
@@ -105,17 +105,14 @@
           >
             {{ v$.myProfile.repeatPassword.$errors[0].$message }}
           </div>
-
-
-
         </div>
         <div class="text-center mt-5">
-        <button type="submit" class="btn btn-secondary text-dark px-5 mt-2 btn-space">
-          Valider
-        </button>
-        <router-link to="/admin/user-list">
-          <button type="button" class="btn btn-outline-light px-5 mt-2">Annuler</button>
-        </router-link>
+          <button type="submit" class="btn btn-secondary text-dark px-5 mt-2 btn-space">
+            Valider
+          </button>
+          <router-link to="/admin/user-list">
+            <button type="button" class="btn btn-outline-light px-5 mt-2">Annuler</button>
+          </router-link>
         </div>
       </form>
     </section>
@@ -124,7 +121,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import NavMobile from "../../components/NavMobile.vue"
+import NavMobile from "../../components/NavMobile.vue";
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, sameAs, alphaNum } from "@vuelidate/validators";
 import Spinner from "../../components/Spinner.vue";

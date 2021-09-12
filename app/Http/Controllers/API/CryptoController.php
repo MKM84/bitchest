@@ -14,7 +14,7 @@ class CryptoController extends Controller
     {
         $cryptosArray = array();
 
-        //Get all last current value of cryptos
+        //Get all last current values of cryptos
         $currencies = Progression::select(
             'progressions.id',
             'progress_value as current_value',
@@ -39,7 +39,7 @@ class CryptoController extends Controller
     }
 
 
-
+    // get crypto evolution for the last 30 days
     public function getCryptoEvolution($id)
     {
         //Get all date of current value changing of one crypto during 30 days

@@ -82,8 +82,8 @@ html {
   color: #375675 !important;
 }
 footer {
-    position: relative;
-    bottom: 0px;
+  position: relative;
+  bottom: 0px;
   background-color: #0dcaf0;
 }
 .btn-secondary {
@@ -144,6 +144,7 @@ aside {
   background-color: #212529;
 }
 
+/* mobile & tabletts  */
 @media (min-width: 300px) and (max-width: 1100px) {
   aside {
     display: none;
@@ -173,7 +174,7 @@ aside {
 /* hide some columns for mobile device*/
 @media (min-width: 300px) and (max-width: 800px) {
   .mobile-device {
-    display:none;
+    display: none;
   }
 }
 </style>

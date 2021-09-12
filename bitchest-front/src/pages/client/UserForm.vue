@@ -1,15 +1,11 @@
 <template>
   <div class="row col-12 m-0">
-    <Nav-mobile :admin="false" :userInfos="userInfos"/>
+    <Nav-mobile :admin="false" :userInfos="userInfos" />
     <Navigation :admin="false" :userInfos="userInfos" />
     <section class="col ctn-content" v-if="myProfile">
       <Spinner :loading="loading" />
 
-      <form
-        @submit.prevent="onSubmit"
-        class="mt-5 mb-5"
-        v-if="loading == false"
-      >
+      <form @submit.prevent="onSubmit" class="mt-5 mb-5" v-if="loading == false">
         <div class="col-sm-6 offset-sm-3 mt-3 mb-5 col-md-6 offset-md-3 mb-4">
           <!-- Lastname  -->
           <label for="lastname" class="form-label fs-6 mt-4 text-light">Nom </label>
@@ -117,12 +113,12 @@
           </div>
         </div>
         <div class="text-center mt-5">
-        <button type="submit" class="btn btn-secondary text-dark px-5  mt-2 btn-space">
-          Valider
-        </button>
-        <router-link to="/client/user-wallet">
-          <button type="button" class="btn btn-outline-light px-5  mt-2">Annuler</button>
-        </router-link>
+          <button type="submit" class="btn btn-secondary text-dark px-5 mt-2 btn-space">
+            Valider
+          </button>
+          <router-link to="/client/user-wallet">
+            <button type="button" class="btn btn-outline-light px-5 mt-2">Annuler</button>
+          </router-link>
         </div>
       </form>
     </section>
@@ -131,7 +127,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import NavMobile from "../../components/NavMobile.vue"
+import NavMobile from "../../components/NavMobile.vue";
 import Spinner from "../../components/Spinner.vue";
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, sameAs, alphaNum } from "@vuelidate/validators";
@@ -141,7 +137,7 @@ export default {
   components: {
     Navigation,
     Spinner,
-    NavMobile
+    NavMobile,
   },
   emits: ["edit-my-profile"],
   setup() {

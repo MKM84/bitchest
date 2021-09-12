@@ -18,7 +18,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link to="/admin/cryptos" class="nav-link text-light fs-9 px-2">
-             <i class="fab fa-bitcoin 3x"></i>
+              <i class="fab fa-bitcoin 3x"></i>
             </router-link>
           </li>
           <li class="nav-item">
@@ -27,16 +27,13 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link
-              to="/admin/user-form/0"
-              class="nav-link text-light fs-9 px-2"
-            >
-             <i class="fas fa-plus-circle"></i>
+            <router-link to="/admin/user-form/0" class="nav-link text-light fs-9 px-2">
+              <i class="fas fa-plus-circle"></i>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/admin/admin-form" class="nav-link text-light fs-9 px-2">
-             <i class="fas fa-user-circle 3x"></i>
+              <i class="fas fa-user-circle 3x"></i>
             </router-link>
           </li>
           <li class="nav-item">
@@ -45,13 +42,13 @@
               href="#"
               @click.prevent="logout"
             >
-             <i class="fas fa-power-off"></i> </a
-            >
+              <i class="fas fa-power-off"></i>
+            </a>
           </li>
         </ul>
-
       </div>
 
+      <!-- client  -->
       <div v-else class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -74,7 +71,7 @@
           </li>
           <li class="nav-item">
             <router-link to="/client/user-form" class="nav-link text-light fs-9 px-2">
-             <i class="fas fa-user-circle 3x"></i>
+              <i class="fas fa-user-circle 3x"></i>
             </router-link>
           </li>
           <li class="nav-item">
@@ -83,11 +80,11 @@
               href="#"
               @click.prevent="logout"
             >
-               <i class="fas fa-power-off"></i></a
-            >
+              <i class="fas fa-power-off"></i
+            ></a>
           </li>
         </ul>
-        <div  class="d-flex">
+        <div class="d-flex">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li
               v-if="userInfos.user_solde"
@@ -98,7 +95,7 @@
               Solde : {{ userInfos.user_solde }} €
             </li>
 
-                        <li
+            <li
               v-if="userInfos.user_money"
               :class="`nav-item ${
                 userInfos.user_money > 0 ? 'color-success' : 'text-danger'

@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12 m-0">
-    <Nav-mobile :admin="false" :userInfos="userInfos"/>
+    <Nav-mobile :admin="false" :userInfos="userInfos" />
     <Navigation :admin="false" :userInfos="userInfos" />
     <section class="col ctn-content">
       <Spinner :loading="loading" />
@@ -31,7 +31,9 @@
               <td class="fs-6 pt-3 pb-3 align-middle mobile-device">
                 {{ transaction.purchase_price }}
               </td>
-              <td class="fs-6 pt-3 pb-3 align-middle mobile-device">{{ transaction.sum_purchase }}</td>
+              <td class="fs-6 pt-3 pb-3 align-middle mobile-device">
+                {{ transaction.sum_purchase }}
+              </td>
               <td class="align-middle">
                 <span
                   :class="`badge ${
@@ -64,7 +66,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import NavMobile from "../../components/NavMobile.vue"
+import NavMobile from "../../components/NavMobile.vue";
 import Spinner from "../../components/Spinner.vue";
 
 export default {

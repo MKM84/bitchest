@@ -54,7 +54,7 @@
                 <button
                   @click="
                     activModal(
-                      `Êtes-vous sûr de vouloir supprimmer  (${ user.firstname } ${user.lastname}) ?`,
+                      `Êtes-vous sûr de vouloir supprimmer  (${user.firstname} ${user.lastname}) ?`,
                       user.id
                     )
                   "

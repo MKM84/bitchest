@@ -10,8 +10,6 @@
     :loading="loading"
     :adminInfos="adminInfos"
     @admin-edit-my-profile="AdminEditMyProfile"
-
-
   />
 </template>
 
@@ -100,34 +98,19 @@ export default {
     },
     // delete user
     deleteUser(id) {
-    //   let user = this.userList.find((u) => u.id == id);
-    //   let clientSolde = user.user_solde;
-    //   let clientHasSold;
-    //   if (clientSolde > 0) {
-    //     clientHasSold = "Il possède toujours de la cryptomonnaies dans son portefeuille.";
-    //   } else {
-    //     clientHasSold = "Il n'a plus de cryptomonaies dans son portefeuille.";
-    //   }
-    //   if (
-    //     window.confirm(
-    //       `Êtes-vous sur de vouloir supprimmer ${user.firstname} ${user.lastname} ?  ${clientHasSold}`
-    //     )
-    //   )
-    //   {
-        this.loading = true;
-        User.deleteUser(id)
-          .then((r) => {
-            if (r.done) {
-              this.userList = this.userList.filter((u) => u.id != id);
-              this.loading = false;
-            }
-          })
-          .then(() => {
-            this.activeAlerte("La suppression a été effectuée avec succes !");
-            this.hideAlerte();
-          })
-          .catch((error) => console.error(error));
-    //   }
+      this.loading = true;
+      User.deleteUser(id)
+        .then((r) => {
+          if (r.done) {
+            this.userList = this.userList.filter((u) => u.id != id);
+            this.loading = false;
+          }
+        })
+        .then(() => {
+          this.activeAlerte("La suppression a été effectuée avec succes !");
+          this.hideAlerte();
+        })
+        .catch((error) => console.error(error));
     },
     // get admin's informations
     getAdminInfos() {

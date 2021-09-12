@@ -24,7 +24,7 @@
 
       <form
         @submit.prevent="activModal('Êtes-vous sûr de vouloir effectuer cet achat ?')"
-        class="col-6 offset-3 mt-5 col-sm-6  offset-sm-3 mt-5 col-md-6 offset-md-3 mt-5 mb-5"
+        class="col-6 offset-3 mt-5 col-sm-6 offset-sm-3 mt-5 col-md-6 offset-md-3 mt-5 mb-5"
       >
         <div class="mb-4 text-center">
           <label for="quantity" class="form-label fs-6 mt-3 text-light">Quantité </label>

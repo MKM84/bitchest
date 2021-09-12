@@ -29,9 +29,11 @@ class AdminController extends Controller
         $connectedUser = Auth::user();
         $users = array_reverse(User::all()->where('id', '!=', $connectedUser->id)->toArray());
 
-        return ['userList' =>  $users ];
-
+        return ['userList' =>  $users];
     }
+
+
+
     // add user
     public function addUser(Request $request)
     {
@@ -58,6 +60,8 @@ class AdminController extends Controller
             'id' => $user->id
         ]);
     }
+
+
     // Edit user
     public function editUser($id, Request $request)
     {
@@ -74,6 +78,9 @@ class AdminController extends Controller
         $user->update($request->all());
         return response()->json(['done' => true]);
     }
+
+
+
     // Delete user
     public function deleteUser($id)
     {
@@ -83,13 +90,19 @@ class AdminController extends Controller
         $user->delete();
         return response()->json(['done' => true]);
     }
-        // Return informations of User
-        public function getAdminInfos()
-        {
-            return ['adminInfos' => Auth::user()];
-        }
-        // edit Admi infos
-        public function EditAdminInfos($id, Request $request)
+
+
+
+    // Return informations of User
+    public function getAdminInfos()
+    {
+        return ['adminInfos' => Auth::user()];
+    }
+
+
+
+    // edit Admi infos
+    public function EditAdminInfos($id, Request $request)
     {
         // validator request informations user
         $validator_user = Validator::make($request->all(), [
@@ -102,28 +115,25 @@ class AdminController extends Controller
             'password' => 'required',
             'repeatPassword' => 'required|same:password'
         ]);
-        if($validator_user->fails())
-        {
+        if ($validator_user->fails()) {
             return response()->json(['done' => false]);
         }
         //Get id of User connection
         $user = User::find($id);
-        if($validator_user_password->fails())
-        {
+        if ($validator_user_password->fails()) {
             //update informations of user
             $user->update([
-            'firstname' => $request->input('firstname'),
-            'lastname' => $request->input('lastname'),
-            'email' => $request->input('email')
-        ]);
-        }
-        else{
+                'firstname' => $request->input('firstname'),
+                'lastname' => $request->input('lastname'),
+                'email' => $request->input('email')
+            ]);
+        } else {
             //update informations and password of user
             $user->update([
-            'firstname' => $request->input('firstname'),
-            'lastname' => $request->input('lastname'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password'))
+                'firstname' => $request->input('firstname'),
+                'lastname' => $request->input('lastname'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password'))
             ]);
         }
         return response()->json(['done' => true]);

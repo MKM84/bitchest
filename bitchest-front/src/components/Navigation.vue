@@ -63,7 +63,9 @@
           <strong>{{ userInfos.user_solde }} €</strong>
         </p>
 
-        <p v-if="userInfos.user_money" class="mb-1 mt-3 text-light">Votre solde bancaire :</p>
+        <p v-if="userInfos.user_money" class="mb-1 mt-3 text-light">
+          Votre solde bancaire :
+        </p>
         <p
           v-if="userInfos.user_money"
           :class="`mb-0 ${userInfos.user_money > 0 ? 'color-green' : 'text-danger'}`"

@@ -1,6 +1,6 @@
 <template>
   <div class="row col-12 m-0">
-    <Nav-mobile :admin="false" :userInfos="userInfos"/>
+    <Nav-mobile :admin="false" :userInfos="userInfos" />
     <Navigation :admin="false" :userInfos="userInfos" />
     <section class="col ctn-content">
       <Spinner :loading="!loaded" />
@@ -33,7 +33,7 @@
 
 <script>
 import Navigation from "../../components/Navigation.vue";
-import NavMobile from "../../components/NavMobile.vue"
+import NavMobile from "../../components/NavMobile.vue";
 import Vue3ChartJs from "@j-t-mcc/vue3-chartjs";
 import Spinner from "../../components/Spinner.vue";
 import User from "../../services/User";

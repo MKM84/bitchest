@@ -26,9 +26,9 @@ class TransactionFactory extends Factory
     public function definition()
     {
         // get all crypto id in table cryptocurrencies with pluck
-        $cryptocurrencies = Cryptocurrency::pluck('id')->all(); 
+        $cryptocurrencies = Cryptocurrency::pluck('id')->all();
         // get random cryptocurrencies id
-        $currencyId = $this->faker->randomElement($cryptocurrencies); 
+        $currencyId = $this->faker->randomElement($cryptocurrencies);
 
         // get random date between now and 30 days before
         $date_purchasing = date('Y-m-d', strtotime("-" . $this->faker->numberBetween(16, 29) . " days"));
@@ -45,7 +45,7 @@ class TransactionFactory extends Factory
 
         // get all user where status = client
         $users = User::where('status', '=', 1)->get();
-         // get all user client id
+        // get all user client id
         $users = $users->pluck('id')->all();
 
         // faker quantity of crypto
@@ -62,11 +62,11 @@ class TransactionFactory extends Factory
         // faker of state boolean true or false
         $state = $this->faker->boolean;
 
-        if ($state == 1 ) {
-             //calcul of total solde in case of selling
-             $sum_selling = $quantity * $progression_selling->progress_value;
-             $balance = $sum_selling - $sum_purchase;
-        }else {
+        if ($state == 1) {
+            //calcul of total solde in case of selling
+            $sum_selling = $quantity * $progression_selling->progress_value;
+            $balance = $sum_selling - $sum_purchase;
+        } else {
 
             $sum_selling = 0;
             $balance = null;

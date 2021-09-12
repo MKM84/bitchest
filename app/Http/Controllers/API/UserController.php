@@ -28,6 +28,10 @@ class UserController extends Controller
             return $next($request);
         });
     }
+
+
+
+
     // Get Curent value of One Crypto
     public function getCurrentValueByCrypto($id)
     {
@@ -38,6 +42,9 @@ class UserController extends Controller
             ->first();
         return $currentValueByCrypto;
     }
+
+
+
 
     // Get Wallets of one user who have connected
     public function userWallet()
@@ -78,6 +85,10 @@ class UserController extends Controller
 
         return ['userWallet' => $wallet_array];
     }
+
+
+
+
     // Get History of transaction  of one user who have connected (sell and buy)
     public function getHistory()
     {
@@ -105,11 +116,17 @@ class UserController extends Controller
 
         return ['historyByCrypto' => $historyByCrypto];
     }
+
+
+
     // Return informations of User
     public function getUserInfos()
     {
         return ['userInfos' => Auth::user()];
     }
+
+
+
     //Update user Info
     public function EditUserInfos($id, Request $request)
     {
@@ -124,33 +141,33 @@ class UserController extends Controller
             'password' => 'required',
             'repeatPassword' => 'required|same:password'
         ]);
-        if($validator_user->fails())
-        {
+        if ($validator_user->fails()) {
             return response()->json(['done' => false]);
         }
         //Get id of User connection
         $user = User::find($id);
-        if($validator_user_password->fails())
-        {
+        if ($validator_user_password->fails()) {
             //update informations of user
             $user->update([
-            'firstname' => $request->input('firstname'),
-            'lastname' => $request->input('lastname'),
-            'email' => $request->input('email')
-        ]);
-        }
-        else{
+                'firstname' => $request->input('firstname'),
+                'lastname' => $request->input('lastname'),
+                'email' => $request->input('email')
+            ]);
+        } else {
             //update informations and password of user
             $user->update([
-            'firstname' => $request->input('firstname'),
-            'lastname' => $request->input('lastname'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password'))
+                'firstname' => $request->input('firstname'),
+                'lastname' => $request->input('lastname'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password'))
             ]);
         }
         return response()->json(['done' => true]);
     }
     //
+
+
+
 
     //Get All Transactions To sell by one user who have connected
     public function getCryptosToSell($crypto_id)
@@ -185,6 +202,9 @@ class UserController extends Controller
 
         return ['cryptosToSellData' => ['name' => $cryptoName, 'logo' => $cryptoLogo, 'actualValue' => $actualValue, 'cryptosToSell' => $cryptosToSell]];
     }
+
+
+
     public function addTransaction(Request $request)
     {
         $request->validate([
@@ -220,13 +240,15 @@ class UserController extends Controller
         User::where('id', $user_id)
             ->update(['user_solde' => $userSolde]);
 
-            User::where('id', $user_id)
+        User::where('id', $user_id)
             ->update(['user_money' => $userMoney]);
 
         return response()->json([
             'done' => true
         ]);
     }
+
+
 
 
     public function sellTransaction($idTransaction)
@@ -256,33 +278,35 @@ class UserController extends Controller
         User::where('id', $user_id)
             ->update(['user_solde' => $userSolde]);
 
-            User::where('id', $user_id)
+        User::where('id', $user_id)
             ->update(['user_money' => $userMoney]);
 
         return response()->json([
             'done' => true
         ]);
     }
+
+
+
     public function sellAllByCrypto($id)
     {
         //Get id of User connection
         $user_id = Auth::user()->id;
 
         // Get transactions by users  by crypto and not selling
-        $TransactionsToSell= DB::table('transactions')
-        ->select("transactions.id as id_transaction")
-        ->where('transactions.state', 0)
-        ->where('user_id', $user_id)
-        ->where('cryptocurrency_id', $id)
-        ->get();
-        foreach($TransactionsToSell as $TransactionToSell)
-        {
+        $TransactionsToSell = DB::table('transactions')
+            ->select("transactions.id as id_transaction")
+            ->where('transactions.state', 0)
+            ->where('user_id', $user_id)
+            ->where('cryptocurrency_id', $id)
+            ->get();
+        foreach ($TransactionsToSell as $TransactionToSell) {
             // Get one Transaction by id
             $transaction = Transaction::find($TransactionToSell->id_transaction);
-             // Get info of One User
+            // Get info of One User
             $user = User::find($user_id);
-             //Update one transaction to change state and completely informations.
-             Transaction::where('id',  $TransactionToSell->id_transaction)->update([
+            //Update one transaction to change state and completely informations.
+            Transaction::where('id',  $TransactionToSell->id_transaction)->update([
                 'state' => 1,
                 'selling_date' => now(),
                 'selling_price' => $this->getCurrentValueByCrypto($transaction->cryptocurrency_id)->progress_value,
@@ -299,13 +323,11 @@ class UserController extends Controller
             User::where('id', $user_id)
                 ->update(['user_solde' => $userSolde]);
 
-                User::where('id', $user_id)
+            User::where('id', $user_id)
                 ->update(['user_money' => $userMoney]);
         }
         return response()->json([
             'done' => true
         ]);
-
-
     }
 }
