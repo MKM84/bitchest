@@ -38,9 +38,12 @@ Créez une base de donnée sur phpMyAdmin.
 Créez un fichier .env à la racine du projet, copier-coller le contenu du fichier .env.example et modifiez les lignes suivantes comme suit :
 
 - APP_NAME = BitChest
+à la racine du projet
+
+       composer install
 - APP_KEY = Générez une clé avec la commande :
 
-        - `php artisan key:generate`
+        php artisan key:generate
 
 - DB_DATABASE =  "Nom de votre base de données"
 - DB_PORT = "Port de votre base de données"
@@ -55,14 +58,14 @@ Créez un fichier .env à la racine du projet, copier-coller le contenu du fichi
 Modifiez le fichier database.php en fonction votre DB.
 
 ### Dans votre ligne de commande à la racine du projet :
-    - `composer install`
-    - `php artisan migrate:fresh --seed`
-    - `php artisan serve`
+    
+        php artisan migrate:fresh --seed`
+        php artisan serve
 
 ### Dans votre ligne de commande à la racine du projet :
-    - `cd bitchest-front`
-    - `npm install`
-    - `npm run serve ou yarn serve`
+        cd bitchest-front
+        npm install
+        npm run serve ou yarn serve
 
 ### Connexion à l'application :
 
