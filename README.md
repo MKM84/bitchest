@@ -57,6 +57,10 @@ Créez un fichier .env à la racine du projet, copier-coller le contenu du fichi
 
 Modifiez le fichier database.php en fonction votre DB.
 
+Pensez si besoin à modifier l'adresse du serveur dans config/sanctum.php :
+
+`'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 'localhost:8000,127.0.0.1:8000'))`
+
 ### Dans votre ligne de commande à la racine du projet :
     
         php artisan migrate:fresh --seed`
